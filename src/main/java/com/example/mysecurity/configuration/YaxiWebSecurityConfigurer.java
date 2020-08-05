@@ -5,7 +5,9 @@ import com.example.mysecurity.configuration.handler.LocalAuthFailureHandler;
 import com.example.mysecurity.configuration.handler.LocalAuthSuccessHandler;
 import com.example.mysecurity.configuration.handler.LocalLogoutHandler;
 import com.example.mysecurity.configuration.handler.LocalLogoutSuccessHandler;
+import com.example.mysecurity.utils.BCryptPasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,6 +15,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.cors.CorsUtils;
 
 @Configuration
@@ -22,7 +25,11 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     private LocalAuthSuccessHandler successHandler;
     @Autowired
     private LocalAuthFailureHandler failureHandler;
-
+    @Autowired
+    @Qualifier("authUserDetailServiceImpl")
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private BCryptPasswordUtil bCryptPasswordUtil;
 
     //退出处理器
     @Autowired
@@ -30,8 +37,8 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     private LocalLogoutSuccessHandler logoutSuccessHandler;
 
-    public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder){
-        authenticationManagerBuilder.userDetailsService()
+    public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordUtil);
     }
 
     //重写configure方法

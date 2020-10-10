@@ -45,15 +45,21 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //解决跨域问题   放行所有preflight request
-        http.authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
+        http.authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest)
+                .permitAll();
 
 //让Security不会创建HttpSession，它不会使用HttpSession来获取SecurityContext
-        http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().headers().cacheControl();
-
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/register").permitAll()
-
-
-                .anyRequest().access("");
+        http.csrf()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .headers()
+                .cacheControl();
+        http.authorizeRequests().
+                antMatchers(HttpMethod.POST, "/user/register").permitAll().
+                anyRequest().access("");
         http.addFilterAt(localUsernamePasswordAuthenticationFilter(), LocalUsernamePasswordAuthenticationFilter.class);
 
         http.formLogin();

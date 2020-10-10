@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mysecurity.dao.SardlineApiDao">
+
+    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineApi">
+        <!--@Table sardline_api-->
+        <result property="apiId" column="api_id" jdbcType="VARCHAR"/>
+        <result property="apiName" column="api_name" jdbcType="VARCHAR"/>
+        <result property="apiUrl" column="api_url" jdbcType="VARCHAR"/>
+        <result property="apiMethod" column="api_method" jdbcType="VARCHAR"/>
+        <result property="pid" column="pid" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          api_id, api_name, api_url, api_method, pid, sort, description
+        from sardline.sardline_api
+        where api_id = #{apiId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          api_id, api_name, api_url, api_method, pid, sort, description
+        from sardline.sardline_api
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          api_id, api_name, api_url, api_method, pid, sort, description
+        from sardline.sardline_api
+        <where>
+            <if test="apiId != null and apiId != ''">
+                and api_id = #{apiId}
+            </if>
+            <if test="apiName != null and apiName != ''">
+                and api_name = #{apiName}
+            </if>
+            <if test="apiUrl != null and apiUrl != ''">
+                and api_url = #{apiUrl}
+            </if>
+            <if test="apiMethod != null and apiMethod != ''">
+                and api_method = #{apiMethod}
+            </if>
+            <if test="pid != null and pid != ''">
+                and pid = #{pid}
+            </if>
+            <if test="sort != null and sort != ''">
+                and sort = #{sort}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="apiId" useGeneratedKeys="true">
+        insert into sardline.sardline_api(api_name, api_url, api_method, pid, sort, description)
+        values (#{apiName}, #{apiUrl}, #{apiMethod}, #{pid}, #{sort}, #{description})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sardline.sardline_api
+        <set>
+            <if test="apiName != null and apiName != ''">
+                api_name = #{apiName},
+            </if>
+            <if test="apiUrl != null and apiUrl != ''">
+                api_url = #{apiUrl},
+            </if>
+            <if test="apiMethod != null and apiMethod != ''">
+                api_method = #{apiMethod},
+            </if>
+            <if test="pid != null and pid != ''">
+                pid = #{pid},
+            </if>
+            <if test="sort != null and sort != ''">
+                sort = #{sort},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+        </set>
+        where api_id = #{apiId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sardline.sardline_api where api_id = #{apiId}
+    </delete>
+
+</mapper>

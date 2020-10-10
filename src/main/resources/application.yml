@@ -1,9 +1,0 @@
-
-server: 8099
-
-
-
-
-application:
-  auth:
-    secretkey: fjx-study

@@ -16,6 +16,8 @@ import java.util.Map;
 
 public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
@@ -32,23 +34,23 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
             } catch (IOException e) {
                 new LocalAuthException(e.getMessage());
             }
-            try{
-                if(!authBean.isEmpty()){
+            try {
+                if (!authBean.isEmpty()) {
                     //获取账号密码
-                    String name=authBean.get(SPRING_SECURITY_FORM_USERNAME_KEY);
-                    String password=authBean.get(SPRING_SECURITY_FORM_PASSWORD_KEY);
+                    String name = authBean.get(SPRING_SECURITY_FORM_USERNAME_KEY);
+                    String password = authBean.get(SPRING_SECURITY_FORM_PASSWORD_KEY);
 
                     //校验账号密码
-                    if()
 
 
                 }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
+        return null;
     }
-
-
-
 
 
 }

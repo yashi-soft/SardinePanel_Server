@@ -1,5 +1,6 @@
 package com.example.mysecurity.service;
 
+import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRoleMenu;
 import java.util.List;
 
@@ -18,6 +19,8 @@ public interface SardlineRoleMenuService {
      * @return 实例对象
      */
     SardlineRoleMenu queryById(String id);
+
+    List<SardlineMenu> queryByRoleId(String roleId);
 
     /**
      * 查询多条数据

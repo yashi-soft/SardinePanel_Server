@@ -1,7 +1,9 @@
 package com.example.mysecurity.common;
 
-public class Result<T> {
+import lombok.Data;
 
+@Data
+public class Result<T> {
 
 
     /**
@@ -23,7 +25,7 @@ public class Result<T> {
     }
 
     public Result(String code, String msg) {
-        this(code,msg,null);
+        this(code, msg, null);
     }
 
     public Result(String code, String msg, T data) {
@@ -31,9 +33,6 @@ public class Result<T> {
         this.msg = msg;
         this.data = data;
     }
-
-
-
 
 
 }

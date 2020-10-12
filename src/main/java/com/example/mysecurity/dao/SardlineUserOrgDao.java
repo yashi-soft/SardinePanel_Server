@@ -64,4 +64,5 @@ public interface SardlineUserOrgDao {
      */
     int deleteById(String id);
 
+    List<SardlineUserOrg> queryByUserId(String userId);
 }

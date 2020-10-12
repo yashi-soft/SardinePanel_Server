@@ -1,5 +1,6 @@
 package com.example.mysecurity.service;
 
+import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineUser;
 import java.util.List;
 
@@ -52,4 +53,7 @@ public interface SardlineUserService {
      */
     boolean deleteById(String userId);
 
+    SardlineUser queryByName(String name);
+
+    Result register(SardlineUser user);
 }

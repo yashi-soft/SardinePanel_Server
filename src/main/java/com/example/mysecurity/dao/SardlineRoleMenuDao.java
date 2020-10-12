@@ -1,6 +1,8 @@
 package com.example.mysecurity.dao;
 
+import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRoleMenu;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-10-10 10:40:57
  */
+@Mapper
 public interface SardlineRoleMenuDao {
 
     /**
@@ -62,4 +65,5 @@ public interface SardlineRoleMenuDao {
      */
     int deleteById(String id);
 
+    List<SardlineMenu> queryByRoleId(String roleId);
 }

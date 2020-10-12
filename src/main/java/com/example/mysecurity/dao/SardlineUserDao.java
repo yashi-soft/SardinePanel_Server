@@ -22,6 +22,8 @@ public interface SardlineUserDao {
      */
     SardlineUser queryById(String userId);
 
+
+    SardlineUser queryByName(@Param("name")String name);
     /**
      * 查询指定行数据
      *

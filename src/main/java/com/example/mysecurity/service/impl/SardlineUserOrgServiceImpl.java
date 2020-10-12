@@ -76,4 +76,9 @@ public class SardlineUserOrgServiceImpl implements SardlineUserOrgService {
     public boolean deleteById(String id) {
         return this.sardlineUserOrgDao.deleteById(id) > 0;
     }
+
+    @Override
+    public List<SardlineUserOrg> queryByUserId(String userId) {
+        return this.sardlineUserOrgDao.queryByUserId(userId);
+    }
 }

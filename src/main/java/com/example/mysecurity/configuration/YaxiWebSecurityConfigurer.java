@@ -59,7 +59,7 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .cacheControl();
         http.authorizeRequests().
                 antMatchers(HttpMethod.POST, "/user/register").permitAll().
-                anyRequest().access("");
+                anyRequest().access("@dynamicPermission.checkPermisstion(request,authentication)");
         http.addFilterAt(localUsernamePasswordAuthenticationFilter(), LocalUsernamePasswordAuthenticationFilter.class);
 
         http.formLogin();

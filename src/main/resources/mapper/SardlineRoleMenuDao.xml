@@ -17,6 +17,15 @@
         where id = #{id}
     </select>
 
+    <select id="queryByRoleId" resultType="com.example.mysecurity.entity.SardlineMenu">
+        select
+          m.*
+        from sardline.sardline_role_menu  r
+        left join
+    sardline.sardline_menu m on r.menu_id=m.menu_id
+        where role_id = #{roleId}
+    </select>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
@@ -28,7 +37,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, role_id, menu_id
+        id, role_id, menu_id
         from sardline.sardline_role_menu
         <where>
             <if test="id != null and id != ''">

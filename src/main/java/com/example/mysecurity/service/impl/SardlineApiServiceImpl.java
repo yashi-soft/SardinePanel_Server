@@ -76,4 +76,9 @@ public class SardlineApiServiceImpl implements SardlineApiService {
     public boolean deleteById(String apiId) {
         return this.sardlineApiDao.deleteById(apiId) > 0;
     }
+
+    @Override
+    public List<SardlineApi> getApiUrlByUserName(String username) {
+        return this.sardlineApiDao.getApiUrlByUserName(username);
+    }
 }

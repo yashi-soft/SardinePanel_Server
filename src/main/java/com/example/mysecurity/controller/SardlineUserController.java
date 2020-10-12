@@ -1,5 +1,6 @@
 package com.example.mysecurity.controller;
 
+import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.service.SardlineUserService;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import javax.annotation.Resource;
  * @since 2020-10-10 10:40:57
  */
 @RestController
-@RequestMapping("sardlineUser")
+@RequestMapping("user")
 public class SardlineUserController {
     /**
      * 服务对象
@@ -31,5 +32,14 @@ public class SardlineUserController {
     public SardlineUser selectOne(String id) {
         return this.sardlineUserService.queryById(id);
     }
+
+
+    @PostMapping("register")
+    public Result register(@RequestBody(required = false) SardlineUser user) {
+        return sardlineUserService.register(user);
+
+
+    }
+
 
 }

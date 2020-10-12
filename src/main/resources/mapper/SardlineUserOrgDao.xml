@@ -17,6 +17,15 @@
         where id = #{id}
     </select>
 
+    <!--查询单个-->
+    <select id="queryByUserId" resultType="com.example.mysecurity.entity.SardlineOrganization">
+        select
+          org.*
+        from sardline.sardline_user_org uo
+        left join  sardline.sardline_organization  org on uo.org_id=org.org_id
+        where uo.user_id = #{userId}
+    </select>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
@@ -28,7 +37,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, user_id, org_id
+        id, user_id, org_id
         from sardline.sardline_user_org
         <where>
             <if test="id != null and id != ''">

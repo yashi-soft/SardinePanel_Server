@@ -1,6 +1,7 @@
 package com.example.mysecurity.service;
 
 import com.example.mysecurity.entity.SardlineUserRole;
+
 import java.util.List;
 
 /**
@@ -19,11 +20,13 @@ public interface SardlineUserRoleService {
      */
     SardlineUserRole queryById(String id);
 
+    List<SardlineUserRole> queryByUserId(String userId);
+
     /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<SardlineUserRole> queryAllByLimit(int offset, int limit);

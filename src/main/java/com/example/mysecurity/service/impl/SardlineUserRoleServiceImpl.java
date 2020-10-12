@@ -30,11 +30,16 @@ public class SardlineUserRoleServiceImpl implements SardlineUserRoleService {
         return this.sardlineUserRoleDao.queryById(id);
     }
 
+    @Override
+    public List<SardlineUserRole> queryByUserId(String userId) {
+        return this.sardlineUserRoleDao.queryByUserId(userId);
+    }
+
     /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     @Override

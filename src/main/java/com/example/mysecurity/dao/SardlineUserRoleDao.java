@@ -22,6 +22,14 @@ public interface SardlineUserRoleDao {
      */
     SardlineUserRole queryById(String id);
 
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    List<SardlineUserRole> queryByUserId(String userId);
+
     /**
      * 查询指定行数据
      *

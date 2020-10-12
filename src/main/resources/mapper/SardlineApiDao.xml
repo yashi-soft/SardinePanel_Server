@@ -21,6 +21,17 @@
         where api_id = #{apiId}
     </select>
 
+    <!--查询单个-->
+    <select id="getApiUrlByUserName" resultMap="BaseResultMap">
+        SELECT
+            c.*
+        FROM
+            sardline_role_api c
+            LEFT JOIN sardline_api d ON c.api_id = d.api_id
+        WHERE
+            c.role_id IN ( SELECT b.role_id FROM sardline_user a LEFT JOIN sardline_user_role b ON a.user_id = b.user_id WHERE a.user_name = #{usernmae} );
+    </select>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
@@ -32,7 +43,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          api_id, api_name, api_url, api_method, pid, sort, description
+        api_id, api_name, api_url, api_method, pid, sort, description
         from sardline.sardline_api
         <where>
             <if test="apiId != null and apiId != ''">
@@ -95,5 +106,6 @@
     <delete id="deleteById">
         delete from sardline.sardline_api where api_id = #{apiId}
     </delete>
+
 
 </mapper>

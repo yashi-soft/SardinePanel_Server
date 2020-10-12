@@ -1,5 +1,6 @@
 package com.example.mysecurity.service.impl;
 
+import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRoleMenu;
 import com.example.mysecurity.dao.SardlineRoleMenuDao;
 import com.example.mysecurity.service.SardlineRoleMenuService;
@@ -30,11 +31,16 @@ public class SardlineRoleMenuServiceImpl implements SardlineRoleMenuService {
         return this.sardlineRoleMenuDao.queryById(id);
     }
 
+    @Override
+    public List<SardlineMenu> queryByRoleId(String roleId) {
+        return this.sardlineRoleMenuDao.queryByRoleId(roleId);
+    }
+
     /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     @Override

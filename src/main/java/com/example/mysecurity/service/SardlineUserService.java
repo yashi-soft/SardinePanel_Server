@@ -56,4 +56,6 @@ public interface SardlineUserService {
     SardlineUser queryByName(String name);
 
     Result register(SardlineUser user);
+
+    boolean checkLogin(String username, String password);
 }

@@ -1,6 +1,7 @@
 package com.example.mysecurity.configuration;
 
 import com.example.mysecurity.configuration.filter.LocalUsernamePasswordAuthenticationFilter;
+import com.example.mysecurity.configuration.filter.YaxiOncePerResuestFilter;
 import com.example.mysecurity.configuration.handler.LocalAuthFailureHandler;
 import com.example.mysecurity.configuration.handler.LocalAuthSuccessHandler;
 import com.example.mysecurity.configuration.handler.LocalLogoutHandler;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
 
 @Configuration
@@ -36,6 +38,10 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     private LocalLogoutHandler localLogoutHandler;
     @Autowired
     private LocalLogoutSuccessHandler logoutSuccessHandler;
+
+
+    @Autowired
+    private YaxiOncePerResuestFilter yaxiOncePerResuestFilter;
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -63,6 +69,7 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 anyRequest().access("@dynamicPermission.checkPermisstion(request,authentication)");
         http.addFilterAt(localUsernamePasswordAuthenticationFilter(), LocalUsernamePasswordAuthenticationFilter.class);
 
+        http.addFilterBefore(yaxiOncePerResuestFilter, UsernamePasswordAuthenticationFilter.class);
         http.formLogin();
         http.logout().addLogoutHandler(localLogoutHandler).logoutSuccessHandler(logoutSuccessHandler);
 

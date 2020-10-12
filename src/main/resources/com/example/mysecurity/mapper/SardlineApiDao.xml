@@ -24,7 +24,7 @@
     <!--查询单个-->
     <select id="getApiUrlByUserName" resultMap="BaseResultMap">
         SELECT
-            c.*
+            d.*
         FROM
             sardline_role_api c
             LEFT JOIN sardline_api d ON c.api_id = d.api_id

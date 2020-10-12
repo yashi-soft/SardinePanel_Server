@@ -69,7 +69,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
      */
     @Override
     public SardlineUser update(SardlineUser sardlineUser) {
-        this.sardlineUserDao.update(sardlineUser,null);
+        this.sardlineUserDao.update(sardlineUser, null);
         return this.queryById(sardlineUser.getUserId());
     }
 
@@ -86,7 +86,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
 
     @Override
     public SardlineUser queryByName(String name) {
-        return null;
+        return this.sardlineUserDao.queryByName(name);
     }
 
     @Override
@@ -111,5 +111,29 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
             result.setMsg("新增失败");
         }
         return result;
+    }
+
+    @Override
+    public boolean checkLogin(String username, String password) {
+        SardlineUser userEntity = this.baseMapper.queryByName(username);
+        System.out.println("userEntity = " + userEntity);
+        if (userEntity == null) {
+            //System.out.println("checkLogin--------->账号不存在，请重新尝试！");
+            //设置友好提示
+//            throw  new Exception("账号不存在，请重新尝试！");
+            return false;
+        } else {
+            //加密的密码
+            String encodedPassword = userEntity.getPassWord();
+            //和加密后的密码进行比配
+            if (!passwordUtil.matches(password, encodedPassword)) {
+                //System.out.println("checkLogin--------->密码不正确！");
+                //设置友好提示
+//                throw new Exception("密码不正确！");
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 }

@@ -1,5 +1,9 @@
 package com.example.mysecurity.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 
 /**
@@ -8,11 +12,13 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-10-10 10:40:57
  */
+@TableName("sardline_organization")
 public class SardlineOrganization implements Serializable {
     private static final long serialVersionUID = 295131874441806056L;
     /**
     * 组织id
     */
+    @TableId(type = IdType.UUID)
     private String orgId;
     /**
     * 组织名称

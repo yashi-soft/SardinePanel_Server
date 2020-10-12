@@ -1,18 +1,19 @@
-package com.example.mysecurity.dao;
+package com.example.mysecurity.mapper;
 
-import com.example.mysecurity.entity.SardlineUserOrg;
+import com.example.mysecurity.entity.SardlineMenu;
+import com.example.mysecurity.entity.SardlineRoleMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * (SardlineUserOrg)表数据库访问层
+ * (SardlineRoleMenu)表数据库访问层
  *
  * @author makejava
  * @since 2020-10-10 10:40:57
  */
 @Mapper
-public interface SardlineUserOrgDao {
+public interface SardlineRoleMenuDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +21,7 @@ public interface SardlineUserOrgDao {
      * @param id 主键
      * @return 实例对象
      */
-    SardlineUserOrg queryById(String id);
+    SardlineRoleMenu queryById(String id);
 
     /**
      * 查询指定行数据
@@ -29,32 +30,32 @@ public interface SardlineUserOrgDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<SardlineUserOrg> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<SardlineRoleMenu> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param sardlineUserOrg 实例对象
+     * @param sardlineRoleMenu 实例对象
      * @return 对象列表
      */
-    List<SardlineUserOrg> queryAll(SardlineUserOrg sardlineUserOrg);
+    List<SardlineRoleMenu> queryAll(SardlineRoleMenu sardlineRoleMenu);
 
     /**
      * 新增数据
      *
-     * @param sardlineUserOrg 实例对象
+     * @param sardlineRoleMenu 实例对象
      * @return 影响行数
      */
-    int insert(SardlineUserOrg sardlineUserOrg);
+    int insert(SardlineRoleMenu sardlineRoleMenu);
 
     /**
      * 修改数据
      *
-     * @param sardlineUserOrg 实例对象
+     * @param sardlineRoleMenu 实例对象
      * @return 影响行数
      */
-    int update(SardlineUserOrg sardlineUserOrg);
+    int update(SardlineRoleMenu sardlineRoleMenu);
 
     /**
      * 通过主键删除数据
@@ -64,5 +65,5 @@ public interface SardlineUserOrgDao {
      */
     int deleteById(String id);
 
-    List<SardlineUserOrg> queryByUserId(String userId);
+    List<SardlineMenu> queryByRoleId(String roleId);
 }

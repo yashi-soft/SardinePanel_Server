@@ -1,5 +1,9 @@
 package com.example.mysecurity.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 
 /**
@@ -8,11 +12,13 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-10-10 10:40:55
  */
+@TableName("sardline_api")
 public class SardlineApi implements Serializable {
     private static final long serialVersionUID = 279938656827938010L;
     /**
     * 主键
     */
+    @TableId(type = IdType.UUID)
     private String apiId;
     /**
     * 方法名

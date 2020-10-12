@@ -1,8 +1,10 @@
-package com.example.mysecurity.dao;
+package com.example.mysecurity.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ import java.util.List;
  * @since 2020-10-10 10:40:57
  */
 @Mapper
-public interface SardlineMenuDao {
+public interface SardlineMenuDao extends BaseMapper<SardlineMenu> {
 
     /**
      * 通过ID查询单条数据
@@ -26,7 +28,7 @@ public interface SardlineMenuDao {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<SardlineMenu> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
@@ -40,28 +42,8 @@ public interface SardlineMenuDao {
      */
     List<SardlineMenu> queryAll(SardlineMenu sardlineMenu);
 
-    /**
-     * 新增数据
-     *
-     * @param sardlineMenu 实例对象
-     * @return 影响行数
-     */
-    int insert(SardlineMenu sardlineMenu);
 
-    /**
-     * 修改数据
-     *
-     * @param sardlineMenu 实例对象
-     * @return 影响行数
-     */
-    int update(SardlineMenu sardlineMenu);
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param menuId 主键
-     * @return 影响行数
-     */
-    int deleteById(String menuId);
+
 
 }

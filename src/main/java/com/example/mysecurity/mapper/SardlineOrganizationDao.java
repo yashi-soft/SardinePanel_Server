@@ -1,4 +1,4 @@
-package com.example.mysecurity.dao;
+package com.example.mysecurity.mapper;
 
 import com.example.mysecurity.entity.SardlineOrganization;
 import org.apache.ibatis.annotations.Mapper;

@@ -1,7 +1,7 @@
 package com.example.mysecurity.service.impl;
 
 import com.example.mysecurity.entity.SardlineRole;
-import com.example.mysecurity.dao.SardlineRoleDao;
+import com.example.mysecurity.mapper.SardlineRoleDao;
 import com.example.mysecurity.service.SardlineRoleService;
 import org.springframework.stereotype.Service;
 

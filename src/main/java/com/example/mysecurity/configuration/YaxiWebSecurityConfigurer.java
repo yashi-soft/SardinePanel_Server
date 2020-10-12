@@ -37,6 +37,7 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     private LocalLogoutSuccessHandler logoutSuccessHandler;
 
+    @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordUtil);
     }

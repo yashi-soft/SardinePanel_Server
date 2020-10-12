@@ -1,5 +1,6 @@
-package com.example.mysecurity.dao;
+package com.example.mysecurity.mapper;
 
+import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUserRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -29,6 +30,8 @@ public interface SardlineUserRoleDao {
      * @return
      */
     List<SardlineUserRole> queryByUserId(String userId);
+
+    List<SardlineRole> queryRolesByUserId(String userId);
 
     /**
      * 查询指定行数据

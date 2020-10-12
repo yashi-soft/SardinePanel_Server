@@ -2,7 +2,7 @@ package com.example.mysecurity.service.impl;
 
 import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRoleMenu;
-import com.example.mysecurity.dao.SardlineRoleMenuDao;
+import com.example.mysecurity.mapper.SardlineRoleMenuDao;
 import com.example.mysecurity.service.SardlineRoleMenuService;
 import org.springframework.stereotype.Service;
 

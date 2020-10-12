@@ -1,5 +1,6 @@
-package com.example.mysecurity.dao;
+package com.example.mysecurity.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +13,7 @@ import java.util.List;
  * @since 2020-10-10 10:40:57
  */
 @Mapper
-public interface SardlineUserDao {
+public interface SardlineUserDao  extends BaseMapper<SardlineUser> {
 
     /**
      * 通过ID查询单条数据
@@ -42,28 +43,9 @@ public interface SardlineUserDao {
      */
     List<SardlineUser> queryAll(SardlineUser sardlineUser);
 
-    /**
-     * 新增数据
-     *
-     * @param sardlineUser 实例对象
-     * @return 影响行数
-     */
-    int insert(SardlineUser sardlineUser);
 
-    /**
-     * 修改数据
-     *
-     * @param sardlineUser 实例对象
-     * @return 影响行数
-     */
-    int update(SardlineUser sardlineUser);
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param userId 主键
-     * @return 影响行数
-     */
-    int deleteById(String userId);
+
+
 
 }

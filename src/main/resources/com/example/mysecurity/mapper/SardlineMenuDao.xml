@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mysecurity.dao.SardlineMenuDao">
+<mapper namespace="com.example.mysecurity.mapper.SardlineMenuDao">
 
     <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineMenu">
         <!--@Table sardline_menu-->
@@ -55,38 +55,6 @@
         </where>
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="menuId" useGeneratedKeys="true">
-        insert into sardline.sardline_menu(menu_name, menu_path, pid, sort, description)
-        values (#{menuName}, #{menuPath}, #{pid}, #{sort}, #{description})
-    </insert>
 
-    <!--通过主键修改数据-->
-    <update id="update">
-        update sardline.sardline_menu
-        <set>
-            <if test="menuName != null and menuName != ''">
-                menu_name = #{menuName},
-            </if>
-            <if test="menuPath != null and menuPath != ''">
-                menu_path = #{menuPath},
-            </if>
-            <if test="pid != null and pid != ''">
-                pid = #{pid},
-            </if>
-            <if test="sort != null and sort != ''">
-                sort = #{sort},
-            </if>
-            <if test="description != null and description != ''">
-                description = #{description},
-            </if>
-        </set>
-        where menu_id = #{menuId}
-    </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from sardline.sardline_menu where menu_id = #{menuId}
-    </delete>
 
 </mapper>

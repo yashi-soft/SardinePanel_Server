@@ -1,8 +1,9 @@
 package com.example.mysecurity.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineUser;
-import com.example.mysecurity.dao.SardlineUserDao;
+import com.example.mysecurity.mapper.SardlineUserDao;
 import com.example.mysecurity.service.SardlineUserService;
 import com.example.mysecurity.utils.BCryptPasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * (SardlineUser)表服务实现类
@@ -18,7 +20,7 @@ import java.util.List;
  * @since 2020-10-10 10:40:57
  */
 @Service("sardlineUserService")
-public class SardlineUserServiceImpl implements SardlineUserService {
+public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, SardlineUser> implements SardlineUserService {
     @Resource
     private SardlineUserDao sardlineUserDao;
     @Autowired
@@ -67,7 +69,7 @@ public class SardlineUserServiceImpl implements SardlineUserService {
      */
     @Override
     public SardlineUser update(SardlineUser sardlineUser) {
-        this.sardlineUserDao.update(sardlineUser);
+        this.sardlineUserDao.update(sardlineUser,null);
         return this.queryById(sardlineUser.getUserId());
     }
 
@@ -97,7 +99,7 @@ public class SardlineUserServiceImpl implements SardlineUserService {
             result.setMsg("此用户已存在");
             return result;
         }
-
+//        user.setUserId(UUID.randomUUID().toString());
         user.setPassWord(passwordUtil.encode(user.getPassWord()));
         user.setState(1);
         int insert = this.sardlineUserDao.insert(user);

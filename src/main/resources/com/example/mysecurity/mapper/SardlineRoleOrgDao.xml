@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mysecurity.dao.SardlineUserOrgDao">
+<mapper namespace="com.example.mysecurity.mapper.SardlineRoleOrgDao">
 
-    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineUserOrg">
-        <!--@Table sardline_user_org-->
+    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineRoleOrg">
+        <!--@Table sardline_role_org-->
         <result property="id" column="id" jdbcType="VARCHAR"/>
-        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
         <result property="orgId" column="org_id" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, user_id, org_id
-        from sardline.sardline_user_org
+          id, role_id, org_id
+        from sardline.sardline_role_org
         where id = #{id}
-    </select>
-
-    <!--查询单个-->
-    <select id="queryByUserId" resultType="com.example.mysecurity.entity.SardlineOrganization">
-        select
-          org.*
-        from sardline.sardline_user_org uo
-        left join  sardline.sardline_organization  org on uo.org_id=org.org_id
-        where uo.user_id = #{userId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, user_id, org_id
-        from sardline.sardline_user_org
+          id, role_id, org_id
+        from sardline.sardline_role_org
         limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-        id, user_id, org_id
-        from sardline.sardline_user_org
+          id, role_id, org_id
+        from sardline.sardline_role_org
         <where>
             <if test="id != null and id != ''">
                 and id = #{id}
             </if>
-            <if test="userId != null and userId != ''">
-                and user_id = #{userId}
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
             </if>
             <if test="orgId != null and orgId != ''">
                 and org_id = #{orgId}
@@ -54,16 +45,16 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sardline.sardline_user_org(user_id, org_id)
-        values (#{userId}, #{orgId})
+        insert into sardline.sardline_role_org(role_id, org_id)
+        values (#{roleId}, #{orgId})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update sardline.sardline_user_org
+        update sardline.sardline_role_org
         <set>
-            <if test="userId != null and userId != ''">
-                user_id = #{userId},
+            <if test="roleId != null and roleId != ''">
+                role_id = #{roleId},
             </if>
             <if test="orgId != null and orgId != ''">
                 org_id = #{orgId},
@@ -74,7 +65,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from sardline.sardline_user_org where id = #{id}
+        delete from sardline.sardline_role_org where id = #{id}
     </delete>
 
 </mapper>

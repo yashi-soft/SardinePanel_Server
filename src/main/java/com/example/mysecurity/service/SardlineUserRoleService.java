@@ -1,5 +1,6 @@
 package com.example.mysecurity.service;
 
+import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUserRole;
 
 import java.util.List;
@@ -21,6 +22,12 @@ public interface SardlineUserRoleService {
     SardlineUserRole queryById(String id);
 
     List<SardlineUserRole> queryByUserId(String userId);
+
+
+
+
+
+
 
     /**
      * 查询多条数据
@@ -55,4 +62,5 @@ public interface SardlineUserRoleService {
      */
     boolean deleteById(String id);
 
+    List<SardlineRole> queryRolesByUserId(String userId);
 }

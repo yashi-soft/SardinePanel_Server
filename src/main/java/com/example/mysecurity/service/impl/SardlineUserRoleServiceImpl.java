@@ -1,7 +1,8 @@
 package com.example.mysecurity.service.impl;
 
+import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUserRole;
-import com.example.mysecurity.dao.SardlineUserRoleDao;
+import com.example.mysecurity.mapper.SardlineUserRoleDao;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import org.springframework.stereotype.Service;
 
@@ -80,5 +81,10 @@ public class SardlineUserRoleServiceImpl implements SardlineUserRoleService {
     @Override
     public boolean deleteById(String id) {
         return this.sardlineUserRoleDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<SardlineRole> queryRolesByUserId(String userId) {
+        return this.sardlineUserRoleDao.queryRolesByUserId(userId);
     }
 }

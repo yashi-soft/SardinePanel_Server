@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mysecurity.dao.SardlineApiDao">
+<mapper namespace="com.example.mysecurity.mapper.SardlineApiDao">
 
     <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineApi">
         <!--@Table sardline_api-->
@@ -70,42 +70,6 @@
         </where>
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="apiId" useGeneratedKeys="true">
-        insert into sardline.sardline_api(api_name, api_url, api_method, pid, sort, description)
-        values (#{apiName}, #{apiUrl}, #{apiMethod}, #{pid}, #{sort}, #{description})
-    </insert>
-
-    <!--通过主键修改数据-->
-    <update id="update">
-        update sardline.sardline_api
-        <set>
-            <if test="apiName != null and apiName != ''">
-                api_name = #{apiName},
-            </if>
-            <if test="apiUrl != null and apiUrl != ''">
-                api_url = #{apiUrl},
-            </if>
-            <if test="apiMethod != null and apiMethod != ''">
-                api_method = #{apiMethod},
-            </if>
-            <if test="pid != null and pid != ''">
-                pid = #{pid},
-            </if>
-            <if test="sort != null and sort != ''">
-                sort = #{sort},
-            </if>
-            <if test="description != null and description != ''">
-                description = #{description},
-            </if>
-        </set>
-        where api_id = #{apiId}
-    </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from sardline.sardline_api where api_id = #{apiId}
-    </delete>
 
 
 </mapper>

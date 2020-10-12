@@ -1,7 +1,10 @@
 package com.example.mysecurity.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.mysecurity.entity.SardlineApi;
 import com.example.mysecurity.entity.SardlineMenu;
-import com.example.mysecurity.dao.SardlineMenuDao;
+import com.example.mysecurity.mapper.SardlineApiDao;
+import com.example.mysecurity.mapper.SardlineMenuDao;
 import com.example.mysecurity.service.SardlineMenuService;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,7 @@ import java.util.List;
  * @since 2020-10-10 10:40:57
  */
 @Service("sardlineMenuService")
-public class SardlineMenuServiceImpl implements SardlineMenuService {
+public class SardlineMenuServiceImpl  extends ServiceImpl<SardlineMenuDao, SardlineMenu> implements SardlineMenuService {
     @Resource
     private SardlineMenuDao sardlineMenuDao;
 
@@ -62,7 +65,7 @@ public class SardlineMenuServiceImpl implements SardlineMenuService {
      */
     @Override
     public SardlineMenu update(SardlineMenu sardlineMenu) {
-        this.sardlineMenuDao.update(sardlineMenu);
+        this.sardlineMenuDao.update(sardlineMenu,null);
         return this.queryById(sardlineMenu.getMenuId());
     }
 

@@ -1,4 +1,4 @@
-package com.example.mysecurity.dao;
+package com.example.mysecurity.mapper;
 
 import org.springframework.stereotype.Repository;
 

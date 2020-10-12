@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mysecurity.dao.SardlineUserDao">
+<mapper namespace="com.example.mysecurity.mapper.SardlineUserDao">
 
     <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineUser">
         <!--@Table sardline_user-->
@@ -63,38 +63,6 @@
         </where>
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into sardline.sardline_user(user_name, nick_name, pass_word, description, state)
-        values (#{userName}, #{nickName}, #{passWord}, #{description}, #{state})
-    </insert>
 
-    <!--通过主键修改数据-->
-    <update id="update">
-        update sardline.sardline_user
-        <set>
-            <if test="userName != null and userName != ''">
-                user_name = #{userName},
-            </if>
-            <if test="nickName != null and nickName != ''">
-                nick_name = #{nickName},
-            </if>
-            <if test="passWord != null and passWord != ''">
-                pass_word = #{passWord},
-            </if>
-            <if test="description != null and description != ''">
-                description = #{description},
-            </if>
-            <if test="state != null">
-                state = #{state},
-            </if>
-        </set>
-        where user_id = #{userId}
-    </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from sardline.sardline_user where user_id = #{userId}
-    </delete>
 
 </mapper>

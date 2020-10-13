@@ -71,5 +71,14 @@
     </select>
 
 
+<!--    <select id="queryAllMenus" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+
+
+
+
+
+
+<!--    </select>-->
+
 
 </mapper>

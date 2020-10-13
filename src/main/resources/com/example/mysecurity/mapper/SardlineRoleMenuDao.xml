@@ -23,7 +23,7 @@
         from sardline.sardline_role_menu  r
         left join
     sardline.sardline_menu m on r.menu_id=m.menu_id
-        where role_id = #{roleId}
+        where r.role_id = #{roleId}
     </select>
 
     <!--查询指定行数据-->

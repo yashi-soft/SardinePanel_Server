@@ -1,5 +1,6 @@
 package com.example.mysecurity.auth.filter;
 
+import com.example.mysecurity.auth.exception.LocalAuthException;
 import com.example.mysecurity.service.SardlineUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -25,9 +28,9 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
         if (true) {
             ObjectMapper mapper = new ObjectMapper();
             UsernamePasswordAuthenticationToken authRequest = null;
+            Map<String, String[]> authBean=request.getParameterMap();
 
 //            Map<String, String> authBean = null;
-            Map<String, String[]> authBean=request.getParameterMap();
 //            try (InputStream is = request.getInputStream()) {
 //                authBean = mapper.readValue(is, Map.class);
 //
@@ -40,6 +43,8 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
                     //获取账号密码
                     String username = authBean.get(SPRING_SECURITY_FORM_USERNAME_KEY)[0];
                     String password = authBean.get(SPRING_SECURITY_FORM_PASSWORD_KEY)[0];
+//                    String username = authBean.get(SPRING_SECURITY_FORM_USERNAME_KEY);
+//                    String password = authBean.get(SPRING_SECURITY_FORM_PASSWORD_KEY);
 
                     //校验账号密码
                     if (sardlineUserService.checkLogin(username, password)) {

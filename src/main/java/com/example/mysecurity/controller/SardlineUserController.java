@@ -34,12 +34,36 @@ public class SardlineUserController {
     }
 
 
+    /**
+     * 注册
+     *
+     * @param user
+     * @return
+     */
     @PostMapping("register")
     public Result register(@RequestBody(required = false) SardlineUser user) {
         return sardlineUserService.register(user);
-
-
     }
+
+    /**
+     * 注销
+     */
+    @PostMapping("cancel")
+    public Boolean cancel(@RequestBody(required = false) SardlineUser user) {
+        user.setState(0);
+        return sardlineUserService.update(user) == null ? false : true;
+    }
+
+
+    /**
+     * 用户修改
+     */
+    @PostMapping("update")
+    public Boolean update(@RequestBody(required = false) SardlineUser user) {
+        user.setState(0);
+        return sardlineUserService.update(user) == null ? false : true;
+    }
+
 
 
 }

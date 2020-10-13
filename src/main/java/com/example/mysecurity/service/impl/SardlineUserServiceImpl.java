@@ -2,6 +2,7 @@ package com.example.mysecurity.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.mysecurity.common.Result;
+import com.example.mysecurity.common.ResultCode;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.mapper.SardlineUserDao;
 import com.example.mysecurity.service.SardlineUserService;
@@ -95,7 +96,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         SardlineUser sardlineUser = this.sardlineUserDao.queryByName(user.getUserName());
 
         if (sardlineUser != null) {
-            result.setCode("100000");
+            result.setCode(ResultCode.FAIL);
             result.setMsg("此用户已存在");
             return result;
         }
@@ -104,10 +105,10 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         user.setState(1);
         int insert = this.sardlineUserDao.insert(user);
         if (insert > 0) {
-            result.setCode("000000");
+            result.setCode(ResultCode.SUCCESS);
             result.setMsg("新增成功");
         } else {
-            result.setCode("200000");
+            result.setCode(ResultCode.FAIL);
             result.setMsg("新增失败");
         }
         return result;

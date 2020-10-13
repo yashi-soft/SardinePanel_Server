@@ -32,4 +32,19 @@ public class SardlineRoleController {
         return this.sardlineRoleService.queryById(id);
     }
 
+
+    /**
+     * 新建角色
+     * @param sardlineRole
+     * @return
+     */
+    @PostMapping("addRole")
+    public Boolean add(SardlineRole sardlineRole) {
+
+
+        return this.sardlineRoleService.insert(sardlineRole) != null ? true : false;
+
+    }
+
+
 }

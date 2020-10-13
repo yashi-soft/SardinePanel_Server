@@ -9,7 +9,7 @@ public class Result<T> {
     /**
      * 状态码
      */
-    private String code;
+    private Integer code;
 
     /**
      * 描述
@@ -24,11 +24,11 @@ public class Result<T> {
     public Result() {
     }
 
-    public Result(String code, String msg) {
+    public Result(Integer code, String msg) {
         this(code, msg, null);
     }
 
-    public Result(String code, String msg, T data) {
+    public Result(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;

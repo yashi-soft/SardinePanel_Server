@@ -1,12 +1,15 @@
 package com.example.mysecurity.auth.handler;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.common.ResultCode;
 import com.example.mysecurity.auth.JsonAuth;
 import com.example.mysecurity.auth.cache.RedisCache;
 import com.example.mysecurity.entity.*;
 import com.example.mysecurity.service.*;
+import com.example.mysecurity.vo.MenuVo;
 import com.example.mysecurity.vo.RoleVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -66,17 +69,38 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
 
 
         List<SardlineUserRole> sardlineUserRoles = sardlineUserRoleService.queryByUserId(sardlineUser.getUserId());
+
         List<RoleVo> roles = new ArrayList<>();
+
+        Map<String, MenuVo> allMenu = new HashMap();
+        String rootid = "-1";
+
         for (SardlineUserRole role : sardlineUserRoles) {
 
-            RoleVo roleVo = new RoleVo();
 
             SardlineRole sardlineRole = sardlineRoleService.queryById(role.getRoleId());
 
+
             List<SardlineMenu> menus = sardlineRoleMenuService.queryByRoleId(role.getRoleId());
 
+            for (SardlineMenu menu : menus) {
+                allMenu.put(menu.getMenuId(), BeanUtil.toBean(menu, MenuVo.class));
+            }
 
 
+            for (SardlineMenu menu : menus) {
+                MenuVo vo = BeanUtil.toBean(menu,MenuVo.class);
+                String pid = vo.getPid();
+                if (pid != null) {
+                    MenuVo menu1 = allMenu.get(pid);
+                    menu1.getChildren().add(vo);
+                }
+            }
+
+            RoleVo roleVo = BeanUtil.toBean(sardlineRole, RoleVo.class);
+
+//            RoleVo roleVo = (RoleVo) sardlineRole;
+            roleVo.setMenuVo(allMenu.get(rootid));
             roles.add(roleVo);
 
         }
@@ -88,7 +112,7 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
 
 //        sardlineMenuService.
 
-        data.put("roles",roles);
+        data.put("roles", roles);
         data.put("dept", sardlineUserOrgs);
         data.put("userInfo", sardlineUser);
 

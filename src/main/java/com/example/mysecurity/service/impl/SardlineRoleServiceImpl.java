@@ -1,5 +1,6 @@
 package com.example.mysecurity.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.mapper.SardlineRoleDao;
 import com.example.mysecurity.service.SardlineRoleService;
@@ -50,6 +51,7 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
      */
     @Override
     public SardlineRole insert(SardlineRole sardlineRole) {
+
         this.sardlineRoleDao.insert(sardlineRole);
         return sardlineRole;
     }

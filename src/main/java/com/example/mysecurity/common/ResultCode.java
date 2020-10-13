@@ -4,8 +4,8 @@ public class ResultCode {
 
 
 
-    public static final String SUCCESS="000000";
+    public static final Integer SUCCESS=20000;
 
-    public static final String FAIL="100000";
+    public static final Integer FAIL=50008;
 
 }

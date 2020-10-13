@@ -1,6 +1,6 @@
-package com.example.mysecurity.configuration.filter;
+package com.example.mysecurity.auth.filter;
 
-import com.example.mysecurity.service.auth.AuthUserDetailServiceImpl;
+import com.example.mysecurity.auth.service.AuthUserDetailServiceImpl;
 import com.example.mysecurity.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -1,7 +1,7 @@
 package com.example.mysecurity.utils;
 
-import com.example.mysecurity.configuration.property.AuthProperty;
-import com.example.mysecurity.entity.auth.AuthUserDetail;
+import com.example.mysecurity.auth.property.AuthProperty;
+import com.example.mysecurity.auth.entity.AuthUserDetail;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

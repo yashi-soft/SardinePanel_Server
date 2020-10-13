@@ -1,7 +1,7 @@
 package com.example.mysecurity.utils;
 
 ;
-import com.example.mysecurity.configuration.exception.MyaccessDeniedException;
+import com.example.mysecurity.auth.exception.MyaccessDeniedException;
 import com.example.mysecurity.entity.SardlineApi;
 import com.example.mysecurity.service.SardlineApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Component
-public class DynamicPermission {
+public class MethodCheckUtil {
 
     @Autowired
     SardlineApiService service;
@@ -28,7 +28,7 @@ public class DynamicPermission {
      * @return
      * @throws MyaccessDeniedException
      */
-    public boolean checkPermisstion(HttpServletRequest request,
+    public boolean checkMethod(HttpServletRequest request,
                                     Authentication authentication) throws MyaccessDeniedException {
 
         Object principal = authentication.getPrincipal();

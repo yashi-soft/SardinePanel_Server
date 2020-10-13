@@ -1,11 +1,8 @@
-package com.example.mysecurity.configuration.filter;
+package com.example.mysecurity.auth.filter;
 
-import com.example.mysecurity.configuration.exception.LocalAuthException;
 import com.example.mysecurity.service.SardlineUserService;
-import com.example.mysecurity.utils.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -13,8 +10,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 
 public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {

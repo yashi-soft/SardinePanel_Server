@@ -1,4 +1,4 @@
-package com.example.mysecurity.configuration.cache;
+package com.example.mysecurity.auth.cache;
 
 import java.util.concurrent.ConcurrentHashMap;
 

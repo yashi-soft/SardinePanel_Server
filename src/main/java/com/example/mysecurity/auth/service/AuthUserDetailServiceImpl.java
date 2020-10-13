@@ -1,9 +1,8 @@
-package com.example.mysecurity.service.auth;
+package com.example.mysecurity.auth.service;
 
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
-import com.example.mysecurity.entity.SardlineUserRole;
-import com.example.mysecurity.entity.auth.AuthUserDetail;
+import com.example.mysecurity.auth.entity.AuthUserDetail;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

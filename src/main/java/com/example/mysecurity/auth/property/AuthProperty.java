@@ -1,4 +1,4 @@
-package com.example.mysecurity.configuration.property;
+package com.example.mysecurity.auth.property;
 
 import lombok.Getter;
 import lombok.Setter;

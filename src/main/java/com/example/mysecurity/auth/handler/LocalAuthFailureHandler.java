@@ -1,13 +1,8 @@
-package com.example.mysecurity.configuration.handler;
+package com.example.mysecurity.auth.handler;
 
-import com.example.mysecurity.configuration.JsonAuth;
-import com.example.mysecurity.configuration.cache.RedisCache;
-import org.springframework.security.core.Authentication;
+import com.example.mysecurity.auth.JsonAuth;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;

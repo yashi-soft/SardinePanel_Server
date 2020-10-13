@@ -1,11 +1,11 @@
-package com.example.mysecurity.configuration;
+package com.example.mysecurity.auth;
 
-import com.example.mysecurity.configuration.filter.LocalUsernamePasswordAuthenticationFilter;
-import com.example.mysecurity.configuration.filter.YaxiOncePerResuestFilter;
-import com.example.mysecurity.configuration.handler.LocalAuthFailureHandler;
-import com.example.mysecurity.configuration.handler.LocalAuthSuccessHandler;
-import com.example.mysecurity.configuration.handler.LocalLogoutHandler;
-import com.example.mysecurity.configuration.handler.LocalLogoutSuccessHandler;
+import com.example.mysecurity.auth.filter.LocalUsernamePasswordAuthenticationFilter;
+import com.example.mysecurity.auth.filter.YaxiOncePerResuestFilter;
+import com.example.mysecurity.auth.handler.LocalAuthFailureHandler;
+import com.example.mysecurity.auth.handler.LocalAuthSuccessHandler;
+import com.example.mysecurity.auth.handler.LocalLogoutHandler;
+import com.example.mysecurity.auth.handler.LocalLogoutSuccessHandler;
 import com.example.mysecurity.utils.BCryptPasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -66,7 +66,7 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .cacheControl();
         http.authorizeRequests().
                 antMatchers(HttpMethod.POST, "/user/register").permitAll().
-                anyRequest().access("@dynamicPermission.checkPermisstion(request,authentication)");
+                anyRequest().access("@methodCheckUtil.checkMethod(request,authentication)");
         http.addFilterAt(localUsernamePasswordAuthenticationFilter(), LocalUsernamePasswordAuthenticationFilter.class);
 
         http.addFilterBefore(yaxiOncePerResuestFilter, UsernamePasswordAuthenticationFilter.class);

@@ -1,4 +1,4 @@
-package com.example.mysecurity.configuration;
+package com.example.mysecurity.auth;
 
 import com.example.mysecurity.utils.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;

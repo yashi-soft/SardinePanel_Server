@@ -1,10 +1,9 @@
-package com.example.mysecurity.configuration.handler;
+package com.example.mysecurity.auth.handler;
 
-import com.baomidou.mybatisplus.extension.api.R;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.common.ResultCode;
-import com.example.mysecurity.configuration.JsonAuth;
-import com.example.mysecurity.configuration.cache.RedisCache;
+import com.example.mysecurity.auth.JsonAuth;
+import com.example.mysecurity.auth.cache.RedisCache;
 import com.example.mysecurity.entity.*;
 import com.example.mysecurity.service.*;
 import com.example.mysecurity.vo.RoleVo;

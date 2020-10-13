@@ -1,4 +1,4 @@
-package com.example.mysecurity.configuration.exception;
+package com.example.mysecurity.auth.exception;
 
 import org.springframework.security.access.AccessDeniedException;
 

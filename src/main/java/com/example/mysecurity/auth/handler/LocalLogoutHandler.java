@@ -1,6 +1,6 @@
-package com.example.mysecurity.configuration.handler;
+package com.example.mysecurity.auth.handler;
 
-import com.example.mysecurity.configuration.JsonAuth;
+import com.example.mysecurity.auth.JsonAuth;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;

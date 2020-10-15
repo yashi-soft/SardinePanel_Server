@@ -2,6 +2,7 @@ package com.example.mysecurity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineApi;
+import com.example.mysecurity.vo.ApiVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -44,4 +45,7 @@ public interface SardlineApiDao extends BaseMapper<SardlineApi> {
 
 
     List<SardlineApi> getApiUrlByUserName(String username);
+
+
+    List<ApiVo> queryByMenuId(String menuId);
 }

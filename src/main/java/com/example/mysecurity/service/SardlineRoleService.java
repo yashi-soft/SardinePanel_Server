@@ -1,6 +1,9 @@
 package com.example.mysecurity.service;
 
 import com.example.mysecurity.entity.SardlineRole;
+import com.example.mysecurity.vo.MenuVo;
+import com.example.mysecurity.vo.RoleVo;
+
 import java.util.List;
 
 /**
@@ -52,4 +55,9 @@ public interface SardlineRoleService {
      */
     boolean deleteById(String roleId);
 
+    MenuVo getAllMenuAndApi(String roleId);
+
+    List<SardlineRole> queryAll();
+
+    Boolean add(SardlineRole sardlineRole);
 }

@@ -35,4 +35,13 @@ public class Result<T> {
     }
 
 
+    public static Result success(Object object) {
+        Result result = new Result();
+        result.setMsg("请求成功");
+        result.setCode(ResultCode.SUCCESS);
+        result.setData(object);
+        return result;
+    }
+
+
 }

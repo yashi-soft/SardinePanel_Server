@@ -27,7 +27,13 @@
         from sardline.sardline_user
         where user_name = #{name}
     </select>
-
+    <!--查询单个-->
+    <select id="queryByNameForLogin" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          user_id, user_name, nick_name, pass_word, description, state
+        from sardline.sardline_user
+        where user_name = #{name}
+    </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select

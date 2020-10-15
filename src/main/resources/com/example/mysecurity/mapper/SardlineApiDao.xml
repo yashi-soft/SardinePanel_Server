@@ -11,12 +11,13 @@
         <result property="pid" column="pid" jdbcType="VARCHAR"/>
         <result property="sort" column="sort" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="menuId" column="menu_id" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          api_id, api_name, api_url, api_method, pid, sort, description
+          api_id, api_name, api_url, api_method, pid, sort, description,menu_id
         from sardline.sardline_api
         where api_id = #{apiId}
     </select>
@@ -32,10 +33,21 @@
             c.role_id IN ( SELECT b.role_id FROM sardline_user a LEFT JOIN sardline_user_role b ON a.user_id = b.user_id WHERE a.user_name = #{usernmae} );
     </select>
 
+
+    <select id="queryByMenuId" resultType="com.example.mysecurity.vo.ApiVo">
+        SELECT
+            d.*
+        FROM
+            sardline_role_api c
+        WHERE
+            c.menu_id =#{menuId}
+    </select>
+
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          api_id, api_name, api_url, api_method, pid, sort, description
+          api_id, api_name, api_url, api_method, pid, sort, description,menu_id
         from sardline.sardline_api
         limit #{offset}, #{limit}
     </select>
@@ -43,7 +55,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-        api_id, api_name, api_url, api_method, pid, sort, description
+        api_id, api_name, api_url, api_method, pid, sort, description,menu_id
         from sardline.sardline_api
         <where>
             <if test="apiId != null and apiId != ''">
@@ -67,18 +79,15 @@
             <if test="description != null and description != ''">
                 and description = #{description}
             </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
         </where>
     </select>
 
 
-<!--    <select id="queryAllMenus" parameterType="java.lang.String" resultMap="BaseResultMap">-->
-
-
-
-
-
-
-<!--    </select>-->
+    <!--    <select id="queryAllMenus" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+    <!--    </select>-->
 
 
 </mapper>

@@ -43,7 +43,7 @@ public interface SardlineMenuDao extends BaseMapper<SardlineMenu> {
     List<SardlineMenu> queryAll(SardlineMenu sardlineMenu);
 
 
-
+    int updateByMenuId(SardlineMenu sardlineMenu);
 
 
 }

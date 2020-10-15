@@ -53,28 +53,28 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert1" keyProperty="id" useGeneratedKeys="true">
         insert into sardline.sardline_role_menu(role_id, menu_id)
         values (#{roleId}, #{menuId})
     </insert>
 
-    <!--通过主键修改数据-->
-    <update id="update">
-        update sardline.sardline_role_menu
-        <set>
-            <if test="roleId != null and roleId != ''">
-                role_id = #{roleId},
-            </if>
-            <if test="menuId != null and menuId != ''">
-                menu_id = #{menuId},
-            </if>
-        </set>
-        where id = #{id}
-    </update>
+<!--    &lt;!&ndash;通过主键修改数据&ndash;&gt;-->
+<!--    <update id="update">-->
+<!--        update sardline.sardline_role_menu-->
+<!--        <set>-->
+<!--            <if test="roleId != null and roleId != ''">-->
+<!--                role_id = #{roleId},-->
+<!--            </if>-->
+<!--            <if test="menuId != null and menuId != ''">-->
+<!--                menu_id = #{menuId},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from sardline.sardline_role_menu where id = #{id}
-    </delete>
+<!--    <delete id="deleteById">-->
+<!--        delete from sardline.sardline_role_menu where id = #{id}-->
+<!--    </delete>-->
 
 </mapper>

@@ -1,16 +1,24 @@
 package com.example.mysecurity.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.common.ResultCode;
+import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
+import com.example.mysecurity.entity.SardlineUserRole;
 import com.example.mysecurity.mapper.SardlineUserDao;
+import com.example.mysecurity.service.SardlineRoleService;
+import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
 import com.example.mysecurity.utils.BCryptPasswordUtil;
+import com.example.mysecurity.vo.RoleVo;
+import com.example.mysecurity.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +34,11 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     private SardlineUserDao sardlineUserDao;
     @Autowired
     BCryptPasswordUtil passwordUtil;
+
+    @Resource
+    private SardlineUserRoleService sardlineUserRoleService;
+    @Resource
+    private SardlineRoleService sardlineRoleService;
 
     /**
      * 通过ID查询单条数据
@@ -136,5 +149,24 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
                 return true;
             }
         }
+    }
+
+    @Override
+    public UserVo queryUserForLogin(String username) {
+        SardlineUser sardlineUser = this.sardlineUserDao.queryByName(username);
+        UserVo userVo = null;
+        if (sardlineUser != null) {
+             userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
+
+            List<SardlineUserRole> sardlineUserRoles = sardlineUserRoleService.queryByUserId(sardlineUser.getUserId());
+            for (SardlineUserRole role : sardlineUserRoles) {
+                SardlineRole sardlineRole = sardlineRoleService.queryById(role.getRoleId());
+                RoleVo roleVo = BeanUtil.toBean(sardlineRole, RoleVo.class);
+                userVo.getRoles().add(roleVo);
+            }
+        }
+
+
+        return userVo;
     }
 }

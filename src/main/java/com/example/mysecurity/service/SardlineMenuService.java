@@ -1,5 +1,6 @@
 package com.example.mysecurity.service;
 
+import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.vo.MenuVo;
 
@@ -55,4 +56,6 @@ public interface SardlineMenuService {
     boolean deleteById(String menuId);
 
     MenuVo getMenuVo(String roleId);
+
+   MenuVo queryAllMenu();
 }

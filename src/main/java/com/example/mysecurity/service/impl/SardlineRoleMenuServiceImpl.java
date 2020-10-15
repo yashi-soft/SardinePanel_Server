@@ -68,7 +68,7 @@ public class SardlineRoleMenuServiceImpl implements SardlineRoleMenuService {
      */
     @Override
     public SardlineRoleMenu update(SardlineRoleMenu sardlineRoleMenu) {
-        this.sardlineRoleMenuDao.update(sardlineRoleMenu);
+//        this.sardlineRoleMenuDao.update(sardlineRoleMenu);
         return this.queryById(sardlineRoleMenu.getId());
     }
 

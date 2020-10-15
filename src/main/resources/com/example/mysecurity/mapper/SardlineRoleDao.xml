@@ -44,13 +44,13 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="roleId" useGeneratedKeys="true">
+    <insert id="insert1" keyProperty="roleId" useGeneratedKeys="true">
         insert into sardline.sardline_role(role_name, description)
         values (#{roleName}, #{description})
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="update">
+    <update id="update1">
         update sardline.sardline_role
         <set>
             <if test="roleName != null and roleName != ''">
@@ -64,7 +64,7 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
+    <delete id="deleteById1">
         delete from sardline.sardline_role where role_id = #{roleId}
     </delete>
 

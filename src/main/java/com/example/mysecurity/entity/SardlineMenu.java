@@ -16,31 +16,42 @@ import java.io.Serializable;
 public class SardlineMenu implements Serializable {
     private static final long serialVersionUID = -70371943597984101L;
     /**
-    * 菜单id
-    */
+     * 菜单id
+     */
     @TableId(type = IdType.UUID)
     private String menuId;
     /**
-    * 菜单名称
-    */
+     * 菜单名称
+     */
     private String menuName;
     /**
-    * 菜单路径
-    */
+     * 菜单路径
+     */
     private String menuPath;
     /**
-    * 上级id
-    */
+     * 上级id
+     */
     private String pid;
     /**
-    * 排序
-    */
+     * 排序
+     */
     private String sort;
     /**
-    * 描述
-    */
+     * 描述
+     */
     private String description;
+    /**
+     * 类别
+     */
+    private Integer isCatalog;
 
+    public Integer getIsCatalog() {
+        return isCatalog;
+    }
+
+    public void setIsCatalog(Integer isCatalog) {
+        this.isCatalog = isCatalog;
+    }
 
     public String getMenuId() {
         return menuId;

@@ -1,8 +1,10 @@
 package com.example.mysecurity.controller;
 
 import com.example.mysecurity.common.Result;
+import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.service.SardlineUserService;
+import com.example.mysecurity.vo.UserVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -45,6 +47,7 @@ public class SardlineUserController {
         return sardlineUserService.register(user);
     }
 
+
     /**
      * 注销
      */
@@ -64,6 +67,10 @@ public class SardlineUserController {
         return sardlineUserService.update(user) == null ? false : true;
     }
 
+    @PostMapping("queryUser")
+    public Result<UserVo> queryUserForLogin(String username) {
+        return Result.success(sardlineUserService.queryUserForLogin(username));
+    }
 
 
 }

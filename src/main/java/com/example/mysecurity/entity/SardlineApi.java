@@ -45,6 +45,15 @@ public class SardlineApi implements Serializable {
     */
     private String description;
 
+    private String menuId;
+
+    public String getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
+    }
 
     public String getApiId() {
         return apiId;

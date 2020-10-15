@@ -37,8 +37,10 @@ public class SardlineMenuController {
 
 
     @PostMapping("list")
-    public MenuVo getMenuList(String roleId) {
-        return this.sardlineMenuService.getMenuVo(roleId);
+    public Result<MenuVo> getMenuList(String roleId) {
+
+
+        return Result.success(this.sardlineMenuService.getMenuVo(roleId));
     }
 
 
@@ -46,20 +48,18 @@ public class SardlineMenuController {
      * 新增菜单
      */
     @PostMapping("addMenu")
-    public Boolean addMenu(SardlineMenu menu) {
+    public Result<Boolean> addMenu(SardlineMenu menu) {
 
-        return this.sardlineMenuService.insert(menu) != null ? true : false;
-
-
+        return Result.success(this.sardlineMenuService.insert(menu) != null ? true : false);
     }
 
     /**
      * 修改菜单
      */
     @PostMapping("updateMenu")
-    public Boolean updateMenu(SardlineMenu menu) {
+    public Result<Boolean> updateMenu(SardlineMenu menu) {
 
-        return this.sardlineMenuService.update(menu) != null ? true : false;
+        return Result.success(this.sardlineMenuService.update(menu) != null ? true : false);
     }
 
 
@@ -67,9 +67,19 @@ public class SardlineMenuController {
      * 删除菜单
      */
     @PostMapping("deleteMenu")
-    public Boolean deleteMenu(String menuId) {
+    public Result<Boolean> deleteMenu(String menuId) {
 
-        return this.sardlineMenuService.deleteById(menuId);
+        return Result.success(this.sardlineMenuService.deleteById(menuId));
     }
+
+    /**
+     * 查询菜单
+     */
+    @PostMapping("queryAllMenu")
+    public Result<MenuVo> queryAllMenu() {
+
+        return Result.success(this.sardlineMenuService.queryAllMenu());
+    }
+
 
 }

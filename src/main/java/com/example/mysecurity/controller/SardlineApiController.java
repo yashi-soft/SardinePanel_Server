@@ -1,7 +1,10 @@
 package com.example.mysecurity.controller;
 
+import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineApi;
+import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.service.SardlineApiService;
+import com.example.mysecurity.vo.MenuVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,16 +23,56 @@ public class SardlineApiController {
      */
     @Resource
     private SardlineApiService sardlineApiService;
+//
+//    /**
+//     * 通过主键查询单条数据
+//     *
+//     * @param id 主键
+//     * @return 单条数据
+//     */
+//    @GetMapping("selectOne")
+//    public SardlineApi selectOne(String id) {
+//        return this.sardlineApiService.queryById(id);
+//    }
+//
+//    @PostMapping("list")
+//    public Result<MenuVo> getMenuList(String roleId) {
+//
+//
+//        return Result.success(this.sardlineApiService.getMenuVo(roleId));
+//    }
+
 
     /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
+     * 新增api
      */
-    @GetMapping("selectOne")
-    public SardlineApi selectOne(String id) {
-        return this.sardlineApiService.queryById(id);
+    @PostMapping("addApi")
+    public Result<Boolean> addMenu(SardlineApi api) {
+
+        return Result.success(this.sardlineApiService.insert(api) != null ? true : false);
     }
+
+    /**
+     * 修改菜单
+     */
+    @PostMapping("updateApi")
+    public Result<Boolean> updateMenu(SardlineApi api) {
+
+        return Result.success(this.sardlineApiService.update(api) != null ? true : false);
+    }
+
+
+    /**
+     * 删除菜单
+     */
+    @PostMapping("deleteApi")
+    public Result<Boolean> deleteMenu(String apiId) {
+
+        return Result.success(this.sardlineApiService.deleteById(apiId));
+    }
+
+
+
+
 
 }

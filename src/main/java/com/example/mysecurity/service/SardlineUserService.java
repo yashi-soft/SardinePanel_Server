@@ -2,6 +2,8 @@ package com.example.mysecurity.service;
 
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineUser;
+import com.example.mysecurity.vo.UserVo;
+
 import java.util.List;
 
 /**
@@ -58,4 +60,6 @@ public interface SardlineUserService {
     Result register(SardlineUser user);
 
     boolean checkLogin(String username, String password);
+
+    UserVo queryUserForLogin(String username);
 }

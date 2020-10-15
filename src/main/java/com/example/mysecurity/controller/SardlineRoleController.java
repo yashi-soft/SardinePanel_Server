@@ -1,10 +1,14 @@
 package com.example.mysecurity.controller;
 
+import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.service.SardlineRoleService;
+import com.example.mysecurity.vo.MenuVo;
+import com.example.mysecurity.vo.RoleVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (SardlineRole)表控制层
@@ -35,6 +39,7 @@ public class SardlineRoleController {
 
     /**
      * 新建角色
+     *
      * @param sardlineRole
      * @return
      */
@@ -42,8 +47,29 @@ public class SardlineRoleController {
     public Boolean add(SardlineRole sardlineRole) {
 
 
-        return this.sardlineRoleService.insert(sardlineRole) != null ? true : false;
+        return this.sardlineRoleService.add(sardlineRole) != null ? true : false;
 
+    }
+
+
+    /**
+     * 角色列表
+     *
+     * @return
+     */
+    @PostMapping("list")
+    public Result<List<SardlineRole>> list() {
+        return Result.success(this.sardlineRoleService.queryAll());
+
+    }
+
+
+    /**
+     * 编辑角色
+     */
+    @PostMapping("apiAndMenulist")
+    public Result<MenuVo> getAllMenuAndApi(String roleId) {
+        return Result.success(this.sardlineRoleService.getAllMenuAndApi(roleId));
     }
 
 

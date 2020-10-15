@@ -25,6 +25,9 @@ public interface SardlineUserDao  extends BaseMapper<SardlineUser> {
 
 
     SardlineUser queryByName(@Param("name")String name);
+
+
+    SardlineUser queryByNameForLogin(@Param("name")String name);
     /**
      * 查询指定行数据
      *

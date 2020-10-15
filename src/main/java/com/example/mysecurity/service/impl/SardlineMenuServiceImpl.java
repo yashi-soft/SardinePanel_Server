@@ -2,6 +2,7 @@ package com.example.mysecurity.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineApi;
 import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.mapper.SardlineApiDao;
@@ -12,6 +13,7 @@ import com.example.mysecurity.vo.MenuVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +76,7 @@ public class SardlineMenuServiceImpl extends ServiceImpl<SardlineMenuDao, Sardli
      */
     @Override
     public SardlineMenu update(SardlineMenu sardlineMenu) {
-        this.sardlineMenuDao.update(sardlineMenu, null);
+        this.sardlineMenuDao.updateByMenuId(sardlineMenu);
         return this.queryById(sardlineMenu.getMenuId());
     }
 
@@ -92,6 +94,8 @@ public class SardlineMenuServiceImpl extends ServiceImpl<SardlineMenuDao, Sardli
     @Override
     public MenuVo getMenuVo(String roleId) {
         List<SardlineMenu> menus = sardlineRoleMenuService.queryByRoleId(roleId);
+
+
         Map<String, MenuVo> allMenu = new HashMap();
         for (SardlineMenu menu : menus) {
             allMenu.put(menu.getMenuId(), BeanUtil.toBean(menu, MenuVo.class));
@@ -99,11 +103,36 @@ public class SardlineMenuServiceImpl extends ServiceImpl<SardlineMenuDao, Sardli
         String rootid = "-1";
 
         for (SardlineMenu menu : menus) {
-            MenuVo vo = BeanUtil.toBean(menu, MenuVo.class);
-            String pid = vo.getPid();
+            String pid = menu.getPid();
             if (pid != null) {
                 MenuVo menu1 = allMenu.get(pid);
-                menu1.getChildren().add(vo);
+                if (menu1 != null) {
+                    menu1.getChildren().add(allMenu.get(menu.getMenuId()));
+                }
+
+            }
+        }
+
+        return allMenu.get(rootid);
+    }
+
+    @Override
+    public MenuVo queryAllMenu() {
+        List<SardlineMenu> menus = this.sardlineMenuDao.queryAll(new SardlineMenu());
+        Map<String, MenuVo> allMenu = new HashMap();
+        for (SardlineMenu menu : menus) {
+            allMenu.put(menu.getMenuId(), BeanUtil.toBean(menu, MenuVo.class));
+        }
+        String rootid = "-1";
+
+        for (SardlineMenu menu : menus) {
+            String pid = menu.getPid();
+            if (pid != null) {
+                MenuVo menu1 = allMenu.get(pid);
+                if (menu1 != null) {
+                    menu1.getChildren().add(allMenu.get(menu.getMenuId()));
+                }
+
             }
         }
 

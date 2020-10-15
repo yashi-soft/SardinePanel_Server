@@ -1,5 +1,6 @@
 package com.example.mysecurity.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRoleMenu;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 2020-10-10 10:40:57
  */
 @Mapper
-public interface SardlineRoleMenuDao {
+public interface SardlineRoleMenuDao extends BaseMapper<SardlineRoleMenu> {
 
     /**
      * 通过ID查询单条数据
@@ -47,7 +48,7 @@ public interface SardlineRoleMenuDao {
      * @param sardlineRoleMenu 实例对象
      * @return 影响行数
      */
-    int insert(SardlineRoleMenu sardlineRoleMenu);
+    int insert1(SardlineRoleMenu sardlineRoleMenu);
 
     /**
      * 修改数据
@@ -55,7 +56,7 @@ public interface SardlineRoleMenuDao {
      * @param sardlineRoleMenu 实例对象
      * @return 影响行数
      */
-    int update(SardlineRoleMenu sardlineRoleMenu);
+//    int update(SardlineRoleMenu sardlineRoleMenu);
 
     /**
      * 通过主键删除数据
@@ -63,7 +64,7 @@ public interface SardlineRoleMenuDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(String id);
+//    int deleteById(String id);
 
     List<SardlineMenu> queryByRoleId(String roleId);
 }

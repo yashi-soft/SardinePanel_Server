@@ -7,7 +7,7 @@ import lombok.Data;
 
 @TableName("sardline_role_api")
 @Data
-public class SardlineRole_Api {
+public class SardlineRoleApi {
 
     @TableId(type = IdType.UUID)
     private String id;

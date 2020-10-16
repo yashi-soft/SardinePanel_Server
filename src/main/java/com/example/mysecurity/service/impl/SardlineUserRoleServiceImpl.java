@@ -36,6 +36,11 @@ public class SardlineUserRoleServiceImpl implements SardlineUserRoleService {
         return this.sardlineUserRoleDao.queryByUserId(userId);
     }
 
+    @Override
+    public List<String> queryRoleIdByUserId(String userId) {
+        return this.sardlineUserRoleDao.queryRoleIdByUserId(userId);
+    }
+
     /**
      * 查询多条数据
      *

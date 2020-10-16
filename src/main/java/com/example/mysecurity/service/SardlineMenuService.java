@@ -58,4 +58,8 @@ public interface SardlineMenuService {
     MenuVo getMenuVo(String roleId);
 
    MenuVo queryAllMenu();
+
+    Boolean addMenu(SardlineMenu menu);
+
+    Boolean delete(String menuId);
 }

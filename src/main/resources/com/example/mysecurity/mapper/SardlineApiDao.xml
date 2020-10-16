@@ -38,11 +38,18 @@
         SELECT
             d.*
         FROM
-            sardline_role_api c
+            sardline.sardline_api d
         WHERE
-            c.menu_id =#{menuId}
+            d.menu_id =#{menuId}
     </select>
-
+    <select id="queryCountByMenuId" resultType="java.lang.Integer">
+        SELECT
+            count(d.api_id)
+        FROM
+            sardline.sardline_api d
+        WHERE
+            d.menu_id =#{menuId}
+    </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
@@ -89,5 +96,7 @@
     <!--    <select id="queryAllMenus" parameterType="java.lang.String" resultMap="BaseResultMap">-->
     <!--    </select>-->
 
-
+    <delete id="deletebyMenuId">
+            delete from sardline.sardline_api where menu_id = #{menuId}
+        </delete>
 </mapper>

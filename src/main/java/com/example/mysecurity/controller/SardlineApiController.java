@@ -49,7 +49,7 @@ public class SardlineApiController {
     @PostMapping("addApi")
     public Result<Boolean> addMenu(SardlineApi api) {
 
-        return Result.success(this.sardlineApiService.insert(api) != null ? true : false);
+        return Result.success(this.sardlineApiService.add(api) != null ? true : false);
     }
 
     /**

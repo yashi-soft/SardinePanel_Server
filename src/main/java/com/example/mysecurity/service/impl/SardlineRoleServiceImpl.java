@@ -129,8 +129,12 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
             String pid = menu.getPid();
 
             List<ApiVo> apis = sardlineApiDao.queryByMenuId(menu.getMenuId());
-            MenuVo menu1 = allMenu.get(pid);
-            menu1.setApis(apis);
+
+            MenuVo menu1 = allMenu.get(menu.getMenuId());
+
+
+//            menu1.setApis(apis);
+
             if (pid != null) {
                 MenuVo menu2 = allMenu.get(pid);
                 if (menu2 != null) {
@@ -141,7 +145,5 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
         }
 
         return allMenu.get(rootid);
-
-
     }
 }

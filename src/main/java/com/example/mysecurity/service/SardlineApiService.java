@@ -54,4 +54,5 @@ public interface SardlineApiService {
 
     List<SardlineApi> getApiUrlByUserName(String username);
 
+    Boolean add(SardlineApi api);
 }

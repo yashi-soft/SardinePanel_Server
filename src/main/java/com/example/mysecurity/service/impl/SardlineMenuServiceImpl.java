@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineApi;
 import com.example.mysecurity.entity.SardlineMenu;
+import com.example.mysecurity.entity.SardlineRoleMenu;
 import com.example.mysecurity.mapper.SardlineApiDao;
 import com.example.mysecurity.mapper.SardlineMenuDao;
+import com.example.mysecurity.mapper.SardlineRoleMenuDao;
 import com.example.mysecurity.service.SardlineMenuService;
 import com.example.mysecurity.service.SardlineRoleMenuService;
 import com.example.mysecurity.vo.MenuVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -32,6 +35,13 @@ public class SardlineMenuServiceImpl extends ServiceImpl<SardlineMenuDao, Sardli
 
     @Resource
     private SardlineRoleMenuService sardlineRoleMenuService;
+
+    @Resource
+    private SardlineRoleMenuDao sardlineRoleMenuDao;
+
+    @Resource
+    private SardlineApiDao sardlineApiDao;
+
 
     /**
      * 通过ID查询单条数据
@@ -137,5 +147,35 @@ public class SardlineMenuServiceImpl extends ServiceImpl<SardlineMenuDao, Sardli
         }
 
         return allMenu.get(rootid);
+    }
+
+    @Override
+    @Transactional
+    public Boolean addMenu(SardlineMenu menu) {
+
+        int insert = this.sardlineMenuDao.insert(menu);
+
+        //赋值给admin
+
+        SardlineRoleMenu rm = new SardlineRoleMenu();
+        rm.setMenuId(menu.getMenuId());
+        rm.setRoleId("1");
+        int insert1 = sardlineRoleMenuDao.insert(rm);
+        return insert > 0 && insert1 > 0;
+    }
+
+    @Override
+    public Boolean delete(String menuId) {
+        //删除菜单信息
+        int i = sardlineMenuDao.deleteById(menuId);
+        int roleCount = sardlineRoleMenuDao.queryByMenuId(menuId);
+        //删除角色关联菜单信息
+        int k = sardlineRoleMenuDao.deleteByMenuId(menuId);
+
+        //删除菜单关联api信息
+        Integer apiCount = sardlineApiDao.queryCountByMenuId(menuId);
+        Integer a = sardlineApiDao.deletebyMenuId(menuId);
+
+        return i > 0 && k == roleCount && a == apiCount;
     }
 }

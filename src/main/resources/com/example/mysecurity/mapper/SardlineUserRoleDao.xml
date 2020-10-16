@@ -25,13 +25,21 @@
         where user_id = #{userId}
     </select>
 
+    <!--查询单个-->
+    <select id="queryRoleIdByUserId" resultType="java.lang.String">
+        select
+           role_id  roleId
+        from sardline.sardline_user_role
+        where user_id = #{userId}
+    </select>
+
+
     <select id="queryRolesByUserId" resultType="com.example.mysecurity.entity.SardlineRole">
         select
           b.*
         from sardline.sardline_user_role a left join sardline.sardline_role b on a.role_id=b.role_id
         where user_id = #{userId}
     </select>
-
 
 
     <!--查询指定行数据-->

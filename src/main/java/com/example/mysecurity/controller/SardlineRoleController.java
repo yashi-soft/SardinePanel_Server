@@ -65,12 +65,23 @@ public class SardlineRoleController {
 
 
     /**
-     * 编辑角色
+     * 查询所有角色和api列表
      */
     @PostMapping("apiAndMenulist")
     public Result<MenuVo> getAllMenuAndApi(String roleId) {
         return Result.success(this.sardlineRoleService.getAllMenuAndApi(roleId));
     }
+
+
+//    /**
+//     * 分配权限
+//     */
+//    @PostMapping("distribution")
+//    public Result<Boolean> distribution(){
+//
+//
+//
+//    }
 
 
 }

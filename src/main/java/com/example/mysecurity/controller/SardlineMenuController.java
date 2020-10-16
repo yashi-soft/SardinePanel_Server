@@ -50,7 +50,7 @@ public class SardlineMenuController {
     @PostMapping("addMenu")
     public Result<Boolean> addMenu(SardlineMenu menu) {
 
-        return Result.success(this.sardlineMenuService.insert(menu) != null ? true : false);
+        return Result.success(this.sardlineMenuService.addMenu(menu) != null ? true : false);
     }
 
     /**
@@ -69,7 +69,7 @@ public class SardlineMenuController {
     @PostMapping("deleteMenu")
     public Result<Boolean> deleteMenu(String menuId) {
 
-        return Result.success(this.sardlineMenuService.deleteById(menuId));
+        return Result.success(this.sardlineMenuService.delete(menuId));
     }
 
     /**

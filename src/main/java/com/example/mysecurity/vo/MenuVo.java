@@ -14,5 +14,5 @@ public class MenuVo extends SardlineMenu {
 
     private List<MenuVo> children = new ArrayList<>();
 
-    private List<ApiVo> apis = new ArrayList<>();
+//    private List<ApiVo> apis = new ArrayList<>();
 }

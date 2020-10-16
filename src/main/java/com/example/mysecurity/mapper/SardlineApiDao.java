@@ -48,4 +48,8 @@ public interface SardlineApiDao extends BaseMapper<SardlineApi> {
 
 
     List<ApiVo> queryByMenuId(String menuId);
+    
+    Integer queryCountByMenuId(String menuId);
+
+    Integer deletebyMenuId(String menuId);
 }

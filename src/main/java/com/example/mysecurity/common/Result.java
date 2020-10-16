@@ -43,5 +43,10 @@ public class Result<T> {
         return result;
     }
 
-
+    public static Result noData() {
+        Result result = new Result();
+        result.setMsg("查询无数据");
+        result.setCode(ResultCode.NO_DATA);
+        return result;
+    }
 }

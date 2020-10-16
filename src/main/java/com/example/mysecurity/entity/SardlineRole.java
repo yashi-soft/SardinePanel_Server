@@ -16,19 +16,32 @@ import java.io.Serializable;
 public class SardlineRole implements Serializable {
     private static final long serialVersionUID = 267587044720991004L;
     /**
-    * 角色id
-    */
+     * 角色id
+     */
     @TableId(type = IdType.UUID)
     private String roleId;
     /**
-    * 角色名
-    */
+     * 角色名
+     */
     private String roleName;
     /**
-    * 描述
-    */
+     * 描述
+     */
     private String description;
 
+    /**
+     * 状态，0-停用，1：启用
+     */
+    private String state;
+
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public String getRoleId() {
         return roleId;

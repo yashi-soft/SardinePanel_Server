@@ -106,7 +106,11 @@
             <artifactId>hutool-all</artifactId>
             <version>5.4.4</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-slf4j</artifactId>
 
+        </dependency>
 
     </dependencies>
 

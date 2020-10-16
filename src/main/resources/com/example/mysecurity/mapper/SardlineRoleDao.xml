@@ -7,6 +7,7 @@
         <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
         <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->

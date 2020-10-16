@@ -24,16 +24,17 @@ public class SardlineApiController {
     @Resource
     private SardlineApiService sardlineApiService;
 //
-//    /**
-//     * 通过主键查询单条数据
-//     *
-//     * @param id 主键
-//     * @return 单条数据
-//     */
-//    @GetMapping("selectOne")
-//    public SardlineApi selectOne(String id) {
-//        return this.sardlineApiService.queryById(id);
-//    }
+
+    /**
+     * 通过主键查询单条数据
+     *
+     * @param id 主键
+     * @return 单条数据
+     */
+    @GetMapping("selectOne")
+    public Result<SardlineApi> selectOne(String id) {
+        return Result.success(this.sardlineApiService.queryById(id));
+    }
 //
 //    @PostMapping("list")
 //    public Result<MenuVo> getMenuList(String roleId) {
@@ -70,9 +71,6 @@ public class SardlineApiController {
 
         return Result.success(this.sardlineApiService.deleteById(apiId));
     }
-
-
-
 
 
 }

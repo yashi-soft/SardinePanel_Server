@@ -5,6 +5,7 @@ import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.auth.entity.AuthUserDetail;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class AuthUserDetailServiceImpl implements UserDetailsService {
 
 
@@ -41,7 +43,7 @@ public class AuthUserDetailServiceImpl implements UserDetailsService {
             for (SardlineRole role : sardlineUserRoles) {
                 authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
             }
-            System.out.println("loadUserByUsername......user ===> " + user);
+            log.info("loadUserByUsername......user ===>{}",user);
             return new AuthUserDetail(user.getUserName(), user.getPassWord(), user.getState(), authorities);
         }
     }

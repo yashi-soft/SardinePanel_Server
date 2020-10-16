@@ -84,7 +84,7 @@
         select
           count(id) number
         from sardline.sardline_role_menu
-      where menu_id={menuId}
+      where menu_id=#{menuId}
     </select>
 
 </mapper>

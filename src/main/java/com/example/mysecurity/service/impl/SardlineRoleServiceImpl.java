@@ -6,15 +6,18 @@ import com.example.mysecurity.entity.SardlineApi;
 import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.mapper.SardlineApiDao;
+import com.example.mysecurity.mapper.SardlineRoleApiDao;
 import com.example.mysecurity.mapper.SardlineRoleDao;
 import com.example.mysecurity.service.SardlineRoleMenuService;
 import com.example.mysecurity.service.SardlineRoleService;
 import com.example.mysecurity.vo.ApiVo;
 import com.example.mysecurity.vo.MenuVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +29,7 @@ import java.util.Map;
  * @since 2020-10-10 10:40:57
  */
 @Service("sardlineRoleService")
+@Slf4j
 public class SardlineRoleServiceImpl implements SardlineRoleService {
     @Resource
     private SardlineRoleDao sardlineRoleDao;
@@ -35,6 +39,10 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
 
     @Resource
     private SardlineApiDao sardlineApiDao;
+
+    @Resource
+    private SardlineRoleApiDao sardlineRoleApiDao;
+
 
     /**
      * 通过ID查询单条数据
@@ -67,12 +75,13 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
     @Transactional
     public Boolean add(SardlineRole sardlineRole) {
         //添加角色表
-         sardlineRoleDao.insert(sardlineRole);
+        sardlineRoleDao.insert(sardlineRole);
         //添加角色-菜单表
 
 //        sardlineRoleMenuService.insert()
-        //添加角色-api表
 
+        //添加角色-api表
+//        sardlineRoleApiDao.insert();
 
         return null;
     }
@@ -130,10 +139,22 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
 
             List<ApiVo> apis = sardlineApiDao.queryByMenuId(menu.getMenuId());
 
+            List<MenuVo> menuVoList = new ArrayList<>();
+
+            for (ApiVo api : apis) {
+                MenuVo menuVo = new MenuVo();
+                menuVo.setIsCatalog(30);
+                menuVo.setMenuName(api.getApiName());
+                menuVo.setMenuPath(api.getApiUrl());
+                menuVo.setMenuId(api.getApiId());
+                menuVo.setDescription(api.getDescription());
+                menuVo.setPid(api.getPid());
+                menuVo.setPid(api.getPid());
+                menuVo.setSort(api.getSort());
+                menuVoList.add(menuVo);
+            }
             MenuVo menu1 = allMenu.get(menu.getMenuId());
-
-
-//            menu1.setApis(apis);
+            menu1.getChildren().addAll(menuVoList);
 
             if (pid != null) {
                 MenuVo menu2 = allMenu.get(pid);

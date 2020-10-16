@@ -30,7 +30,7 @@
             sardline_role_api c
             LEFT JOIN sardline_api d ON c.api_id = d.api_id
         WHERE
-            c.role_id IN ( SELECT b.role_id FROM sardline_user a LEFT JOIN sardline_user_role b ON a.user_id = b.user_id WHERE a.user_name = #{usernmae} );
+            c.role_id IN ( SELECT r.role_id  from sardline.sardline_role r where r.role_id in (SELECT b.role_id  FROM sardline_user a LEFT JOIN sardline_user_role b ON a.user_id = b.user_id WHERE a.user_name = #{usernmae}) and r.state=1);
     </select>
 
 

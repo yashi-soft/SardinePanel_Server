@@ -2,6 +2,7 @@ package com.example.mysecurity.auth.filter;
 
 import com.example.mysecurity.auth.service.AuthUserDetailServiceImpl;
 import com.example.mysecurity.utils.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
@@ -30,8 +32,10 @@ public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String headerToken = request.getHeader(header);
-        System.out.println("headerToken = " + headerToken);
-        System.out.println("request getMethod = " + request.getMethod());
+
+        log.info("headerToken = {}",headerToken);
+        log.info("request getMethod =  {}",request.getMethod());
+
 
         if (!StringUtils.isEmpty(headerToken)) {
             //postMan测试时，自动假如的前缀，要去掉。

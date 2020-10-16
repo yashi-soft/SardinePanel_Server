@@ -44,10 +44,10 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sardline.sardline_role_api(role_id, api_id)
-        values (#{roleId}, #{apiId})
-    </insert>
+<!--    <insert id="insert" keyProperty="id" useGeneratedKeys="true">-->
+<!--        insert into sardline.sardline_role_api(role_id, api_id)-->
+<!--        values (#{roleId}, #{apiId})-->
+<!--    </insert>-->
 
     <!--通过主键修改数据-->
     <update id="update">

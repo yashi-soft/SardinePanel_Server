@@ -5,6 +5,7 @@ import com.example.mysecurity.auth.entity.AuthUserDetail;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class JwtUtil {
 
     // 过期时间 毫秒,设置默认1周的时间过期
@@ -44,7 +46,7 @@ public class JwtUtil {
         String username = null;
         try {
             Claims claims = getClaimsFromToken(token);
-            System.out.println("claims = " + claims.toString());
+            log.info("claims ={}",claims.toString());
             username = claims.getSubject();
         } catch (Exception e) {
             System.out.println("e = " + e.getMessage());

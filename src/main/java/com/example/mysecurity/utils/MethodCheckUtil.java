@@ -4,6 +4,7 @@ package com.example.mysecurity.utils;
 import com.example.mysecurity.auth.exception.MyaccessDeniedException;
 import com.example.mysecurity.entity.SardlineApi;
 import com.example.mysecurity.service.SardlineApiService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Component
+@Slf4j
 public class MethodCheckUtil {
 
     @Autowired
@@ -29,10 +31,10 @@ public class MethodCheckUtil {
      * @throws MyaccessDeniedException
      */
     public boolean checkMethod(HttpServletRequest request,
-                                    Authentication authentication) throws MyaccessDeniedException {
+                               Authentication authentication) throws MyaccessDeniedException {
 
         Object principal = authentication.getPrincipal();
-        System.out.println("DynamicPermission principal = " + principal);
+        log.info("principal = {}", principal.toString());
 
         if (principal instanceof UserDetails) {
 
@@ -51,7 +53,8 @@ public class MethodCheckUtil {
 
             //提交类型
             String urlMethod = request.getMethod();
-            System.out.println("requestURI======="+requestURI+"--------------urlMethod=========="+urlMethod);
+            log.info("requestURI======={}:urlMethod=========={}", requestURI, urlMethod);
+            System.out.println("requestURI=======" + requestURI + "--------------urlMethod==========" + urlMethod);
 
             // System.out.println("DynamicPermission requestURI = " + requestURI);
 
@@ -66,10 +69,9 @@ public class MethodCheckUtil {
                 //处理null，万一数据库存值
                 dbMethod = (dbMethod == null) ? "" : dbMethod;
                 int hasMethod = dbMethod.indexOf(urlMethod);
-
-                System.out.println("hashAntPath = " + hashAntPath);
-                System.out.println("hasMethod = " + hasMethod);
-                System.out.println("hashAntPath && hasMethod = " + (hashAntPath && hasMethod != -1));
+                log.info("hashAntPath = {}", hashAntPath);
+                log.info("hasMethod = {}", hasMethod);
+                log.info("hashAntPath && hasMethod =  = {}", hashAntPath && hasMethod != -1);
                 //两者都成立，返回真，否则返回假
                 return hashAntPath && (hasMethod != -1);
             });

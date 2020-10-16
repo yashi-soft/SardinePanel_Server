@@ -1,5 +1,6 @@
 package com.example.mysecurity.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineRoleApi;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 2020-10-16 10:15:18
  */
 @Mapper
-public interface SardlineRoleApiDao {
+public interface SardlineRoleApiDao extends BaseMapper<SardlineRoleApi> {
 
     /**
      * 通过ID查询单条数据
@@ -47,7 +48,7 @@ public interface SardlineRoleApiDao {
      * @param sardlineRoleApi 实例对象
      * @return 影响行数
      */
-    int insert(SardlineRoleApi sardlineRoleApi);
+//    int insert(SardlineRoleApi sardlineRoleApi);
 
     /**
      * 修改数据

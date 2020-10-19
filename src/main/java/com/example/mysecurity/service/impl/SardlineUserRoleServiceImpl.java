@@ -20,6 +20,7 @@ public class SardlineUserRoleServiceImpl implements SardlineUserRoleService {
     @Resource
     private SardlineUserRoleDao sardlineUserRoleDao;
 
+
     /**
      * 通过ID查询单条数据
      *
@@ -91,5 +92,18 @@ public class SardlineUserRoleServiceImpl implements SardlineUserRoleService {
     @Override
     public List<SardlineRole> queryRolesByUserId(String userId) {
         return this.sardlineUserRoleDao.queryRolesByUserId(userId);
+    }
+
+    @Override
+    public Boolean setRoles(String userId, String roleIds) {
+        this.sardlineUserRoleDao.deleteByUserId(userId);
+        String[] split = roleIds.split(",");
+        SardlineUserRole sardlineUserRole = new SardlineUserRole();
+        sardlineUserRole.setUserId(userId);
+        for(int i = 0; i < split.length; i++){
+            sardlineUserRole.setRoleId(split[i]);
+            this.insert(sardlineUserRole);
+        }
+        return true;
     }
 }

@@ -3,6 +3,8 @@ package com.example.mysecurity.controller;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
+import com.example.mysecurity.entity.SardlineUserRole;
+import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
 import com.example.mysecurity.vo.UserVo;
 import org.springframework.security.core.parameters.P;
@@ -24,6 +26,11 @@ public class SardlineUserController {
      */
     @Resource
     private SardlineUserService sardlineUserService;
+
+    @Resource
+    private SardlineUserRoleService sardlineUserRoleService;
+
+
 
     /**
      * 通过主键查询单条数据
@@ -68,6 +75,7 @@ public class SardlineUserController {
         return Result.success(sardlineUserService.update(user) == null ? false : true);
     }
 
+
     @PostMapping("queryUser")
     public Result<UserVo> queryUserForLogin(String username) {
 
@@ -80,14 +88,17 @@ public class SardlineUserController {
 
     }
 
-    /**
-    * 查询可分配角色
-    */
 
 
     /**
      * 分配角色
      */
+    @PostMapping("queryUser")
+    public Result<Boolean> queryUserForLogin(@RequestParam("userId") String userId, @RequestParam("roleIds") String roleIds) {
 
+        return Result.success(this.sardlineUserRoleService.setRoles(userId,roleIds));
+
+
+    }
 
 }

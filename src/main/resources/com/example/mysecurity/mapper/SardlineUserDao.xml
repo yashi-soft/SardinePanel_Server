@@ -45,9 +45,9 @@
     </select>
 
     <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="BaseResultMap">
+    <select id="queryAll" resultType="com.example.mysecurity.entity.so.UserListSo">
         select
-        user_id, user_name, nick_name, pass_word, description, state,register_time,update_time
+        user_id as id, user_name as userName,  phone, mail_box as mailBox, description, state, register_time as registerTime,  login_time as loginTime
         from sardline.sardline_user
         <where>
             <if test="userId != null and userId != ''">

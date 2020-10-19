@@ -5,6 +5,7 @@ import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.SardlineUserRole;
 import com.example.mysecurity.entity.base.PageParm;
+import com.example.mysecurity.entity.so.UserListSo;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
 import com.example.mysecurity.vo.UserVo;
@@ -60,24 +61,15 @@ public class SardlineUserController {
     }
 
 
-    /**
-     * 注销
-     */
-    @PostMapping("cancel")
-    public Result<Boolean> cancel(@RequestBody(required = false) SardlineUser user) {
-        user.setState(0);
-        return Result.success(sardlineUserService.update(user) == null ? false : true);
-    }
-
 
     /**
      * 用户修改
      */
     @PostMapping("update")
     public Result<Boolean> update(@RequestBody(required = false) SardlineUser user) {
-        user.setState(0);
         return Result.success(sardlineUserService.update(user) == null ? false : true);
     }
+
 
 
     @PostMapping("queryUser")
@@ -96,7 +88,7 @@ public class SardlineUserController {
      * 用户列表
      * */
     @PostMapping("list")
-    public Result<PageInfo<SardlineUser>> UserList(@Validated PageParm pageParm, @Validated SardlineUser sardlineUser) {
+    public Result<PageInfo<UserListSo>> UserList(@Validated PageParm pageParm, @Validated SardlineUser sardlineUser) {
 
         return Result.success(this.sardlineUserService.queryAll(pageParm,sardlineUser));
 

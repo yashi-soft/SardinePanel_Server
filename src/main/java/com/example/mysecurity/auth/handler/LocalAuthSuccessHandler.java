@@ -22,10 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationSuccessHandler {
@@ -120,7 +117,9 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
         result.setCode(ResultCode.SUCCESS);
         result.setMsg("登录成功");
         result.setData(data);
-
+        SardlineUser sardlineUser1 = new SardlineUser();
+        sardlineUser1.setLoginTime(new Date());
+        sardlineUserService.update(sardlineUser1);
         this.writeJson(httpServletRequest, httpServletResponse, result);
 
     }

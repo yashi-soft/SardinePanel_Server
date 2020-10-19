@@ -2,6 +2,7 @@ package com.example.mysecurity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineUser;
+import com.example.mysecurity.entity.so.UserListSo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -44,7 +45,7 @@ public interface SardlineUserDao  extends BaseMapper<SardlineUser> {
      * @param sardlineUser 实例对象
      * @return 对象列表
      */
-    List<SardlineUser> queryAll(SardlineUser sardlineUser);
+    List<UserListSo> queryAll(SardlineUser sardlineUser);
 
 
 

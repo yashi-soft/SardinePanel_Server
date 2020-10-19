@@ -8,6 +8,7 @@ import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.SardlineUserRole;
 import com.example.mysecurity.entity.base.PageParm;
+import com.example.mysecurity.entity.so.UserListSo;
 import com.example.mysecurity.mapper.SardlineUserDao;
 import com.example.mysecurity.mapper.SardlineUserOrgDao;
 import com.example.mysecurity.mapper.SardlineUserRoleDao;
@@ -22,11 +23,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * (SardlineUser)表服务实现类
@@ -128,6 +132,8 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
 //        user.setUserId(UUID.randomUUID().toString());
         user.setPassWord(passwordUtil.encode(user.getPassWord()));
         user.setState(1);
+        user.setRegisterTime(new Date());
+        user.setUpdateTime(new Date());
         int insert = this.sardlineUserDao.insert(user);
         if (insert > 0) {
             result.setCode(ResultCode.SUCCESS);
@@ -168,7 +174,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         SardlineUser sardlineUser = this.sardlineUserDao.queryByName(username);
         UserVo userVo = null;
         if (sardlineUser != null) {
-            userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
+             userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
 
             List<SardlineUserRole> sardlineUserRoles = sardlineUserRoleService.queryByUserId(sardlineUser.getUserId());
             for (SardlineUserRole role : sardlineUserRoles) {
@@ -183,9 +189,22 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     }
 
     @Override
-    public PageInfo<SardlineUser> queryAll(PageParm pageParm, SardlineUser sardlineUser) {
+    public PageInfo<UserListSo> queryAll(PageParm pageParm, SardlineUser sardlineUser) {
+
         PageHelper.startPage(pageParm.getPageNum(), pageParm.getPageSize());
-        return new PageInfo<>(sardlineUserDao.queryAll(sardlineUser));
+        PageInfo<UserListSo> pageInfo = new PageInfo<>(sardlineUserDao.queryAll(sardlineUser));
+        if (CollectionUtils.isEmpty(pageInfo.getList())){
+            return pageInfo;
+        }
+        List<UserListSo> list=pageInfo.getList();
+        for (int i=0;i < list.size(); i++){
+            UserListSo userListSo = list.get(i);
+            List<String> s= sardlineUserRoleDao.getRoleName(userListSo.getId());
+            String roles = String.join(",", s);
+            userListSo.setRoleList(roles);
+        }
+        return pageInfo;
+
     }
 
     @Override

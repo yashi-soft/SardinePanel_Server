@@ -33,6 +33,12 @@
         where user_id = #{userId}
     </select>
 
+    <select id="getRoleName" resultType="java.lang.String">
+        select
+            t2.role_name
+        from sardline.sardline_user_role t1 left join sardline.sardline_role t2 on t1.role_id=t2.role_id
+        where t1.user_id = #{userId}
+    </select>
 
     <select id="queryRolesByUserId" resultType="com.example.mysecurity.entity.SardlineRole">
         select

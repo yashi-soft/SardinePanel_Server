@@ -34,6 +34,14 @@ public class SardlineUser implements Serializable {
     */
     private String passWord;
     /**
+     * 手机号
+     */
+    private String phone;
+    /**
+     * 邮箱
+     */
+    private String mailBox;
+    /**
     * 描述
     */
     private String description;
@@ -45,6 +53,8 @@ public class SardlineUser implements Serializable {
     private Date registerTime;
 
     private Date updateTime;
+
+    private Date loginTime;
 
     public Date getRegisterTime() {
         return registerTime;
@@ -60,6 +70,14 @@ public class SardlineUser implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
     }
 
     public String getUserId() {
@@ -104,6 +122,22 @@ public class SardlineUser implements Serializable {
 
     public Integer getState() {
         return state;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getMailBox() {
+        return mailBox;
+    }
+
+    public void setMailBox(String mailBox) {
+        this.mailBox = mailBox;
     }
 
     public void setState(Integer state) {

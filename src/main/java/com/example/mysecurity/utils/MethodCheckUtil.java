@@ -47,6 +47,8 @@ public class MethodCheckUtil {
             //通过账号获取资源鉴权
             List<SardlineApi> apiUrls = service.getApiUrlByUserName(username);
 
+            //查询通用接口
+
             AntPathMatcher antPathMatcher = new AntPathMatcher();
             //当前访问路径
             String requestURI = request.getRequestURI();

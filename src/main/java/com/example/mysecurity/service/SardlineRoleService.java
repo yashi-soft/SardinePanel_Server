@@ -60,4 +60,6 @@ public interface SardlineRoleService {
     List<SardlineRole> queryAll();
 
     Boolean add(SardlineRole sardlineRole);
+
+    Boolean addRole(SardlineRole sardlineRole);
 }

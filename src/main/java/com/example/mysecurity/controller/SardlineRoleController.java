@@ -109,5 +109,20 @@ public class SardlineRoleController {
 
     }
 
+    /**
+     * 删除角色
+     * @param roleId
+     * @return
+     */
+    @PostMapping("delete")
+    public Result<Boolean> delete(String roleId) {
+        return Result.success(sardlineRoleService.delete(roleId));
+    }
+
+
+
+
+
+
 
 }

@@ -69,4 +69,6 @@ public interface SardlineRoleService {
     Boolean addRole(SardlineRole sardlineRole);
 
     PageInfo<SardlineRole> queryForPage(PageParm pageParm, SardlineRole req);
+
+    Boolean delete(String roleId);
 }

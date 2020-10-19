@@ -192,5 +192,18 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
 
     }
 
+    @Override
+    public Boolean delete(String roleId) {
+
+        this.sardlineRoleDao.deleteById(roleId);
+        //删除角色关联菜单
+//        sardlineRoleMenuService.deleteByRoleId();
+
+        //删除角色关联功能
+        //删除角色关联人员
+
+        return null;
+    }
+
 
 }

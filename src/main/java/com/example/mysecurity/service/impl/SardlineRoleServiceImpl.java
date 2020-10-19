@@ -1,10 +1,12 @@
 package com.example.mysecurity.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.date.DateUtil;
-import com.example.mysecurity.entity.SardlineApi;
+import com.example.mysecurity.common.PageResult;
 import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRole;
+import com.example.mysecurity.entity.SardlineUser;
+import com.example.mysecurity.entity.base.PageParm;
+import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.mapper.SardlineApiDao;
 import com.example.mysecurity.mapper.SardlineRoleApiDao;
 import com.example.mysecurity.mapper.SardlineRoleDao;
@@ -12,6 +14,8 @@ import com.example.mysecurity.service.SardlineRoleMenuService;
 import com.example.mysecurity.service.SardlineRoleService;
 import com.example.mysecurity.vo.ApiVo;
 import com.example.mysecurity.vo.MenuVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -173,4 +177,20 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
 
         return allMenu.get(rootid);
     }
+
+
+    public PageInfo<SardlineRole> queryForPage(PageParm pageParm, SardlineRole req) {
+        Map<String, Object> stringObjectMap = BeanUtil.beanToMap(req);
+        PageHelper.startPage(pageParm.getPageNum(), pageParm.getPageSize());
+        return new PageInfo<>(this.sardlineRoleDao.queryForPage(stringObjectMap));
+
+
+//        List<SardlineRole> sardlineRoles = this.sardlineRoleDao.queryForPage(stringObjectMap);
+//        Integer count = sardlineRoleDao.queryCountForPage(stringObjectMap);
+//
+//        return PageResult.success(sardlineRoles, count);
+
+    }
+
+
 }

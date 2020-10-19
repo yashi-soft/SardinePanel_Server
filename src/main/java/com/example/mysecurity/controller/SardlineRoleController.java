@@ -1,10 +1,16 @@
 package com.example.mysecurity.controller;
 
+import com.example.mysecurity.common.PageResult;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineRole;
+import com.example.mysecurity.entity.SardlineUser;
+import com.example.mysecurity.entity.base.PageParm;
+import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.service.SardlineRoleService;
 import com.example.mysecurity.vo.MenuVo;
 import com.example.mysecurity.vo.RoleVo;
+import com.github.pagehelper.PageInfo;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -63,6 +69,16 @@ public class SardlineRoleController {
 
     }
 
+    /**
+     * 角色列表
+     *
+     * @return
+     */
+    @GetMapping("listForPage")
+    public Result<PageInfo<SardlineRole>> listForPage(@Validated PageParm pageParm, @Validated SardlineRole req) {
+        return Result.success(this.sardlineRoleService.queryForPage(pageParm, req));
+
+    }
 
     /**
      * 查询所有角色和api列表
@@ -82,7 +98,6 @@ public class SardlineRoleController {
 //
 //
 //    }
-
 
 
     /**

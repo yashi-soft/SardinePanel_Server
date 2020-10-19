@@ -168,7 +168,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         SardlineUser sardlineUser = this.sardlineUserDao.queryByName(username);
         UserVo userVo = null;
         if (sardlineUser != null) {
-             userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
+            userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
 
             List<SardlineUserRole> sardlineUserRoles = sardlineUserRoleService.queryByUserId(sardlineUser.getUserId());
             for (SardlineUserRole role : sardlineUserRoles) {
@@ -183,7 +183,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     }
 
     @Override
-    public PageInfo<SardlineUser> queryAll(PageParm pageParm,SardlineUser sardlineUser) {
+    public PageInfo<SardlineUser> queryAll(PageParm pageParm, SardlineUser sardlineUser) {
         PageHelper.startPage(pageParm.getPageNum(), pageParm.getPageSize());
         return new PageInfo<>(sardlineUserDao.queryAll(sardlineUser));
     }

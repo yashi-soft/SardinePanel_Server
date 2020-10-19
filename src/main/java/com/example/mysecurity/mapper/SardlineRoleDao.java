@@ -5,6 +5,7 @@ import com.example.mysecurity.entity.SardlineRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (SardlineRole)表数据库访问层
@@ -34,6 +35,10 @@ public interface SardlineRoleDao extends BaseMapper<SardlineRole> {
 
 
     List<SardlineRole> queryAll();
+
+    List<SardlineRole> queryForPage(Map map);
+
+    Integer queryCountForPage(Map map);
 
 
     /**

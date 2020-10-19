@@ -10,6 +10,9 @@ public class SardlineRoleReq extends SardlineRole {
 
     //按钮信息
 
+    private Integer start;
+
+    private Integer limit;
 
 
 

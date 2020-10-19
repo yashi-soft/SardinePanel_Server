@@ -1,14 +1,10 @@
 package com.example.mysecurity.controller;
 
-import com.example.mysecurity.common.PageResult;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineRole;
-import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.base.PageParm;
-import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.service.SardlineRoleService;
 import com.example.mysecurity.vo.MenuVo;
-import com.example.mysecurity.vo.RoleVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

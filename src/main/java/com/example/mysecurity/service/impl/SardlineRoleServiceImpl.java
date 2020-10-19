@@ -1,12 +1,9 @@
 package com.example.mysecurity.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.example.mysecurity.common.PageResult;
 import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRole;
-import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.base.PageParm;
-import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.mapper.SardlineApiDao;
 import com.example.mysecurity.mapper.SardlineRoleApiDao;
 import com.example.mysecurity.mapper.SardlineRoleDao;

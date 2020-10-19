@@ -1,15 +1,11 @@
 package com.example.mysecurity.service;
 
-import com.example.mysecurity.common.PageResult;
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.base.PageParm;
-import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.vo.MenuVo;
-import com.example.mysecurity.vo.RoleVo;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * (SardlineRole)表服务接口

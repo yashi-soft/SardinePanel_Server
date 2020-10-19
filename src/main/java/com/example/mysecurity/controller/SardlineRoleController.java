@@ -84,4 +84,13 @@ public class SardlineRoleController {
 //    }
 
 
+    /**
+     * 查询可分配角色
+     */
+    @PostMapping("roleList")
+    public Result<List<SardlineRole>> roleList() {
+        return Result.success(this.sardlineRoleService.queryAll());
+
+    }
+
 }

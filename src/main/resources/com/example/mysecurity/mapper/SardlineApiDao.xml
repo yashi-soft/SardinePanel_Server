@@ -99,4 +99,35 @@
     <delete id="deletebyMenuId">
             delete from sardline.sardline_api where menu_id = #{menuId}
         </delete>
+
+
+
+    <update id="updateApi">
+        update sardline.sardline_api
+        <set>
+            <if test="apiName != null and apiName != ''">
+                 api_name = #{apiName},
+            </if>
+            <if test="apiUrl != null and apiUrl != ''">
+                 api_url = #{apiUrl},
+            </if>
+            <if test="apiMethod != null and apiMethod != ''">
+                 api_method = #{apiMethod},
+            </if>
+            <if test="pid != null and pid != ''">
+                 pid = #{pid},
+            </if>
+            <if test="sort != null and sort != ''">
+                 sort = #{sort},
+            </if>
+            <if test="description != null and description != ''">
+                 description = #{description},
+            </if>
+            <if test="menuId != null and menuId != ''">
+                 menu_id = #{menuId},
+            </if>
+        </set>
+        where api_id = #{apiId}
+    </update>
+
 </mapper>

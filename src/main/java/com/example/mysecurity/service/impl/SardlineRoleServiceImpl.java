@@ -74,6 +74,12 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
     @Override
     @Transactional
     public Boolean add(SardlineRole sardlineRole) {
+        int insert = sardlineRoleDao.insert(sardlineRole);
+        return insert > 0;
+    }
+
+    @Override
+    public Boolean addRole(SardlineRole sardlineRole) {
         //添加角色表
         sardlineRoleDao.insert(sardlineRole);
         //添加角色-菜单表

@@ -44,10 +44,10 @@ public class SardlineRoleController {
      * @return
      */
     @PostMapping("addRole")
-    public Boolean add(SardlineRole sardlineRole) {
+    public Result<Boolean> add(SardlineRole sardlineRole) {
 
 
-        return this.sardlineRoleService.add(sardlineRole) != null ? true : false;
+        return Result.success(this.sardlineRoleService.add(sardlineRole) != null ? true : false);
 
     }
 
@@ -84,6 +84,7 @@ public class SardlineRoleController {
 //    }
 
 
+
     /**
      * 查询可分配角色
      */
@@ -92,5 +93,6 @@ public class SardlineRoleController {
         return Result.success(this.sardlineRoleService.queryAll());
 
     }
+
 
 }

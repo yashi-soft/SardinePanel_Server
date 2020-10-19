@@ -73,7 +73,7 @@ public class SardlineApiServiceImpl extends ServiceImpl<SardlineApiDao, Sardline
      */
     @Override
     public SardlineApi update(SardlineApi sardlineApi) {
-        this.sardlineApiDao.update(sardlineApi, null);
+        this.sardlineApiDao.updateApi(sardlineApi);
         return this.queryById(sardlineApi.getApiId());
     }
 

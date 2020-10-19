@@ -7,13 +7,19 @@ import com.example.mysecurity.common.ResultCode;
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.SardlineUserRole;
+import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.mapper.SardlineUserDao;
+import com.example.mysecurity.mapper.SardlineUserOrgDao;
+import com.example.mysecurity.mapper.SardlineUserRoleDao;
 import com.example.mysecurity.service.SardlineRoleService;
+import com.example.mysecurity.service.SardlineUserOrgService;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
 import com.example.mysecurity.utils.BCryptPasswordUtil;
 import com.example.mysecurity.vo.RoleVo;
 import com.example.mysecurity.vo.UserVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +45,12 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     private SardlineUserRoleService sardlineUserRoleService;
     @Resource
     private SardlineRoleService sardlineRoleService;
+
+    @Resource
+    private SardlineUserOrgDao sardlineUserOrgDao;
+
+    @Resource
+    private SardlineUserRoleDao sardlineUserRoleDao;
 
     /**
      * 通过ID查询单条数据
@@ -168,5 +180,22 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
 
 
         return userVo;
+    }
+
+    @Override
+    public PageInfo<SardlineUser> queryAll(PageParm pageParm,SardlineUser sardlineUser) {
+        PageHelper.startPage(pageParm.getPageNum(), pageParm.getPageSize());
+        return new PageInfo<>(sardlineUserDao.queryAll(sardlineUser));
+    }
+
+    @Override
+    public Boolean delete(String userId) {
+        //删除用户角色信息
+        sardlineUserRoleDao.deleteByUserId(userId);
+        //删除用户组织信息
+        sardlineUserOrgDao.deleteByUserId(userId);
+        //删除用户信息
+        sardlineUserDao.deleteById(userId);
+        return true;
     }
 }

@@ -77,4 +77,9 @@
         delete from sardline.sardline_user_org where id = #{id}
     </delete>
 
+    <!--通过userId删除-->
+    <delete id="deleteByUserId">
+        delete from sardline.sardline_user_org where user_id = #{userId}
+    </delete>
+
 </mapper>

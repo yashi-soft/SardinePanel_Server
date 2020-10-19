@@ -4,13 +4,17 @@ import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.SardlineUserRole;
+import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
 import com.example.mysecurity.vo.UserVo;
+import com.github.pagehelper.PageInfo;
 import org.springframework.security.core.parameters.P;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (SardlineUser)表控制层
@@ -88,12 +92,30 @@ public class SardlineUserController {
 
     }
 
+    /**
+     * 用户列表
+     * */
+    @PostMapping("list")
+    public Result<PageInfo<SardlineUser>> UserList(@Validated PageParm pageParm, @Validated SardlineUser sardlineUser) {
+
+        return Result.success(this.sardlineUserService.queryAll(pageParm,sardlineUser));
+
+    }
+
+    /**
+     * 删除用户
+     */
+    @PostMapping("deleteUser")
+    public Result<Boolean> deleteUser(String userId) {
+
+        return Result.success(this.sardlineUserService.delete(userId));
+    }
 
 
     /**
      * 分配角色
      */
-    @PostMapping("queryUser")
+    @PostMapping("setRoles")
     public Result<Boolean> queryUserForLogin(@RequestParam("userId") String userId, @RequestParam("roleIds") String roleIds) {
 
         return Result.success(this.sardlineUserRoleService.setRoles(userId,roleIds));

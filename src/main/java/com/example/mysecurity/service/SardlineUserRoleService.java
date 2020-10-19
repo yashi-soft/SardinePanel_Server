@@ -65,4 +65,6 @@ public interface SardlineUserRoleService {
     List<SardlineRole> queryRolesByUserId(String userId);
 
     Boolean setRoles(String userId, String roleIds);
+
+
 }

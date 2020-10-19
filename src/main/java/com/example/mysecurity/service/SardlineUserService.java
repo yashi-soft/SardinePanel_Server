@@ -2,7 +2,9 @@ package com.example.mysecurity.service;
 
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineUser;
+import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.vo.UserVo;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -62,4 +64,8 @@ public interface SardlineUserService {
     boolean checkLogin(String username, String password);
 
     UserVo queryUserForLogin(String username);
+
+    PageInfo<SardlineUser> queryAll(PageParm pageParm,SardlineUser sardlineUser);
+
+    Boolean delete(String userId);
 }

@@ -200,9 +200,12 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         List<UserListSo> list=pageInfo.getList();
         for (int i=0;i < list.size(); i++){
             UserListSo userListSo = list.get(i);
-            List<String> s= sardlineUserRoleDao.getRoleName(userListSo.getId());
-            String roles = String.join(",", s);
-            userListSo.setRoleList(roles);
+            List<String> id= sardlineUserRoleDao.getRoleId(userListSo.getId());
+            String ids = String.join(",", id);
+            userListSo.setRoleIds(ids);
+            List<String> name= sardlineUserRoleDao.getRoleName(userListSo.getId());
+            String names = String.join(",", name);
+            userListSo.setRoleList(names);
         }
         return pageInfo;
 

@@ -21,7 +21,7 @@ public class localAuthenticationEntryPoint implements AuthenticationEntryPoint {
         //系统异常
         if (exception instanceof LocalAuthException) {
             //系统异常
-            result.setCode(403);
+            result.setCode(401);
             result.setMsg(exception.getMessage());
         }
         try {

@@ -48,8 +48,6 @@ public interface SardlineUserDao  extends BaseMapper<SardlineUser> {
     List<UserListSo> queryAll(SardlineUser sardlineUser);
 
 
-
-
-
+    void updateUser(SardlineUser sardlineUser);
 
 }

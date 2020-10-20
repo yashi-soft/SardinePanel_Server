@@ -56,7 +56,7 @@ public class SardlineUserController {
      * @return
      */
     @PostMapping("register")
-    public Result register(@RequestBody(required = false) SardlineUser user) {
+    public Result register(@Validated SardlineUser user) {
         return sardlineUserService.register(user);
     }
 
@@ -66,7 +66,7 @@ public class SardlineUserController {
      * 用户修改
      */
     @PostMapping("update")
-    public Result<Boolean> update(@RequestBody(required = false) SardlineUser user) {
+    public Result<Boolean> update(@Validated SardlineUser user) {
         return Result.success(sardlineUserService.update(user) == null ? false : true);
     }
 

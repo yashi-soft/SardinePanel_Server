@@ -11,6 +11,8 @@ public class UserListSo {
      * 用户姓名
      */
     private String userName;
+
+    private String nickName;
     /**
      * 描述
      */

@@ -71,7 +71,9 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(yaxiOncePerResuestFilter, UsernamePasswordAuthenticationFilter.class);
         http.formLogin();
         http.logout().addLogoutHandler(localLogoutHandler).logoutSuccessHandler(logoutSuccessHandler);
-        http.exceptionHandling().accessDeniedHandler(new LocalAccessDeniedHandler()).authenticationEntryPoint(new localAuthenticationEntryPoint());
+        http.exceptionHandling().authenticationEntryPoint(new localAuthenticationEntryPoint())
+                .accessDeniedHandler(new LocalAccessDeniedHandler());
+//              ;
     }
 
     @Bean

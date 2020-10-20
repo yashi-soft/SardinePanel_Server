@@ -1,7 +1,7 @@
 package com.example.mysecurity.utils;
 
 ;
-import com.example.mysecurity.auth.exception.MyaccessDeniedException;
+import com.example.mysecurity.auth.exception.LocalAccessDeniedException;
 import com.example.mysecurity.entity.SardlineApi;
 import com.example.mysecurity.service.SardlineApiService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +28,10 @@ public class MethodCheckUtil {
      * @param request
      * @param authentication
      * @return
-     * @throws MyaccessDeniedException
+     * @throws LocalAccessDeniedException
      */
     public boolean checkMethod(HttpServletRequest request,
-                               Authentication authentication) throws MyaccessDeniedException {
+                               Authentication authentication) throws LocalAccessDeniedException {
 
         Object principal = authentication.getPrincipal();
         log.info("principal = {}", principal.toString());
@@ -71,22 +71,22 @@ public class MethodCheckUtil {
                 //处理null，万一数据库存值
                 dbMethod = (dbMethod == null) ? "" : dbMethod;
                 int hasMethod = dbMethod.indexOf(urlMethod);
-                log.info("hashAntPath = {}", hashAntPath);
-                log.info("hasMethod = {}", hasMethod);
-                log.info("hashAntPath && hasMethod =  = {}", hashAntPath && hasMethod != -1);
+
                 //两者都成立，返回真，否则返回假
                 return hashAntPath && (hasMethod != -1);
             });
             //返回
+
+            log.info("check method status===={}", rs);
             if (rs) {
                 return rs;
             } else {
-                throw new MyaccessDeniedException("您没有访问该API的权限！");
+                throw new LocalAccessDeniedException("您没有访问该API的权限！");
 
             }
 
         } else {
-            throw new MyaccessDeniedException("不是UserDetails类型！");
+            throw new LocalAccessDeniedException("不是UserDetails类型！");
         }
     }
 }

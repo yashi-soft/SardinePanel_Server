@@ -2,10 +2,10 @@ package com.example.mysecurity.auth.exception;
 
 import org.springframework.security.access.AccessDeniedException;
 
-public class MyaccessDeniedException extends AccessDeniedException {
+public class LocalAccessDeniedException extends AccessDeniedException {
 
 
-    public MyaccessDeniedException(String msg) {
+    public LocalAccessDeniedException(String msg) {
         super(msg);
     }
 }

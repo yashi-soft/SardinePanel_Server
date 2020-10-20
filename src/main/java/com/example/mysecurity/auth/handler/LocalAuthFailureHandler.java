@@ -20,6 +20,7 @@ public class LocalAuthFailureHandler extends JsonAuth implements AuthenticationF
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         Map result = new HashMap<>();
         result.put("msg", "登陆失败");
+        result.put("code", 401);
         this.writeJson(httpServletRequest, httpServletResponse, result);
     }
 }

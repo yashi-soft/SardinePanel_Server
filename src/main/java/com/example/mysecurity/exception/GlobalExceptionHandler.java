@@ -1,7 +1,7 @@
 package com.example.mysecurity.exception;
 
 import cn.hutool.json.JSONUtil;
-import com.example.mysecurity.auth.exception.MyaccessDeniedException;
+import com.example.mysecurity.auth.exception.LocalAccessDeniedException;
 import com.example.mysecurity.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler  {
         //打印错误日志
         Result result = new Result<>();
         //系统异常
-        if (exception instanceof MyaccessDeniedException) {
+        if (exception instanceof LocalAccessDeniedException) {
             //系统异常
             result.setCode(403);
             result.setMsg(exception.getMessage());

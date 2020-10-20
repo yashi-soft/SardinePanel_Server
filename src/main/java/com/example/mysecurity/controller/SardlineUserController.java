@@ -123,7 +123,7 @@ public class SardlineUserController {
      * 分配角色
      */
     @PostMapping("setOrgs")
-    public Result<Boolean> setOrgs(@RequestParam("userId") String userId, @RequestParam("roleIds") String orgIds) {
+    public Result<Boolean> setOrgs(@RequestParam("userId") String userId, @RequestParam("orgIds") String orgIds) {
 
         return Result.success(this.sardlineUserOrgService.setOrgs(userId,orgIds));
 

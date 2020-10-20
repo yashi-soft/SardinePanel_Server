@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class UserListSo {
-    private String id;
+    private String userId;
     /**
      * 用户姓名
      */

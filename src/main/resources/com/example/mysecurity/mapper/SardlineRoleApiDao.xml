@@ -67,5 +67,10 @@
     <delete id="deleteById">
         delete from sardline.sardline_role_api where id = #{id}
     </delete>
-
+<!--    -->
+<!--    <delete id="deleteByApiId">-->
+<!--        delete from sardline.sardline_role_api where-->
+<!--         <foreach collection=""-->
+<!--         api_id = #{id}-->
+<!--    </delete>-->
 </mapper>

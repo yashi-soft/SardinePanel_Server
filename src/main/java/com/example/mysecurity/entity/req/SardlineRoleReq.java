@@ -10,6 +10,15 @@ public class SardlineRoleReq extends SardlineRole {
 
     //按钮信息
 
+    /**
+     * 菜单信息
+     */
+    private String menus;
+
+    /**
+     * api信息
+     */
+    private String apis;
 
 
 

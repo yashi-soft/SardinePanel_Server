@@ -1,8 +1,9 @@
 package com.example.mysecurity.service;
 
 import com.example.mysecurity.entity.SardlineRole;
+import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.vo.MenuVo;
-import com.example.mysecurity.vo.RoleVo;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public interface SardlineRoleService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<SardlineRole> queryAllByLimit(int offset, int limit);
@@ -62,4 +63,8 @@ public interface SardlineRoleService {
     Boolean add(SardlineRole sardlineRole);
 
     Boolean addRole(SardlineRole sardlineRole);
+
+    PageInfo<SardlineRole> queryForPage(PageParm pageParm, SardlineRole req);
+
+    Boolean delete(String roleId);
 }

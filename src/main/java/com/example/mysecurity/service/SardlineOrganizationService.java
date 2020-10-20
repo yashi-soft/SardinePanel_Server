@@ -52,4 +52,6 @@ public interface SardlineOrganizationService {
      */
     boolean deleteById(String orgId);
 
+    List<SardlineOrganization> queryAll();
+
 }

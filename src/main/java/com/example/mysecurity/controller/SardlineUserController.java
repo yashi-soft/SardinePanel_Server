@@ -6,6 +6,7 @@ import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.SardlineUserRole;
 import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.entity.so.UserListSo;
+import com.example.mysecurity.service.SardlineUserOrgService;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
 import com.example.mysecurity.vo.UserVo;
@@ -34,6 +35,9 @@ public class SardlineUserController {
 
     @Resource
     private SardlineUserRoleService sardlineUserRoleService;
+
+    @Resource
+    private SardlineUserOrgService sardlineUserOrgService;
 
 
 
@@ -108,9 +112,20 @@ public class SardlineUserController {
      * 分配角色
      */
     @PostMapping("setRoles")
-    public Result<Boolean> queryUserForLogin(@RequestParam("userId") String userId, @RequestParam("roleIds") String roleIds) {
+    public Result<Boolean> setRoles(@RequestParam("userId") String userId, @RequestParam("roleIds") String roleIds) {
 
         return Result.success(this.sardlineUserRoleService.setRoles(userId,roleIds));
+
+
+    }
+
+    /**
+     * 分配角色
+     */
+    @PostMapping("setOrgs")
+    public Result<Boolean> setOrgs(@RequestParam("userId") String userId, @RequestParam("roleIds") String orgIds) {
+
+        return Result.success(this.sardlineUserOrgService.setOrgs(userId,orgIds));
 
 
     }

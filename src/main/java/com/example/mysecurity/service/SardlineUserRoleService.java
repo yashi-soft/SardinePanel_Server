@@ -67,4 +67,5 @@ public interface SardlineUserRoleService {
     Boolean setRoles(String userId, String roleIds);
 
 
+
 }

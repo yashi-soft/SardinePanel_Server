@@ -76,4 +76,9 @@ public class SardlineOrganizationServiceImpl implements SardlineOrganizationServ
     public boolean deleteById(String orgId) {
         return this.sardlineOrganizationDao.deleteById(orgId) > 0;
     }
+
+    @Override
+    public List<SardlineOrganization> queryAll() {
+        return sardlineOrganizationDao.queryAll(new SardlineOrganization());
+    }
 }

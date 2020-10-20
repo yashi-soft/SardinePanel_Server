@@ -1,6 +1,8 @@
 package com.example.mysecurity.auth.handler;
 
 import com.example.mysecurity.auth.JsonAuth;
+import com.example.mysecurity.common.Result;
+import com.example.mysecurity.common.ResultCode;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -18,9 +20,9 @@ public class LocalAuthFailureHandler extends JsonAuth implements AuthenticationF
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        Map result = new HashMap<>();
-        result.put("msg", "登陆失败");
-        result.put("code", 401);
+        Result result = new Result();
+        result.setMsg( "登陆失败");
+        result.setCode(ResultCode.AUTHEXCEPTION);
         this.writeJson(httpServletRequest, httpServletResponse, result);
     }
 }

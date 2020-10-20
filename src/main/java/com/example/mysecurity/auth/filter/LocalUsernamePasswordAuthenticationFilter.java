@@ -44,7 +44,8 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
                         authRequest = new UsernamePasswordAuthenticationToken(username, password);
                         setDetails(request, authRequest);
                         return this.getAuthenticationManager().authenticate(authRequest);
-                    }
+                    }else{
+                        throw new LocalAuthenticationException("账号或者密码不正确");}
                 }
 
             } catch (Exception e) {

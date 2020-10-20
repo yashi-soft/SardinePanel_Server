@@ -3,6 +3,7 @@ package com.example.mysecurity.auth.handler;
 import cn.hutool.json.JSONUtil;
 import com.example.mysecurity.auth.exception.LocalAccessDeniedException;
 import com.example.mysecurity.common.Result;
+import com.example.mysecurity.common.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -16,16 +17,13 @@ import java.io.IOException;
 public class LocalAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException, ServletException {
-        Result result = new Result<>();
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=UTF-8");
-        //系统异常
-        if (exception instanceof LocalAccessDeniedException) {
-            //系统异常
-            result.setCode(403);
-            result.setMsg(exception.getMessage());
-        }
+
+        Result result = new Result<>();
+        result.setCode(ResultCode.NO_AUTH);
+        result.setMsg(exception.getMessage());
         try {
             response.getWriter().write(JSONUtil.toJsonStr(result));
         } catch (Exception e) {

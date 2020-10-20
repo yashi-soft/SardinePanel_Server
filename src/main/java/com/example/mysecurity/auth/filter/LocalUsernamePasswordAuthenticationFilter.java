@@ -4,6 +4,7 @@ import com.example.mysecurity.auth.exception.LocalAuthException;
 import com.example.mysecurity.service.SardlineUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -25,19 +26,12 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
                                                 HttpServletResponse response) throws AuthenticationException {
 
 //        if (request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE) || request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE)) {
-        if (true) {
-            ObjectMapper mapper = new ObjectMapper();
-            UsernamePasswordAuthenticationToken authRequest = null;
-            Map<String, String[]> authBean=request.getParameterMap();
+        if (request.getContentType().equals(MediaType.MULTIPART_FORM_DATA) || request.getContentType().equals(MediaType.MULTIPART_FORM_DATA_VALUE)) {
 
-//            Map<String, String> authBean = null;
-//            try (InputStream is = request.getInputStream()) {
-//                authBean = mapper.readValue(is, Map.class);
-//
-//
-//            } catch (IOException e) {
-//                new LocalAuthException(e.getMessage());
-//            }
+            UsernamePasswordAuthenticationToken authRequest = null;
+            Map<String, String[]> authBean = request.getParameterMap();
+
+
             try {
                 if (!authBean.isEmpty()) {
                     //获取账号密码
@@ -52,6 +46,8 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
                         authRequest = new UsernamePasswordAuthenticationToken(username, password);
                         setDetails(request, authRequest);
                         return this.getAuthenticationManager().authenticate(authRequest);
+                    } else {
+                        throw new LocalAuthException("账号或者密码错误");
                     }
 
                 }

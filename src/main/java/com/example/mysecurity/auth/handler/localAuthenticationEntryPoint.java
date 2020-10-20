@@ -18,6 +18,8 @@ public class localAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         Result result = new Result<>();
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         //系统异常
         if (exception instanceof LocalAuthException) {
             //系统异常

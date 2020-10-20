@@ -3,6 +3,7 @@ package com.example.mysecurity.auth.filter;
 import com.example.mysecurity.auth.exception.LocalAuthException;
 import com.example.mysecurity.service.SardlineUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+@Slf4j
 public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Autowired
@@ -25,8 +27,11 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
 
+
+        log.info("content==========={}", request.getContentType());
+        log.info(request.getContentType());
 //        if (request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE) || request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE)) {
-        if (request.getContentType().equals(MediaType.MULTIPART_FORM_DATA) || request.getContentType().equals(MediaType.MULTIPART_FORM_DATA_VALUE)) {
+        if (true) {
 
             UsernamePasswordAuthenticationToken authRequest = null;
             Map<String, String[]> authBean = request.getParameterMap();

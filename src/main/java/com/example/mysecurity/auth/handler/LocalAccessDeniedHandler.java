@@ -17,6 +17,9 @@ public class LocalAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException, ServletException {
         Result result = new Result<>();
+
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         //系统异常
         if (exception instanceof MyaccessDeniedException) {
             //系统异常

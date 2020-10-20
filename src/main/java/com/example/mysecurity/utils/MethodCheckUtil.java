@@ -82,6 +82,7 @@ public class MethodCheckUtil {
                 return rs;
             } else {
                 throw new MyaccessDeniedException("您没有访问该API的权限！");
+
             }
 
         } else {

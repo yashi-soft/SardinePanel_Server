@@ -132,7 +132,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         }
 //        user.setUserId(UUID.randomUUID().toString());
         user.setPassWord(passwordUtil.encode(user.getPassWord()));
-        user.setState(1);
         user.setRegisterTime(new Date());
         user.setUpdateTime(new Date());
         int insert = this.sardlineUserDao.insert(user);
@@ -200,9 +199,18 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         List<UserListSo> list=pageInfo.getList();
         for (int i=0;i < list.size(); i++){
             UserListSo userListSo = list.get(i);
-            List<String> s= sardlineUserRoleDao.getRoleName(userListSo.getId());
-            String roles = String.join(",", s);
-            userListSo.setRoleList(roles);
+            List<String> id= sardlineUserRoleDao.getRoleId(userListSo.getId());
+            String ids = String.join(",", id);
+            userListSo.setRoleIds(ids);
+            List<String> name= sardlineUserRoleDao.getRoleName(userListSo.getId());
+            String names = String.join(",", name);
+            userListSo.setRoleList(names);
+            String orgId= sardlineUserOrgDao.getOrgId(userListSo.getId());
+            String orgIds = String.join(",", orgId);
+            userListSo.setRoleIds(ids);
+            String orgName= sardlineUserOrgDao.getOrgName(userListSo.getId());
+            String orgNames = String.join(",", orgName);
+            userListSo.setRoleIds(ids);
         }
         return pageInfo;
 

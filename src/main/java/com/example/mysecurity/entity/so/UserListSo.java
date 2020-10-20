@@ -32,5 +32,12 @@ public class UserListSo {
 
     private Date loginTime;
 
+    private String roleIds;
+
     private String roleList;
+
+    private String organizationIds;
+
+    private String organizationList;
+
 }

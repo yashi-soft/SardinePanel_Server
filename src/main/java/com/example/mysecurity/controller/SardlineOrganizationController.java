@@ -1,10 +1,12 @@
 package com.example.mysecurity.controller;
 
+import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineOrganization;
 import com.example.mysecurity.service.SardlineOrganizationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (SardlineOrganization)表控制层
@@ -32,4 +34,13 @@ public class SardlineOrganizationController {
         return this.sardlineOrganizationService.queryById(id);
     }
 
+
+    /**
+     * 查询可分配角色
+     */
+    @PostMapping("orgList")
+    public Result<List<SardlineOrganization>> organizationList() {
+        return Result.success(this.sardlineOrganizationService.queryAll());
+
+    }
 }

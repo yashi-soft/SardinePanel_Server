@@ -1,7 +1,9 @@
 package com.example.mysecurity.service.impl;
 
 import com.example.mysecurity.entity.SardlineRole;
+import com.example.mysecurity.entity.SardlineUserOrg;
 import com.example.mysecurity.entity.SardlineUserRole;
+import com.example.mysecurity.mapper.SardlineUserOrgDao;
 import com.example.mysecurity.mapper.SardlineUserRoleDao;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.List;
 public class SardlineUserRoleServiceImpl implements SardlineUserRoleService {
     @Resource
     private SardlineUserRoleDao sardlineUserRoleDao;
+
 
 
     /**
@@ -106,4 +109,6 @@ public class SardlineUserRoleServiceImpl implements SardlineUserRoleService {
         }
         return true;
     }
+
+
 }

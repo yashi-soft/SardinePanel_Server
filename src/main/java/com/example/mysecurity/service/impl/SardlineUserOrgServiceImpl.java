@@ -81,4 +81,17 @@ public class SardlineUserOrgServiceImpl implements SardlineUserOrgService {
     public List<SardlineUserOrg> queryByUserId(String userId) {
         return this.sardlineUserOrgDao.queryByUserId(userId);
     }
+
+    @Override
+    public Boolean setOrgs(String userId, String orgIds) {
+        this.sardlineUserOrgDao.deleteByUserId(userId);
+        String[] split = orgIds.split(",");
+        SardlineUserOrg sardlineUserOrg = new SardlineUserOrg();
+        sardlineUserOrg.setUserId(userId);
+        for(int i = 0; i < split.length; i++){
+            sardlineUserOrg.setOrgId(split[i]);
+            this.insert(sardlineUserOrg);
+        }
+        return true;
+    }
 }

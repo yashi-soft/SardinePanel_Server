@@ -2,19 +2,18 @@ package com.example.mysecurity.auth;
 
 import com.example.mysecurity.auth.filter.LocalUsernamePasswordAuthenticationFilter;
 import com.example.mysecurity.auth.filter.YaxiOncePerResuestFilter;
-import com.example.mysecurity.auth.handler.LocalAuthFailureHandler;
-import com.example.mysecurity.auth.handler.LocalAuthSuccessHandler;
-import com.example.mysecurity.auth.handler.LocalLogoutHandler;
-import com.example.mysecurity.auth.handler.LocalLogoutSuccessHandler;
+import com.example.mysecurity.auth.handler.*;
 import com.example.mysecurity.utils.BCryptPasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -72,7 +71,7 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(yaxiOncePerResuestFilter, UsernamePasswordAuthenticationFilter.class);
         http.formLogin();
         http.logout().addLogoutHandler(localLogoutHandler).logoutSuccessHandler(logoutSuccessHandler);
-
+        http.exceptionHandling().accessDeniedHandler(new LocalAccessDeniedHandler()).authenticationEntryPoint(new localAuthenticationEntryPoint());
     }
 
     @Bean

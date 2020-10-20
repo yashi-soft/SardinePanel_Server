@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @ControllerAdvice
 @ResponseBody
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler  {
 
     /**
      * 所有异常报错

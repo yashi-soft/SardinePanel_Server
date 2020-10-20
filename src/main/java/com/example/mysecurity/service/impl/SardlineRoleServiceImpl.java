@@ -3,10 +3,11 @@ package com.example.mysecurity.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.example.mysecurity.entity.SardlineMenu;
 import com.example.mysecurity.entity.SardlineRole;
+import com.example.mysecurity.entity.SardlineRoleApi;
+import com.example.mysecurity.entity.SardlineRoleMenu;
 import com.example.mysecurity.entity.base.PageParm;
-import com.example.mysecurity.mapper.SardlineApiDao;
-import com.example.mysecurity.mapper.SardlineRoleApiDao;
-import com.example.mysecurity.mapper.SardlineRoleDao;
+import com.example.mysecurity.entity.req.SardlineRoleReq;
+import com.example.mysecurity.mapper.*;
 import com.example.mysecurity.service.SardlineRoleMenuService;
 import com.example.mysecurity.service.SardlineRoleService;
 import com.example.mysecurity.vo.ApiVo;
@@ -38,11 +39,18 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
     @Resource
     private SardlineRoleMenuService sardlineRoleMenuService;
 
+
     @Resource
     private SardlineApiDao sardlineApiDao;
 
     @Resource
     private SardlineRoleApiDao sardlineRoleApiDao;
+
+    @Resource
+    private SardlineRoleMenuDao sardlineRoleMenuDao;
+
+    @Resource
+    private SardlineUserRoleDao sardlineUserRoleDao;
 
 
     /**
@@ -80,17 +88,31 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
     }
 
     @Override
-    public Boolean addRole(SardlineRole sardlineRole) {
-        //添加角色表
-        sardlineRoleDao.insert(sardlineRole);
-        //添加角色-菜单表
-
-//        sardlineRoleMenuService.insert()
+    @Transactional
+    public Boolean addRole(SardlineRoleReq req) {
+        String menus = req.getMenus();
+        String apis = req.getApis();
+        String[] menuList = menus.split(",");
+        String[] apiList = apis.split(",");
+//添加角色表
+        sardlineRoleDao.insert(req);
 
         //添加角色-api表
-//        sardlineRoleApiDao.insert();
+        for (String api : apiList) {
+            SardlineRoleApi apiEntity = new SardlineRoleApi();
+            apiEntity.setRoleId(req.getRoleId());
+            apiEntity.setApiId(api);
+            sardlineRoleApiDao.insert(apiEntity);
+        }
+        //添加角色-菜单表
+        for (String menu : menuList) {
+            SardlineRoleMenu roleMenu = new SardlineRoleMenu();
+            roleMenu.setMenuId(menu);
+            roleMenu.setRoleId(req.getRoleId());
+            sardlineRoleMenuDao.insert(roleMenu);
+        }
 
-        return null;
+        return true;
     }
 
 
@@ -190,16 +212,53 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
     }
 
     @Override
+    @Transactional
     public Boolean delete(String roleId) {
 
         this.sardlineRoleDao.deleteById(roleId);
-        //删除角色关联菜单
 //        sardlineRoleMenuService.deleteByRoleId();
 
         //删除角色关联功能
-        //删除角色关联人员
+        sardlineRoleApiDao.deleteByRoleTd(roleId);
 
-        return null;
+        //删除角色关联菜单
+        sardlineRoleMenuDao.deleteByRoleId(roleId);
+        //删除角色关联人员
+        sardlineUserRoleDao.deleteByRoleId(roleId);
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public Boolean updateRole(SardlineRoleReq req) {
+        sardlineRoleDao.update1(req);
+        String menus = req.getMenus();
+        String apis = req.getApis();
+        String[] menuList = menus.split(",");
+        String[] apiList = apis.split(",");
+//修改功能表
+
+        sardlineRoleApiDao.deleteByRoleTd(req.getRoleId());
+
+        //添加角色-api表
+        for (String api : apiList) {
+            SardlineRoleApi apiEntity = new SardlineRoleApi();
+            apiEntity.setRoleId(req.getRoleId());
+            apiEntity.setApiId(api);
+            sardlineRoleApiDao.insert(apiEntity);
+        }
+
+        sardlineRoleMenuDao.deleteByRoleId(req.getRoleId());
+
+        //修改菜单表
+        for (String menu : menuList) {
+            SardlineRoleMenu roleMenu = new SardlineRoleMenu();
+            roleMenu.setMenuId(menu);
+            roleMenu.setRoleId(req.getRoleId());
+            sardlineRoleMenuDao.insert(roleMenu);
+        }
+
+        return true;
     }
 
 

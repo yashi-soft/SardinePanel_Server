@@ -66,4 +66,7 @@ public interface SardlineRoleApiDao extends BaseMapper<SardlineRoleApi> {
      */
     int deleteById(String id);
 
+    int deleteByRoleTd(String roleId);
+
+    List<SardlineRoleApi> queryByRoleId(String roleId);
 }

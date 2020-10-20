@@ -28,7 +28,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          role_id, id, api_id
+        role_id, id, api_id
         from sardline.sardline_role_api
         <where>
             <if test="roleId != null and roleId != ''">
@@ -42,12 +42,20 @@
             </if>
         </where>
     </select>
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryByRoleId" resultMap="BaseResultMap">
+        select
+          role_id, id, api_id
+        from sardline.sardline_role_api
+        where  role_id = #{roleId}
+    </select>
+
 
     <!--新增所有列-->
-<!--    <insert id="insert" keyProperty="id" useGeneratedKeys="true">-->
-<!--        insert into sardline.sardline_role_api(role_id, api_id)-->
-<!--        values (#{roleId}, #{apiId})-->
-<!--    </insert>-->
+    <!--    <insert id="insert" keyProperty="id" useGeneratedKeys="true">-->
+    <!--        insert into sardline.sardline_role_api(role_id, api_id)-->
+    <!--        values (#{roleId}, #{apiId})-->
+    <!--    </insert>-->
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -67,10 +75,14 @@
     <delete id="deleteById">
         delete from sardline.sardline_role_api where id = #{id}
     </delete>
-<!--    -->
-<!--    <delete id="deleteByApiId">-->
-<!--        delete from sardline.sardline_role_api where-->
-<!--         <foreach collection=""-->
-<!--         api_id = #{id}-->
-<!--    </delete>-->
+
+    <delete id="deleteByRoleTd">
+        delete from sardline.sardline_role_api where role_id = #{roleId}
+    </delete>
+    <!--    -->
+    <!--    <delete id="deleteByApiId">-->
+    <!--        delete from sardline.sardline_role_api where-->
+    <!--         <foreach collection=""-->
+    <!--         api_id = #{id}-->
+    <!--    </delete>-->
 </mapper>

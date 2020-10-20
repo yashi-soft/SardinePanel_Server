@@ -71,5 +71,7 @@ public interface SardlineRoleMenuDao extends BaseMapper<SardlineRoleMenu> {
 
     int deleteByMenuId(String menuId);
 
+    int deleteByRoleId(String menuId);
+
     int queryByMenuId(String menuId);
 }

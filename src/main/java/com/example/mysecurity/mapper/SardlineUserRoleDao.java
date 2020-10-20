@@ -75,6 +75,8 @@ public interface SardlineUserRoleDao {
      */
     int deleteById(String id);
 
+    int deleteByRoleId(String roleId);
+
     List<String> queryRoleIdByUserId(String userId);
 
     void deleteByUserId(@Param("userId")String userId);

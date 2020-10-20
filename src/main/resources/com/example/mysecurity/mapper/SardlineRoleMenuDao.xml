@@ -80,6 +80,10 @@
             delete from sardline.sardline_role_menu where menu_id = #{menuId}
         </delete>
 
+    <delete id="deleteByRoleId">
+            delete from sardline.sardline_role_menu where role_id = #{roleId}
+        </delete>
+
     <select id="queryByMenuId" resultType="java.lang.Integer">
         select
           count(id) number

@@ -2,6 +2,7 @@ package com.example.mysecurity.service;
 
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.base.PageParm;
+import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.vo.MenuVo;
 import com.github.pagehelper.PageInfo;
 
@@ -62,9 +63,11 @@ public interface SardlineRoleService {
 
     Boolean add(SardlineRole sardlineRole);
 
-    Boolean addRole(SardlineRole sardlineRole);
+    Boolean addRole(SardlineRoleReq sardlineRole);
 
     PageInfo<SardlineRole> queryForPage(PageParm pageParm, SardlineRole req);
 
     Boolean delete(String roleId);
+
+    Boolean updateRole(SardlineRoleReq req);
 }

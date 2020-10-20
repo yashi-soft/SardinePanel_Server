@@ -99,6 +99,10 @@
         delete from sardline.sardline_user_role where id = #{id}
     </delete>
 
+    <delete id="deleteByRoleId">
+        delete from sardline.sardline_user_role where role_id = #{roleId}
+    </delete>
+
     <!--通过用户id删除-->
     <delete id="deleteByUserId">
         delete from sardline.sardline_user_role where user_id = #{userId}

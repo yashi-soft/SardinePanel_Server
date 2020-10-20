@@ -3,9 +3,11 @@ package com.example.mysecurity.controller;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.base.PageParm;
+import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.service.SardlineRoleService;
 import com.example.mysecurity.vo.MenuVo;
 import com.github.pagehelper.PageInfo;
+import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,19 +41,19 @@ public class SardlineRoleController {
     }
 
 
-    /**
-     * 新建角色
-     *
-     * @param sardlineRole
-     * @return
-     */
-    @PostMapping("addRole")
-    public Result<Boolean> add(SardlineRole sardlineRole) {
-
-
-        return Result.success(this.sardlineRoleService.add(sardlineRole) != null ? true : false);
-
-    }
+//    /**
+//     * 新建角色
+//     *
+//     * @param sardlineRole
+//     * @return
+//     */
+//    @PostMapping("addRole")
+//    public Result<Boolean> add(SardlineRole sardlineRole) {
+//
+//
+//        return Result.success(this.sardlineRoleService.add(sardlineRole) != null ? true : false);
+//
+//    }
 
 
     /**
@@ -77,23 +79,12 @@ public class SardlineRoleController {
     }
 
     /**
-     * 查询所有角色和api列表
+     * 查询所有可分配菜单和api列表
      */
     @PostMapping("apiAndMenulist")
     public Result<MenuVo> getAllMenuAndApi(String roleId) {
         return Result.success(this.sardlineRoleService.getAllMenuAndApi(roleId));
     }
-
-
-//    /**
-//     * 分配权限
-//     */
-//    @PostMapping("distribution")
-//    public Result<Boolean> distribution(){
-//
-//
-//
-//    }
 
 
     /**
@@ -107,6 +98,7 @@ public class SardlineRoleController {
 
     /**
      * 删除角色
+     *
      * @param roleId
      * @return
      */
@@ -116,9 +108,20 @@ public class SardlineRoleController {
     }
 
 
+    /**
+     * @param req
+     * @return
+     */
+    @PostMapping("addRole")
+    public Result<Boolean> add(SardlineRoleReq req) {
+        return Result.success(sardlineRoleService.addRole(req));
+    }
 
+    @PostMapping("updateRole")
+    public Result<Boolean> updateRole(SardlineRoleReq req) {
+        return Result.success(sardlineRoleService.updateRole(req));
 
-
+    }
 
 
 }

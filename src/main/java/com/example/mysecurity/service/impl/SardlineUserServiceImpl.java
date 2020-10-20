@@ -99,7 +99,8 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
      */
     @Override
     public SardlineUser update(SardlineUser sardlineUser) {
-        this.sardlineUserDao.update(sardlineUser, null);
+        sardlineUser.setUpdateTime(new Date());
+        this.sardlineUserDao.updateUser(sardlineUser);
         return this.queryById(sardlineUser.getUserId());
     }
 

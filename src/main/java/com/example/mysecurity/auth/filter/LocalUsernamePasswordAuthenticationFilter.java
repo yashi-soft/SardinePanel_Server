@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +29,8 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
                                                 HttpServletResponse response) throws AuthenticationException {
 
 
-        log.info("content==========={}", request.getContentType());
-        log.info(request.getContentType());
+//        log.info("content==========={}", request.getContentType());
+//        log.info(request.getContentType());
 //        if (request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE) || request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE)) {
         if (true) {
 
@@ -42,23 +43,18 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
                     //获取账号密码
                     String username = authBean.get(SPRING_SECURITY_FORM_USERNAME_KEY)[0];
                     String password = authBean.get(SPRING_SECURITY_FORM_PASSWORD_KEY)[0];
-//                    String username = authBean.get(SPRING_SECURITY_FORM_USERNAME_KEY);
-//                    String password = authBean.get(SPRING_SECURITY_FORM_PASSWORD_KEY);
-
                     //校验账号密码
                     if (sardlineUserService.checkLogin(username, password)) {
                         //将账号、密码装入UsernamePasswordAuthenticationToken中
                         authRequest = new UsernamePasswordAuthenticationToken(username, password);
                         setDetails(request, authRequest);
                         return this.getAuthenticationManager().authenticate(authRequest);
-                    } else {
-                        throw new LocalAuthException("账号或者密码错误");
                     }
-
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
+                throw new LocalAuthException("账号或者密码不正确");
             }
         }
         return null;

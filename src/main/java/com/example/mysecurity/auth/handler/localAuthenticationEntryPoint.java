@@ -2,7 +2,6 @@ package com.example.mysecurity.auth.handler;
 
 import cn.hutool.json.JSONUtil;
 import com.example.mysecurity.auth.exception.LocalAuthException;
-import com.example.mysecurity.auth.exception.MyaccessDeniedException;
 import com.example.mysecurity.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;

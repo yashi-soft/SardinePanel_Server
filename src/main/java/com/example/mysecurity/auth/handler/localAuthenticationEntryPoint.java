@@ -1,7 +1,7 @@
 package com.example.mysecurity.auth.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.example.mysecurity.auth.exception.LocalAuthException;
+import com.example.mysecurity.auth.exception.LocalAuthenticationException;
 import com.example.mysecurity.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
@@ -20,7 +20,7 @@ public class localAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=UTF-8");
         //系统异常
-        if (exception instanceof LocalAuthException) {
+        if (exception instanceof LocalAuthenticationException) {
             //系统异常
             result.setCode(401);
             result.setMsg(exception.getMessage());

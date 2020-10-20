@@ -1,21 +1,16 @@
 package com.example.mysecurity.auth.filter;
 
-import com.example.mysecurity.auth.exception.LocalAuthException;
+import com.example.mysecurity.auth.exception.LocalAuthenticationException;
 import com.example.mysecurity.service.SardlineUserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 
 @Slf4j
@@ -54,7 +49,7 @@ public class LocalUsernamePasswordAuthenticationFilter extends UsernamePasswordA
 
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new LocalAuthException("账号或者密码不正确");
+                throw new LocalAuthenticationException("账号或者密码不正确");
             }
         }
         return null;

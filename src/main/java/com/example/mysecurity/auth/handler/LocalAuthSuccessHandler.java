@@ -74,29 +74,8 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
 
         for (SardlineUserRole role : sardlineUserRoles) {
 
-
             SardlineRole sardlineRole = sardlineRoleService.queryById(role.getRoleId());
-
-
-//            List<SardlineMenu> menus = sardlineRoleMenuService.queryByRoleId(role.getRoleId());
-//
-//            for (SardlineMenu menu : menus) {
-//                allMenu.put(menu.getMenuId(), BeanUtil.toBean(menu, MenuVo.class));
-//            }
-
-//
-//            for (SardlineMenu menu : menus) {
-//                MenuVo vo = BeanUtil.toBean(menu,MenuVo.class);
-//                String pid = vo.getPid();
-//                if (pid != null) {
-//                    MenuVo menu1 = allMenu.get(pid);
-//                    menu1.getChildren().add(vo);
-//                }
-//            }
-
             RoleVo roleVo = BeanUtil.toBean(sardlineRole, RoleVo.class);
-
-//            RoleVo roleVo = (RoleVo) sardlineRole;
             roleVo.setMenuVo(allMenu.get(rootid));
             roles.add(roleVo);
 

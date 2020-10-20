@@ -2,8 +2,8 @@ package com.example.mysecurity.auth.exception;
 
 import org.springframework.security.core.AuthenticationException;
 
-public class LocalAuthException extends AuthenticationException {
-    public LocalAuthException(String msg) {
+public class LocalAuthenticationException extends AuthenticationException {
+    public LocalAuthenticationException(String msg) {
         super(msg);
     }
 }

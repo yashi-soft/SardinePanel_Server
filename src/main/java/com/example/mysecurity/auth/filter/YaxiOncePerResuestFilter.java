@@ -79,7 +79,6 @@ public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
                                         null,
                                         userDetails.getAuthorities()
                                 );
-                        //
                         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                         // 将 authentication 存入 ThreadLocal，方便后续获取用户信息
                         SecurityContextHolder.getContext().setAuthentication(authentication);

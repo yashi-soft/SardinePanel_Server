@@ -64,4 +64,5 @@ public interface SardlineRoleOrgDao {
      */
     int deleteById(String id);
 
+    Boolean deleteByOrgId(String orgId);
 }

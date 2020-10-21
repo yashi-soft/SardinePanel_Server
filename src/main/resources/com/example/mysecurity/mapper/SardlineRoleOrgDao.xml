@@ -28,7 +28,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, role_id, org_id
+        id, role_id, org_id
         from sardline.sardline_role_org
         <where>
             <if test="id != null and id != ''">
@@ -68,4 +68,8 @@
         delete from sardline.sardline_role_org where id = #{id}
     </delete>
 
+
+    <delete id="deleteByOrgId">
+          delete from sardline.sardline_role_org where org_id = #{orgId}
+    </delete>
 </mapper>

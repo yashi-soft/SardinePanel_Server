@@ -2,11 +2,17 @@ package com.example.mysecurity.service.impl;
 
 import com.example.mysecurity.entity.SardlineOrganization;
 import com.example.mysecurity.mapper.SardlineOrganizationDao;
+import com.example.mysecurity.mapper.SardlineRoleOrgDao;
+import com.example.mysecurity.mapper.SardlineUserOrgDao;
 import com.example.mysecurity.service.SardlineOrganizationService;
+import com.example.mysecurity.vo.OrgVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (SardlineOrganization)表服务实现类
@@ -18,6 +24,12 @@ import java.util.List;
 public class SardlineOrganizationServiceImpl implements SardlineOrganizationService {
     @Resource
     private SardlineOrganizationDao sardlineOrganizationDao;
+
+    @Resource
+    private SardlineUserOrgDao sardlineUserOrgDao;
+
+    @Resource
+    private SardlineRoleOrgDao sardlineRoleOrgDao;
 
     /**
      * 通过ID查询单条数据
@@ -34,7 +46,7 @@ public class SardlineOrganizationServiceImpl implements SardlineOrganizationServ
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     @Override
@@ -80,5 +92,35 @@ public class SardlineOrganizationServiceImpl implements SardlineOrganizationServ
     @Override
     public List<SardlineOrganization> queryAll() {
         return sardlineOrganizationDao.queryAll(new SardlineOrganization());
+    }
+
+    @Override
+    public OrgVo queryByName(String orgName) {
+
+        List<OrgVo> orgs = sardlineOrganizationDao.queryByName(orgName);
+        Map<String, OrgVo> allOrg = new HashMap<>();
+        for (OrgVo vo : orgs) {
+            allOrg.put(vo.getOrgId(), vo);
+        }
+
+        for (OrgVo vo : orgs) {
+
+            String pid = vo.getPid();
+            if (pid != null) {
+                OrgVo orgVo = allOrg.get(pid);
+                orgVo.getChildren().add(allOrg.get(vo.getOrgId()));
+            }
+        }
+
+        return allOrg.get("-1");
+    }
+
+    @Override
+    @Transactional
+    public Boolean delete(String orgId) {
+        Boolean flag1 = sardlineOrganizationDao.deleteById(orgId) > 0;
+        Boolean flag2 = sardlineUserOrgDao.deleteByOrgId(orgId);
+        Boolean flag3 = sardlineRoleOrgDao.deleteByOrgId(orgId);
+        return flag1 && flag2 && flag3;
     }
 }

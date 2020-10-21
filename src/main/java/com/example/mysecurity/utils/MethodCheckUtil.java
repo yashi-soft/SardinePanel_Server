@@ -56,8 +56,6 @@ public class MethodCheckUtil {
             //提交类型
             String urlMethod = request.getMethod();
             log.info("requestURI======={}:urlMethod=========={}", requestURI, urlMethod);
-            System.out.println("requestURI=======" + requestURI + "--------------urlMethod==========" + urlMethod);
-
             // System.out.println("DynamicPermission requestURI = " + requestURI);
 
             //判断当前路径中是否在资源鉴权中

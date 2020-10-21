@@ -71,4 +71,6 @@ public interface SardlineUserOrgDao {
     String getOrgId(@Param("userId")String userId);
 
     String getOrgName(@Param("userId")String userId);
+
+    Boolean deleteByOrgId(String orgId);
 }

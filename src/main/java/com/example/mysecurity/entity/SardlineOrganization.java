@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * (SardlineOrganization)实体类
@@ -16,22 +17,31 @@ import java.io.Serializable;
 public class SardlineOrganization implements Serializable {
     private static final long serialVersionUID = 295131874441806056L;
     /**
-    * 组织id
-    */
+     * 组织id
+     */
     @TableId(type = IdType.UUID)
     private String orgId;
     /**
-    * 组织名称
-    */
+     * 组织名称
+     */
     private String orgName;
     /**
-    * 上级组织id
-    */
-    private Integer pid;
+     * 上级组织id
+     */
+    private String pid;
     /**
-    * 描述
-    */
+     * 描述
+     */
     private String description;
+    private String sort;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+
+
+
 
 
     public String getOrgId() {
@@ -50,11 +60,11 @@ public class SardlineOrganization implements Serializable {
         this.orgName = orgName;
     }
 
-    public Integer getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 

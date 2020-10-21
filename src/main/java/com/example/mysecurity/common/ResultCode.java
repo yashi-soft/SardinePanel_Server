@@ -21,11 +21,11 @@ public class ResultCode {
     /**
      * 登录失败
      */
-    public static final Integer AUTHEXCEPTION=00001;
+    public static final Integer AUTHEXCEPTION=401;
     /**
      *无权限
      */
-    public static final Integer NO_AUTH=00001;
+    public static final Integer NO_AUTH=403;
 
 
 

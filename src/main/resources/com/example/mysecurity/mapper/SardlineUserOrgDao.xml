@@ -82,6 +82,10 @@
         delete from sardline.sardline_user_org where user_id = #{userId}
     </delete>
 
+    <delete id="deleteByOrgId">
+        delete from sardline.sardline_user_org where org_id = #{orgId}
+    </delete>
+
     <select id="getOrgId" resultType="java.lang.String">
         select
             t2.org_id

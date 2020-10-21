@@ -1,6 +1,8 @@
 package com.example.mysecurity.service;
 
 import com.example.mysecurity.entity.SardlineOrganization;
+import com.example.mysecurity.vo.OrgVo;
+
 import java.util.List;
 
 /**
@@ -54,4 +56,7 @@ public interface SardlineOrganizationService {
 
     List<SardlineOrganization> queryAll();
 
+    OrgVo queryByName(String orgName);
+
+    Boolean delete(String orgId);
 }

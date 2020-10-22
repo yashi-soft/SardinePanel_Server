@@ -1,10 +1,7 @@
 package com.example.mysecurity.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.example.mysecurity.entity.SardlineMenu;
-import com.example.mysecurity.entity.SardlineRole;
-import com.example.mysecurity.entity.SardlineRoleApi;
-import com.example.mysecurity.entity.SardlineRoleMenu;
+import com.example.mysecurity.entity.*;
 import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.mapper.*;
@@ -12,6 +9,7 @@ import com.example.mysecurity.service.SardlineRoleMenuService;
 import com.example.mysecurity.service.SardlineRoleService;
 import com.example.mysecurity.vo.ApiVo;
 import com.example.mysecurity.vo.MenuVo;
+import com.example.mysecurity.vo.RoleVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +49,8 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
 
     @Resource
     private SardlineUserRoleDao sardlineUserRoleDao;
+    @Resource
+    private SardlineRoleOrgDao sardlineRoleOrgDao;
 
 
     /**
@@ -97,6 +97,10 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
 //添加角色表
         sardlineRoleDao.insert(req);
 
+        SardlineRoleOrg rg = new SardlineRoleOrg();
+        rg.setOrgId(req.getOrgId());
+        rg.setRoleId(req.getRoleId());
+        sardlineRoleOrgDao.insert(rg);
         //添加角色-api表
         for (String api : apiList) {
             SardlineRoleApi apiEntity = new SardlineRoleApi();
@@ -158,8 +162,10 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
 
 
         Map<String, MenuVo> allMenu = new HashMap();
+        StringBuilder menusStr = new StringBuilder();
         for (SardlineMenu menu : menus) {
             allMenu.put(menu.getMenuId(), BeanUtil.toBean(menu, MenuVo.class));
+            menusStr.append(menu.getMenuId() + ",");
         }
         String rootid = "-1";
 
@@ -177,7 +183,6 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
                 menuVo.setMenuPath(api.getApiUrl());
                 menuVo.setMenuId(api.getApiId());
                 menuVo.setDescription(api.getDescription());
-                menuVo.setPid(api.getPid());
                 menuVo.setPid(api.getPid());
                 menuVo.setSort(api.getSort());
                 menuVoList.add(menuVo);
@@ -198,10 +203,37 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
     }
 
 
-    public PageInfo<SardlineRole> queryForPage(PageParm pageParm, SardlineRole req) {
+    public PageInfo<RoleVo> queryForPage(PageParm pageParm, SardlineRole req) {
         Map<String, Object> stringObjectMap = BeanUtil.beanToMap(req);
         PageHelper.startPage(pageParm.getPageNum(), pageParm.getPageSize());
-        return new PageInfo<>(this.sardlineRoleDao.queryForPage(stringObjectMap));
+        List<RoleVo> sardlineRoles = this.sardlineRoleDao.queryForPage(stringObjectMap);
+
+        for (RoleVo role : sardlineRoles) {
+            List<SardlineMenu> sardlineMenus = sardlineRoleMenuDao.queryByRoleId(role.getRoleId());
+
+
+            StringBuilder menuSb = new StringBuilder();
+            StringBuilder apiSb = new StringBuilder();
+            for (SardlineMenu menu : sardlineMenus) {
+                menuSb.append(menu.getMenuId() + ",");
+            }
+
+            String menuStr = menuSb.toString();
+            if (menuStr.length() > 0) {
+                role.setMenus(menuStr.substring(0, menuStr.length() - 1));
+            }
+            List<SardlineRoleApi> sardlineRoleApis = sardlineRoleApiDao.queryByRoleId(role.getRoleId());
+            for (SardlineRoleApi api : sardlineRoleApis) {
+                apiSb.append(api.getId() + ",");
+            }
+            String apiStr = apiSb.toString();
+            if (apiStr.length() > 0) {
+                role.setApis(apiStr.substring(0, apiStr.length() - 1));
+
+            }
+        }
+
+        return new PageInfo<>(sardlineRoles);
 
 
 //        List<SardlineRole> sardlineRoles = this.sardlineRoleDao.queryForPage(stringObjectMap);
@@ -237,6 +269,10 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
         String[] menuList = menus.split(",");
         String[] apiList = apis.split(",");
 //修改功能表
+        SardlineRoleOrg rg = new SardlineRoleOrg();
+        rg.setOrgId(req.getOrgId());
+        rg.setRoleId(req.getRoleId());
+        sardlineRoleOrgDao.update(rg);
 
         sardlineRoleApiDao.deleteByRoleTd(req.getRoleId());
 

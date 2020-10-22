@@ -108,4 +108,11 @@ public class SardlineApiServiceImpl extends ServiceImpl<SardlineApiDao, Sardline
 
         return flag > 0;
     }
+
+    @Override
+    public List<SardlineApi> selectUsualApi() {
+        return sardlineApiDao.selectUsualApi();
+    }
+
+
 }

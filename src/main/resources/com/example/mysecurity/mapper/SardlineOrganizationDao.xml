@@ -51,9 +51,9 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="orgId" useGeneratedKeys="true">
-        insert into sardline.sardline_organization(org_name, pid, description,sort,create_time,update_time)
-        values (#{orgName}, #{pid}, #{description},#{sort},#{createTime},#{updateTime})
+    <insert id="insert1" keyProperty="orgId" useGeneratedKeys="true">
+        insert into sardline.sardline_organization(org_id,org_name, pid, description,sort,create_time,update_time)
+        values (#{orgId},#{orgName}, #{pid}, #{description},#{sort},#{createTime},#{updateTime})
     </insert>
 
     <!--通过主键修改数据-->

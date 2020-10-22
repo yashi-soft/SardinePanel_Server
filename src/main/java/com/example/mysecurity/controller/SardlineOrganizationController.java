@@ -47,10 +47,12 @@ public class SardlineOrganizationController {
 
     @GetMapping("orgTree")
     public Result<OrgVo> orgTree(String orgName) {
-        return Result.success(sardlineOrganizationService.queryByName(orgName));
+        OrgVo orgVo = sardlineOrganizationService.queryByName(orgName);
+
+        return Result.success(orgVo);
     }
 
-    @PostMapping("addorg")
+    @PostMapping("addOrg")
     public Result<Boolean> addOrg(SardlineOrganization org) {
         return Result.success(sardlineOrganizationService.insert(org) != null ? true : false);
     }

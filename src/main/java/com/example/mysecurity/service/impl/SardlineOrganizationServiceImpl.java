@@ -1,5 +1,6 @@
 package com.example.mysecurity.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import com.example.mysecurity.entity.SardlineOrganization;
 import com.example.mysecurity.mapper.SardlineOrganizationDao;
 import com.example.mysecurity.mapper.SardlineRoleOrgDao;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +64,9 @@ public class SardlineOrganizationServiceImpl implements SardlineOrganizationServ
      */
     @Override
     public SardlineOrganization insert(SardlineOrganization sardlineOrganization) {
+        sardlineOrganization.setCreateTime(DateUtil.date());
+        sardlineOrganization.setUpdateTime(DateUtil.date());
+
         this.sardlineOrganizationDao.insert(sardlineOrganization);
         return sardlineOrganization;
     }
@@ -74,6 +79,7 @@ public class SardlineOrganizationServiceImpl implements SardlineOrganizationServ
      */
     @Override
     public SardlineOrganization update(SardlineOrganization sardlineOrganization) {
+        sardlineOrganization.setUpdateTime(DateUtil.date());
         this.sardlineOrganizationDao.update(sardlineOrganization);
         return this.queryById(sardlineOrganization.getOrgId());
     }

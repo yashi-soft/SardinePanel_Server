@@ -64,8 +64,11 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .headers()
                 .cacheControl();
         http.authorizeRequests().
-                antMatchers(HttpMethod.POST, "/user/register").permitAll().
+                antMatchers(HttpMethod.POST, "/user/register").permitAll();
+        http.authorizeRequests().
+                antMatchers(HttpMethod.POST, "/swagger-ui.html").permitAll().
                 anyRequest().access("@methodCheckUtil.checkMethod(request,authentication)");
+
         http.addFilterAt(localUsernamePasswordAuthenticationFilter(), LocalUsernamePasswordAuthenticationFilter.class);
 
         http.addFilterBefore(yaxiOncePerResuestFilter, UsernamePasswordAuthenticationFilter.class);
@@ -74,7 +77,6 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedHandler(new LocalAccessDeniedHandler());
 //        http.exceptionHandling().authenticationEntryPoint(new localAuthenticationEntryPoint())
 //                .accessDeniedHandler(new LocalAccessDeniedHandler());
-//              ;
     }
 
     @Bean

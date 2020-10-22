@@ -1,5 +1,6 @@
 package com.example.mysecurity.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineOrganization;
 import com.example.mysecurity.vo.OrgVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 2020-10-10 10:40:57
  */
 @Mapper
-public interface SardlineOrganizationDao {
+public interface SardlineOrganizationDao  extends BaseMapper<SardlineOrganization> {
 
     /**
      * 通过ID查询单条数据
@@ -47,7 +48,7 @@ public interface SardlineOrganizationDao {
      * @param sardlineOrganization 实例对象
      * @return 影响行数
      */
-    int insert(SardlineOrganization sardlineOrganization);
+    int insert1(SardlineOrganization sardlineOrganization);
 
     /**
      * 修改数据

@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <jwt.version>0.7.0</jwt.version>
+        <swagger2.version>2.9.2</swagger2.version>
     </properties>
 
     <dependencies>
@@ -116,44 +117,57 @@
             <artifactId>feign-slf4j</artifactId>
             <version>11.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
-<!--        </dependency>-->
+
+        <!-- swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+        <!--        </dependency>-->
 
     </dependencies>
 
-<!--    <build>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--        <resources>-->
-<!--            <resource>-->
-<!--                <directory>-->
-<!--                    src/main/java-->
-<!--                </directory>-->
-<!--                <includes>-->
-<!--                    <include>-->
-<!--                        **/*.propertiers-->
-<!--                    </include>-->
-<!--                    <include>*/*.xml</include>-->
-<!--                </includes>-->
-<!--                <filtering>false</filtering>-->
-<!--            </resource>-->
+    <!--    <build>-->
+    <!--        <plugins>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.springframework.boot</groupId>-->
+    <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+    <!--            </plugin>-->
+    <!--        </plugins>-->
+    <!--        <resources>-->
+    <!--            <resource>-->
+    <!--                <directory>-->
+    <!--                    src/main/java-->
+    <!--                </directory>-->
+    <!--                <includes>-->
+    <!--                    <include>-->
+    <!--                        **/*.propertiers-->
+    <!--                    </include>-->
+    <!--                    <include>*/*.xml</include>-->
+    <!--                </includes>-->
+    <!--                <filtering>false</filtering>-->
+    <!--            </resource>-->
 
-<!--            -->
-<!--        </resources>-->
-<!--    </build>-->
+    <!--            -->
+    <!--        </resources>-->
+    <!--    </build>-->
     <build>
         <plugins>
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
 
         <!-- 添加资源 -->
 

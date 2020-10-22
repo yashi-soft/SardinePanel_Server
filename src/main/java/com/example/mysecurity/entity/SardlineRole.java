@@ -34,6 +34,15 @@ public class SardlineRole implements Serializable {
      */
     private String state;
 
+    private String selectIds;
+
+    public String getSelectIds() {
+        return selectIds;
+    }
+
+    public void setSelectIds(String selectIds) {
+        this.selectIds = selectIds;
+    }
 
     public String getState() {
         return state;

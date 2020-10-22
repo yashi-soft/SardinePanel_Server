@@ -47,6 +47,16 @@ public class SardlineApi implements Serializable {
 
     private String menuId;
 
+    private String ifUsual;
+
+    public String getIfUsual() {
+        return ifUsual;
+    }
+
+    public void setIfUsual(String ifUsual) {
+        this.ifUsual = ifUsual;
+    }
+
     public String getMenuId() {
         return menuId;
     }

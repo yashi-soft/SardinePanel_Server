@@ -46,6 +46,8 @@ public class MethodCheckUtil {
             // System.out.println("DynamicPermission  username = " + username);
             //通过账号获取资源鉴权
             List<SardlineApi> apiUrls = service.getApiUrlByUserName(username);
+            List<SardlineApi> usualApiUrls = service.selectUsualApi();
+            apiUrls.addAll(usualApiUrls);
 
             //查询通用接口
 
@@ -80,7 +82,6 @@ public class MethodCheckUtil {
                 return rs;
             } else {
                 throw new LocalAccessDeniedException("您没有访问该API的权限！");
-
             }
 
         } else {

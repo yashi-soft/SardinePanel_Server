@@ -48,7 +48,7 @@ public class SardlineUser implements Serializable {
     /**
     * 状态
     */
-    private Integer state;
+    private String state;
 
     private Date registerTime;
 
@@ -120,8 +120,12 @@ public class SardlineUser implements Serializable {
         this.description = description;
     }
 
-    public Integer getState() {
+    public String getState() {
         return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getPhone() {
@@ -140,8 +144,6 @@ public class SardlineUser implements Serializable {
         this.mailBox = mailBox;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
-    }
+
 
 }

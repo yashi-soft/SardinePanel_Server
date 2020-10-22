@@ -120,7 +120,6 @@ public class SardlineRoleController {
     @PostMapping("updateRole")
     public Result<Boolean> updateRole(SardlineRoleReq req) {
         return Result.success(sardlineRoleService.updateRole(req));
-
     }
 
 

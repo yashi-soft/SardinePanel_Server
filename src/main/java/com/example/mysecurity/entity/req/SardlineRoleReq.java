@@ -20,7 +20,7 @@ public class SardlineRoleReq extends SardlineRole {
      */
     private String apis;
 
-
+    private String orgId;
 
 
 }

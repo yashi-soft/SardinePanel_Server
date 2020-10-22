@@ -26,7 +26,7 @@ public class UserListSo {
      */
     private String mailBox;
 
-    private Integer state;
+    private String state;
 
     private Date registerTime;
 

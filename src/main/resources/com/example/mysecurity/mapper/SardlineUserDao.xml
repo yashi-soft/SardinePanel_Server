@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mysecurity.mapper.SardlineUserDao">
+
+    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineUser">
+        <!--@Table sardline_user-->
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="passWord" column="pass_word" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="registerTime" column="register_time" jdbcType="DATE"/>
+        <result property="updateTime" column="update_time" jdbcType="DATE"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          user_id, user_name, nick_name, pass_word, description, state,register_time,update_time
+        from sardline.sardline_user
+        where user_id = #{userId}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          user_id, user_name, nick_name, pass_word, description, state,register_time,update_time
+        from sardline.sardline_user
+        where user_name = #{name}
+    </select>
+    <!--查询单个-->
+    <select id="queryByNameForLogin" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          user_id, user_name, nick_name, pass_word, description, state,register_time,update_time
+        from sardline.sardline_user
+        where user_name = #{name}
+    </select>
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          user_id, user_name, nick_name, pass_word, description, state,register_time,update_time
+        from sardline.sardline_user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultType="com.example.mysecurity.entity.so.UserListSo">
+        select
+        user_id as userId,nick_name as nickName,  user_name as userName,  phone, mail_box as mailBox, description, state, register_time as registerTime,  login_time as loginTime
+        from sardline.sardline_user
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nick_name = #{nickName}
+            </if>
+            <if test="passWord != null and passWord != ''">
+                and pass_word = #{passWord}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+        </where>
+    </select>
+
+
+    <update id="updateUser">
+        update sardline.sardline_user
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="mailBox != null and mailBox != ''">
+                mail_box = #{mailBox},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime},
+            </if>
+            <if test="loginTime != null">
+                login_time = #{loginTime},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+</mapper>

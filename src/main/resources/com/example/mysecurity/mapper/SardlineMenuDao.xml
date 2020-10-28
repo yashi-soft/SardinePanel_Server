@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mysecurity.mapper.SardlineMenuDao">
+
+    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineMenu">
+        <!--@Table sardline_menu-->
+        <result property="menuId" column="menu_id" jdbcType="VARCHAR"/>
+        <result property="menuName" column="menu_name" jdbcType="VARCHAR"/>
+        <result property="menuPath" column="menu_path" jdbcType="VARCHAR"/>
+        <result property="pid" column="pid" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="isCatalog" column="is_catalog" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          menu_id, menu_name, menu_path, pid, sort, description, is_catalog
+        from sardline.sardline_menu
+        where menu_id = #{menuId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          menu_id, menu_name, menu_path, pid, sort, description, is_catalog
+        from sardline.sardline_menu
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        menu_id, menu_name, menu_path, pid, sort, description,is_catalog
+        from sardline.sardline_menu
+        <where>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+            <if test="menuName != null and menuName != ''">
+                and menu_name = #{menuName}
+            </if>
+            <if test="menuPath != null and menuPath != ''">
+                and menu_path = #{menuPath}
+            </if>
+            <if test="pid != null and pid != ''">
+                and pid = #{pid}
+            </if>
+            <if test="sort != null and sort != ''">
+                and sort = #{sort}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="isCatalog != null and isCatalog != ''">
+                and is_catalog = #{isCatalog}
+            </if>
+        </where>
+    </select>
+
+    <!--通过主键修改数据-->
+    <update id="updateByMenuId">
+        update sardline.sardline_menu
+        <set>
+            <if test="menuName != null and menuName != ''">
+                menu_name = #{menuName},
+            </if>
+            <if test="menuPath != null and menuPath != ''">
+                menu_path = #{menuPath},
+            </if>
+            <if test="pid != null and pid != ''">
+                pid = #{pid},
+            </if>
+            <if test="sort != null and sort != ''">
+                sort = #{sort},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="isCatalog != null and isCatalog != ''">
+                is_catalog = #{isCatalog},
+            </if>
+        </set>
+        where menu_id = #{menuId}
+    </update>
+
+
+
+</mapper>

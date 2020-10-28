@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mysecurity.mapper.SardlineRoleDao">
+
+    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineRole">
+        <!--@Table sardline_role-->
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="selectIds" column="select_ids" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          role_id, role_name, description,state
+        from sardline.sardline_role
+        where role_id = #{roleId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          role_id, role_name, description,state
+        from sardline.sardline_role
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        role_id, role_name, description,state
+        from sardline.sardline_role
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name = #{roleName}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="queryForPage" resultType="com.example.mysecurity.vo.RoleVo" parameterType="java.util.Map">
+        select
+        a.role_id, a.role_name, a.description,a.state,a.select_ids ,b.org_id orgId
+        from sardline.sardline_role a left join sardline.sardline_role_org b on a.role_id=b.role_id
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and a.role_id = #{roleId}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and a.role_name = #{roleName}
+            </if>
+            <if test="description != null and description != ''">
+                and a.description = #{description}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryCountForPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+        count(1)
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name = #{roleName}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="selectIds != null and selectIds != ''">
+                and select_ids = #{selectIds}
+            </if>
+        </where>
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="insert1" keyProperty="roleId" useGeneratedKeys="true">
+        insert into sardline.sardline_role(role_name, description,state)
+        values (#{roleName}, #{description},#{state})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update1">
+        update sardline.sardline_role
+        <set>
+            <if test="roleName != null and roleName != ''">
+                role_name = #{roleName},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+        </set>
+        where role_id = #{roleId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById1">
+        delete from sardline.sardline_role where role_id = #{roleId}
+    </delete>
+
+</mapper>

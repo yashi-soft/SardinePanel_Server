@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mysecurity.mapper.SardlineApiDao">
+
+    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineApi">
+        <!--@Table sardline_api-->
+        <result property="apiId" column="api_id" jdbcType="VARCHAR"/>
+        <result property="apiName" column="api_name" jdbcType="VARCHAR"/>
+        <result property="apiUrl" column="api_url" jdbcType="VARCHAR"/>
+        <result property="apiMethod" column="api_method" jdbcType="VARCHAR"/>
+        <result property="pid" column="pid" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="menuId" column="menu_id" jdbcType="VARCHAR"/>
+        <result property="ifUsual" column="if_usual" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          api_id, api_name, api_url, api_method, pid, sort, description,menu_id,if_usual
+        from sardline.sardline_api
+        where api_id = #{apiId}
+    </select>
+
+    <!--查询单个-->
+    <select id="getApiUrlByUserName" resultMap="BaseResultMap">
+        SELECT
+            d.*
+        FROM
+            sardline_role_api c
+            LEFT JOIN sardline_api d ON c.api_id = d.api_id
+        WHERE
+            c.role_id IN ( SELECT r.role_id  from sardline.sardline_role r where r.role_id in (SELECT b.role_id  FROM sardline_user a LEFT JOIN sardline_user_role b ON a.user_id = b.user_id WHERE a.user_name = #{usernmae}) and r.state=1);
+    </select>
+
+
+    <select id="selectUsualApi" resultMap="BaseResultMap">
+
+        select * from  sardline.sardline_api where if_usual='1'
+
+    </select>
+
+
+
+    <select id="queryByMenuId" resultType="com.example.mysecurity.vo.ApiVo">
+        SELECT
+            d.*
+        FROM
+            sardline.sardline_api d
+        WHERE
+            d.menu_id =#{menuId}
+    </select>
+    <select id="queryCountByMenuId" resultType="java.lang.Integer">
+        SELECT
+            count(d.api_id)
+        FROM
+            sardline.sardline_api d
+        WHERE
+            d.menu_id =#{menuId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          api_id, api_name, api_url, api_method, pid, sort, description,menu_id
+        from sardline.sardline_api
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        api_id, api_name, api_url, api_method, pid, sort, description,menu_id
+        from sardline.sardline_api
+        <where>
+            <if test="apiId != null and apiId != ''">
+                and api_id = #{apiId}
+            </if>
+            <if test="apiName != null and apiName != ''">
+                and api_name = #{apiName}
+            </if>
+            <if test="apiUrl != null and apiUrl != ''">
+                and api_url = #{apiUrl}
+            </if>
+            <if test="apiMethod != null and apiMethod != ''">
+                and api_method = #{apiMethod}
+            </if>
+            <if test="pid != null and pid != ''">
+                and pid = #{pid}
+            </if>
+            <if test="sort != null and sort != ''">
+                and sort = #{sort}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+        </where>
+    </select>
+
+
+    <!--    <select id="queryAllMenus" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+    <!--    </select>-->
+
+    <delete id="deletebyMenuId">
+            delete from sardline.sardline_api where menu_id = #{menuId}
+        </delete>
+
+
+    <update id="updateApi">
+        update sardline.sardline_api
+        <set>
+            <if test="apiName != null and apiName != ''">
+                api_name = #{apiName},
+            </if>
+            <if test="apiUrl != null and apiUrl != ''">
+                api_url = #{apiUrl},
+            </if>
+            <if test="apiMethod != null and apiMethod != ''">
+                api_method = #{apiMethod},
+            </if>
+            <if test="pid != null and pid != ''">
+                pid = #{pid},
+            </if>
+            <if test="sort != null and sort != ''">
+                sort = #{sort},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="menuId != null and menuId != ''">
+                menu_id = #{menuId},
+            </if>
+            <if test="ifUsual != null and ifUsual != ''">
+                if_usual = #{ifUsual},
+            </if>
+        </set>
+        where api_id = #{apiId}
+    </update>
+
+</mapper>

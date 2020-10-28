@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mysecurity.mapper.SardlineUserRoleDao">
+
+    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineUserRole">
+        <!--@Table sardline_user_role-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, role_id, user_id
+        from sardline.sardline_user_role
+        where id = #{id}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByUserId" resultMap="BaseResultMap">
+        select
+          id, role_id, user_id
+        from sardline.sardline_user_role
+        where user_id = #{userId}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryRoleIdByUserId" resultType="java.lang.String">
+        select
+           role_id  roleId
+        from sardline.sardline_user_role
+        where user_id = #{userId}
+    </select>
+
+    <select id="getRoleId" resultType="java.lang.String">
+        select
+            t2.role_id
+        from sardline.sardline_user_role t1 left join sardline.sardline_role t2 on t1.role_id=t2.role_id
+        where t1.user_id = #{userId}
+    </select>
+
+    <select id="getRoleName" resultType="java.lang.String">
+        select
+            t2.role_name
+        from sardline.sardline_user_role t1 left join sardline.sardline_role t2 on t1.role_id=t2.role_id
+        where t1.user_id = #{userId}
+    </select>
+
+    <select id="queryRolesByUserId" resultType="com.example.mysecurity.entity.SardlineRole">
+        select
+          b.*
+        from sardline.sardline_user_role a left join sardline.sardline_role b on a.role_id=b.role_id
+        where user_id = #{userId}
+    </select>
+
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, role_id, user_id
+        from sardline.sardline_user_role
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        id, role_id, user_id
+        from sardline.sardline_user_role
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sardline.sardline_user_role(role_id, user_id)
+        values (#{roleId}, #{userId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sardline.sardline_user_role
+        <set>
+            <if test="roleId != null and roleId != ''">
+                role_id = #{roleId},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sardline.sardline_user_role where id = #{id}
+    </delete>
+
+    <delete id="deleteByRoleId">
+        delete from sardline.sardline_user_role where role_id = #{roleId}
+    </delete>
+
+    <!--通过用户id删除-->
+    <delete id="deleteByUserId">
+        delete from sardline.sardline_user_role where user_id = #{userId}
+    </delete>
+
+
+</mapper>

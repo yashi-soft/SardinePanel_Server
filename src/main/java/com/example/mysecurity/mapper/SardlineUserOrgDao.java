@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * (SardlineUserOrg)表数据库访问层
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:57
  */
 @Mapper

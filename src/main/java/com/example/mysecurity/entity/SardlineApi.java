@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * (SardlineApi)实体类
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:55
  */
 @TableName("sardline_api")

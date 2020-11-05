@@ -19,7 +19,7 @@ import java.util.List;
 public class MethodCheckUtil {
 
     @Autowired
-    SardlineApiService service;
+   private SardlineApiService service;
 
 
     /**

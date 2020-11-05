@@ -137,30 +137,7 @@
 
     </dependencies>
 
-    <!--    <build>-->
-    <!--        <plugins>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.springframework.boot</groupId>-->
-    <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-    <!--            </plugin>-->
-    <!--        </plugins>-->
-    <!--        <resources>-->
-    <!--            <resource>-->
-    <!--                <directory>-->
-    <!--                    src/main/java-->
-    <!--                </directory>-->
-    <!--                <includes>-->
-    <!--                    <include>-->
-    <!--                        **/*.propertiers-->
-    <!--                    </include>-->
-    <!--                    <include>*/*.xml</include>-->
-    <!--                </includes>-->
-    <!--                <filtering>false</filtering>-->
-    <!--            </resource>-->
 
-    <!--            -->
-    <!--        </resources>-->
-    <!--    </build>-->
     <build>
         <plugins>
             <plugin>
@@ -168,13 +145,10 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-
         <!-- 添加资源 -->
-
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <!-- src/main/resources下的指定资源放行 -->
                 <includes>
                     <include>**/*.properties</include>
                     <include>**/*.yml</include>

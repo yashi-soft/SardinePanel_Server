@@ -1,5 +1,6 @@
 package com.example.mysecurity.service.impl;
 
+import com.example.mysecurity.entity.SardlineOrganization;
 import com.example.mysecurity.entity.SardlineUserOrg;
 import com.example.mysecurity.entity.req.SardineUserReq;
 import com.example.mysecurity.mapper.SardlineUserOrgDao;
@@ -79,7 +80,7 @@ public class SardlineUserOrgServiceImpl implements SardlineUserOrgService {
     }
 
     @Override
-    public List<SardlineUserOrg> queryByUserId(String userId) {
+    public List<SardlineOrganization> queryByUserId(String userId) {
         return this.sardlineUserOrgDao.queryByUserId(userId);
     }
 

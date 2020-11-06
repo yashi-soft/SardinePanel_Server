@@ -13,13 +13,14 @@ import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @Slf4j
 public class MethodCheckUtil {
 
     @Autowired
-   private SardlineApiService service;
+    private SardlineApiService service;
 
 
     /**
@@ -45,9 +46,9 @@ public class MethodCheckUtil {
 
             // System.out.println("DynamicPermission  username = " + username);
             //通过账号获取资源鉴权
-            List<SardlineApi> apiUrls = service.getApiUrlByUserName(username);
-            List<SardlineApi> usualApiUrls = service.selectUsualApi();
-            apiUrls.addAll(usualApiUrls);
+            Map urlMap = service.getUrlMap(username);
+            Map usualApiUrlMap = service.selectUsualApiMap();
+            urlMap.putAll(usualApiUrlMap);
 
             //查询通用接口
 
@@ -57,29 +58,18 @@ public class MethodCheckUtil {
 
             //提交类型
             String urlMethod = request.getMethod();
-            log.info("requestURI======={}:urlMethod=========={}", requestURI, urlMethod);
-            // System.out.println("DynamicPermission requestURI = " + requestURI);
 
-            //判断当前路径中是否在资源鉴权中
-            boolean rs = apiUrls.stream().anyMatch(item -> {
-                //判断URL是否匹配
-                boolean hashAntPath = antPathMatcher.match(item.getApiUrl(), requestURI);
+            log.info("requestURI======={}***********************urlMethod=========={}", requestURI, urlMethod);
+            Boolean flag = false;
+            if (urlMap.get(requestURI) != null) {
+                if (urlMap.get(requestURI).equals(urlMethod)) {
+                    flag = true;
+                }
+            }
 
-                //判断请求方式是否和数据库中匹配（数据库存储：GET,POST,PUT,DELETE）
-                String dbMethod = item.getApiMethod();
-
-                //处理null，万一数据库存值
-                dbMethod = (dbMethod == null) ? "" : dbMethod;
-                int hasMethod = dbMethod.indexOf(urlMethod);
-
-                //两者都成立，返回真，否则返回假
-                return hashAntPath && (hasMethod != -1);
-            });
-            //返回
-
-            log.info("check method status===={}", rs);
-            if (rs) {
-                return rs;
+            log.info("check method status===={}", flag);
+            if (flag) {
+                return flag;
             } else {
                 throw new LocalAccessDeniedException("您没有访问该API的权限！");
             }

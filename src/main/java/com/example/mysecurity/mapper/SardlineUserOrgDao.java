@@ -1,5 +1,6 @@
 package com.example.mysecurity.mapper;
 
+import com.example.mysecurity.entity.SardlineOrganization;
 import com.example.mysecurity.entity.SardlineUserOrg;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -64,7 +65,7 @@ public interface SardlineUserOrgDao {
      */
     int deleteById(String id);
 
-    List<SardlineUserOrg> queryByUserId(String userId);
+    List<SardlineOrganization> queryByUserId(String userId);
 
     void deleteByUserId(String userId);
 

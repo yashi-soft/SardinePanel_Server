@@ -12,13 +12,13 @@ import java.io.PrintWriter;
 
 public abstract class JsonAuth {
     @Autowired
-   protected  JwtUtil jwtUtil;
+    protected JwtUtil jwtUtil;
 
     protected void writeJson(
             HttpServletRequest request,
             HttpServletResponse response,
             Object data) throws IOException, ServletException {
-        //这里很重要，否则页面获取不到正常的JSON数据集
+        //把返回转成json格式
         response.setContentType("application/json;charset=UTF-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Method", "POST,GET");

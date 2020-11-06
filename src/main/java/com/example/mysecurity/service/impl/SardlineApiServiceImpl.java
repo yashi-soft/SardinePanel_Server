@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (SardlineApi)表服务实现类
@@ -97,6 +99,18 @@ public class SardlineApiServiceImpl extends ServiceImpl<SardlineApiDao, Sardline
     }
 
     @Override
+    public Map getUrlMap(String username) {
+
+        Map result = new HashMap();
+        List<SardlineApi> apis = this.sardlineApiDao.getApiUrlByUserName(username);
+
+        for (SardlineApi api : apis) {
+            result.put(api.getApiUrl(), api.getApiMethod());
+        }
+        return result;
+    }
+
+    @Override
     @Transactional
     public Boolean add(SardlineApi api) {
 
@@ -112,6 +126,17 @@ public class SardlineApiServiceImpl extends ServiceImpl<SardlineApiDao, Sardline
     @Override
     public List<SardlineApi> selectUsualApi() {
         return sardlineApiDao.selectUsualApi();
+    }
+
+    @Override
+    public Map selectUsualApiMap() {
+        List<SardlineApi> sardlineApis = sardlineApiDao.selectUsualApi();
+        Map result = new HashMap();
+        for (SardlineApi api : sardlineApis) {
+            result.put(api.getApiUrl(), api.getApiMethod());
+        }
+
+        return result;
     }
 
 

@@ -2,6 +2,7 @@ package com.example.mysecurity.auth.filter;
 
 import com.example.mysecurity.auth.cache.TokenCache;
 import com.example.mysecurity.auth.service.AuthUserDetailServiceImpl;
+import com.example.mysecurity.common.CommonCode;
 import com.example.mysecurity.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,16 @@ public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
 
-    private String header = "Authorization";
 
     @Autowired
     private AuthUserDetailServiceImpl authUserDetailService;
 
+    @Autowired
+    private TokenCache tokenCache;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        String headerToken = request.getHeader(header);
+        String headerToken = request.getHeader(CommonCode.HEADER);
 
         log.info("headerToken = {}", headerToken);
         log.info("request getMethod =  {}", request.getMethod());
@@ -46,7 +49,7 @@ public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
             String username = jwtUtil.getUsernameFromToken(token);
 
             //判断是否有该token
-            String cacheToken = TokenCache.getToken(username);
+            String cacheToken = tokenCache.getToken(username);
             if (cacheToken != null) {
                 if (cacheToken.equals(token)) {
                     //判断令牌是否过期，默认是一周

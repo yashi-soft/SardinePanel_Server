@@ -132,7 +132,7 @@ public class SardlineUserController {
     /**
      * 分配角色
      */
-    @PostMapping("c")
+    @PostMapping("updatePassword")
     public Result<Boolean> updatePassword(SardineUserReq req ) {
 
         return Result.success(this.sardlineUserOrgService.updatePassword(req));

@@ -1,5 +1,6 @@
 package com.example.mysecurity.service;
 
+import com.example.mysecurity.entity.SardlineOrganization;
 import com.example.mysecurity.entity.SardlineUserOrg;
 import com.example.mysecurity.entity.req.SardineUserReq;
 
@@ -54,7 +55,7 @@ public interface SardlineUserOrgService {
      */
     boolean deleteById(String id);
 
-    List<SardlineUserOrg> queryByUserId(String userId);
+    List<SardlineOrganization> queryByUserId(String userId);
 
     Boolean setOrgs(String userId, String orgIds);
 

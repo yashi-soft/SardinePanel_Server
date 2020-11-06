@@ -2,6 +2,7 @@ package com.example.mysecurity.service;
 
 import com.example.mysecurity.entity.SardlineApi;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (SardlineApi)表服务接口
@@ -54,7 +55,12 @@ public interface SardlineApiService {
 
     List<SardlineApi> getApiUrlByUserName(String username);
 
+
+    Map getUrlMap(String username);
+
     Boolean add(SardlineApi api);
 
     List<SardlineApi> selectUsualApi();
+
+    Map selectUsualApiMap();
 }

@@ -49,7 +49,7 @@ public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
             String username = jwtUtil.getUsernameFromToken(token);
 
             //判断是否有该token
-            String cacheToken = tokenCache.getToken("token_" + username);
+            String cacheToken = tokenCache.getToken( username);
             if (cacheToken != null) {
                 if (cacheToken.equals(token)) {
                     //判断令牌是否过期，默认是一周

@@ -1,6 +1,7 @@
 package com.example.mysecurity.service.impl;
 
 import com.example.mysecurity.entity.SardlineUserOrg;
+import com.example.mysecurity.entity.req.SardineUserReq;
 import com.example.mysecurity.mapper.SardlineUserOrgDao;
 import com.example.mysecurity.service.SardlineUserOrgService;
 import org.springframework.stereotype.Service;
@@ -93,5 +94,13 @@ public class SardlineUserOrgServiceImpl implements SardlineUserOrgService {
             this.insert(sardlineUserOrg);
         }
         return true;
+    }
+
+    @Override
+    public Object updatePassword(SardineUserReq req) {
+
+
+
+        return null;
     }
 }

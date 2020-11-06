@@ -4,12 +4,11 @@ import cn.hutool.core.bean.BeanUtil;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.common.ResultCode;
 import com.example.mysecurity.auth.JsonAuth;
-import com.example.mysecurity.auth.cache.RedisCache;
+import com.example.mysecurity.auth.cache.TokenCache;
 import com.example.mysecurity.entity.*;
 import com.example.mysecurity.service.*;
 import com.example.mysecurity.vo.MenuVo;
 import com.example.mysecurity.vo.RoleVo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,7 +41,8 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
 
     @Resource
     private SardlineUserOrgService sardlineUserOrgService;
-
+    @Autowired
+    private TokenCache tokenCache;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
@@ -51,12 +51,11 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
 
         String name = userDetails.getUsername();
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = RedisCache.getToken(name);
+        String token = tokenCache.getToken(name);
         if (token == null) {
             //如果是第一次登陆，token为空，新增一个
             token = jwtUtil.generateToken(userDetails);
-
-            RedisCache.setToken(name, token);
+            tokenCache.setToken(name, token);
         }
 
 

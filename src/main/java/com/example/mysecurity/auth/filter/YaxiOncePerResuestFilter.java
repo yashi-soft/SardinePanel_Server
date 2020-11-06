@@ -1,6 +1,6 @@
 package com.example.mysecurity.auth.filter;
 
-import com.example.mysecurity.auth.cache.RedisCache;
+import com.example.mysecurity.auth.cache.TokenCache;
 import com.example.mysecurity.auth.service.AuthUserDetailServiceImpl;
 import com.example.mysecurity.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +46,7 @@ public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
             String username = jwtUtil.getUsernameFromToken(token);
 
             //判断是否有该token
-            String cacheToken = RedisCache.getToken(username);
+            String cacheToken = TokenCache.getToken(username);
             if (cacheToken != null) {
                 if (cacheToken.equals(token)) {
                     //判断令牌是否过期，默认是一周

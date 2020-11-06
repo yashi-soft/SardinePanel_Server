@@ -1,6 +1,8 @@
 package com.example.mysecurity.service;
 
 import com.example.mysecurity.entity.SardlineUserOrg;
+import com.example.mysecurity.entity.req.SardineUserReq;
+
 import java.util.List;
 
 /**
@@ -55,4 +57,6 @@ public interface SardlineUserOrgService {
     List<SardlineUserOrg> queryByUserId(String userId);
 
     Boolean setOrgs(String userId, String orgIds);
+
+    Object updatePassword(SardineUserReq req);
 }

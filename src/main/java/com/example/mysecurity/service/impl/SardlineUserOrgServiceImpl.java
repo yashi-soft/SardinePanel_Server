@@ -97,11 +97,5 @@ public class SardlineUserOrgServiceImpl implements SardlineUserOrgService {
         return true;
     }
 
-    @Override
-    public Object updatePassword(SardineUserReq req) {
 
-
-
-        return null;
-    }
 }

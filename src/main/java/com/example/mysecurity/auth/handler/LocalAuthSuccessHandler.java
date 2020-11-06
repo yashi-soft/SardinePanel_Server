@@ -51,11 +51,12 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
 
         String name = userDetails.getUsername();
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = tokenCache.getToken(name);
+        String token = tokenCache.getToken("token_" + name);
         if (token == null) {
             //如果是第一次登陆，token为空，新增一个
             token = jwtUtil.generateToken(userDetails);
-            tokenCache.setToken(name, token);
+
+            tokenCache.setToken("token_" + name, token);
         }
 
 

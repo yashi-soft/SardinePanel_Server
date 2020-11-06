@@ -3,6 +3,7 @@ package com.example.mysecurity.service;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.base.PageParm;
+import com.example.mysecurity.entity.req.SardineUserReq;
 import com.example.mysecurity.entity.so.UserListSo;
 import com.example.mysecurity.vo.UserVo;
 import com.github.pagehelper.PageInfo;
@@ -69,4 +70,6 @@ public interface SardlineUserService {
     PageInfo<UserListSo> queryAll(PageParm pageParm, SardlineUser sardlineUser);
 
     Boolean delete(String userId);
+
+    Result updatePassword(SardineUserReq req);
 }

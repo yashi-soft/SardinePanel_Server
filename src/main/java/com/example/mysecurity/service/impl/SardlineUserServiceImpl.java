@@ -1,6 +1,7 @@
 package com.example.mysecurity.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.mysecurity.common.Result;
 import com.example.mysecurity.common.ResultCode;
@@ -8,6 +9,7 @@ import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.SardlineUserRole;
 import com.example.mysecurity.entity.base.PageParm;
+import com.example.mysecurity.entity.req.SardineUserReq;
 import com.example.mysecurity.entity.so.UserListSo;
 import com.example.mysecurity.mapper.SardlineUserDao;
 import com.example.mysecurity.mapper.SardlineUserOrgDao;
@@ -21,15 +23,13 @@ import com.example.mysecurity.vo.RoleVo;
 import com.example.mysecurity.vo.UserVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
  * @since 2020-10-10 10:40:57
  */
 @Service("sardlineUserService")
+@Slf4j
 public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, SardlineUser> implements SardlineUserService {
     @Resource
     private SardlineUserDao sardlineUserDao;
@@ -130,7 +131,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
             result.setMsg("此用户已存在");
             return result;
         }
-//        user.setUserId(UUID.randomUUID().toString());
         user.setPassWord(passwordUtil.encode(user.getPassWord()));
         user.setRegisterTime(new Date());
         user.setUpdateTime(new Date());
@@ -148,7 +148,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     @Override
     public boolean checkLogin(String username, String password) {
         SardlineUser userEntity = this.baseMapper.queryByName(username);
-        System.out.println("userEntity = " + userEntity);
+        log.info("userEntity =========={} ", userEntity.toString());
         if (userEntity == null) {
             //System.out.println("checkLogin--------->账号不存在，请重新尝试！");
             //设置友好提示
@@ -174,7 +174,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         SardlineUser sardlineUser = this.sardlineUserDao.queryByName(username);
         UserVo userVo = null;
         if (sardlineUser != null) {
-             userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
+            userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
 
             List<SardlineUserRole> sardlineUserRoles = sardlineUserRoleService.queryByUserId(sardlineUser.getUserId());
             for (SardlineUserRole role : sardlineUserRoles) {
@@ -193,22 +193,22 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
 
         PageHelper.startPage(pageParm.getPageNum(), pageParm.getPageSize());
         PageInfo<UserListSo> pageInfo = new PageInfo<>(sardlineUserDao.queryAll(sardlineUser));
-        if (CollectionUtils.isEmpty(pageInfo.getList())){
+        if (CollectionUtils.isEmpty(pageInfo.getList())) {
             return pageInfo;
         }
-        List<UserListSo> list=pageInfo.getList();
-        for (int i=0;i < list.size(); i++){
+        List<UserListSo> list = pageInfo.getList();
+        for (int i = 0; i < list.size(); i++) {
             UserListSo userListSo = list.get(i);
-            List<String> id= sardlineUserRoleDao.getRoleId(userListSo.getUserId());
+            List<String> id = sardlineUserRoleDao.getRoleId(userListSo.getUserId());
             String ids = String.join(",", id);
             userListSo.setRoleIds(ids);
-            List<String> name= sardlineUserRoleDao.getRoleName(userListSo.getUserId());
+            List<String> name = sardlineUserRoleDao.getRoleName(userListSo.getUserId());
             String names = String.join(",", name);
             userListSo.setRoleList(names);
-            String orgId= sardlineUserOrgDao.getOrgId(userListSo.getUserId());
-            userListSo.setOrganizationIds(orgId==null?"":String.join(",", orgId));
-            String orgName= sardlineUserOrgDao.getOrgName(userListSo.getUserId());
-            userListSo.setOrganizationList(orgName==null?"":String.join(",", orgName));
+            String orgId = sardlineUserOrgDao.getOrgId(userListSo.getUserId());
+            userListSo.setOrganizationIds(orgId == null ? "" : String.join(",", orgId));
+            String orgName = sardlineUserOrgDao.getOrgName(userListSo.getUserId());
+            userListSo.setOrganizationList(orgName == null ? "" : String.join(",", orgName));
         }
         return pageInfo;
 
@@ -223,5 +223,30 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         //删除用户信息
         sardlineUserDao.deleteById(userId);
         return true;
+    }
+
+    @Override
+    public Result updatePassword(SardineUserReq req) {
+
+
+        SardlineUser sardlineUser = sardlineUserDao.queryByName(req.getUserName());
+
+
+        if (sardlineUser == null) {
+            return Result.fail(1001, "该用户不存在");
+        } else {
+            //加密的密码
+            String encodedPassword = sardlineUser.getPassWord();
+            //和加密后的密码进行比配
+            if (!passwordUtil.matches(req.getOldPassword(), encodedPassword)) {
+                return Result.fail(1002, "原密码错误");
+            } else {
+                sardlineUser.setPassWord(passwordUtil.encode(req.getNewPassword()));
+                sardlineUser.setUpdateTime(DateUtil.date());
+                sardlineUserDao.updateUser(sardlineUser);
+                return Result.success();
+            }
+        }
+
     }
 }

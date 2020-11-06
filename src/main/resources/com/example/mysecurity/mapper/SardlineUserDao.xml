@@ -99,6 +99,9 @@
             <if test="loginTime != null">
                 login_time = #{loginTime},
             </if>
+            <if test="passWord != null and passWord != ''">
+                pass_word = #{passWord},
+            </if>
         </set>
         where user_id = #{userId}
     </update>

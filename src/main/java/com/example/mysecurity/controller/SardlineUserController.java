@@ -135,7 +135,7 @@ public class SardlineUserController {
     @PostMapping("updatePassword")
     public Result<Boolean> updatePassword(SardineUserReq req ) {
 
-        return Result.success(this.sardlineUserOrgService.updatePassword(req));
+        return Result.success(this.sardlineUserService.updatePassword(req));
     }
 
 

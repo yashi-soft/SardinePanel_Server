@@ -44,12 +44,12 @@ public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
         if (!StringUtils.isEmpty(headerToken)) {
             //postMan测试时，自动假如的前缀，要去掉。
             String token = headerToken.replace("Bearer", "").trim();
-            System.out.println("token = " + token);
+            log.info("token =========== ", token);
 
             String username = jwtUtil.getUsernameFromToken(token);
 
             //判断是否有该token
-            String cacheToken = tokenCache.getToken(username);
+            String cacheToken = tokenCache.getToken("token_" + username);
             if (cacheToken != null) {
                 if (cacheToken.equals(token)) {
                     //判断令牌是否过期，默认是一周
@@ -67,7 +67,7 @@ public class YaxiOncePerResuestFilter extends OncePerRequestFilter {
                     }
                     if (!check) {
                         //通过令牌获取用户名称
-                        System.out.println("username = " + username);
+                        log.info("username ======= " ,username);
 
                         //判断用户不为空，且SecurityContextHolder授权信息还是空的
                         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

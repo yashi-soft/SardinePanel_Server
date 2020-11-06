@@ -42,11 +42,23 @@ public class Result<T> {
         result.setData(object);
         return result;
     }
-
+    public static Result success() {
+        Result result = new Result();
+        result.setMsg("请求成功");
+        result.setCode(ResultCode.SUCCESS);
+        return result;
+    }
     public static Result noData() {
         Result result = new Result();
         result.setMsg("查询无数据");
         result.setCode(ResultCode.NO_DATA);
         return result;
     }
+    public static Result fail(int code,String msg) {
+        Result result = new Result();
+        result.setMsg(msg);
+        result.setCode(code);
+        return result;
+    }
+
 }

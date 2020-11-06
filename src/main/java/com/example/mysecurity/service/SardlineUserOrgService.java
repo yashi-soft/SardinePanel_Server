@@ -59,5 +59,5 @@ public interface SardlineUserOrgService {
 
     Boolean setOrgs(String userId, String orgIds);
 
-    Object updatePassword(SardineUserReq req);
+
 }

@@ -29,7 +29,7 @@ public class TokenCache {
 
     public void setToken(String key, String token) {
 
-        redisUtil.add(key, token);
+        redisUtil.set(key, token);
         SarlineToken sarlineToken = new SarlineToken();
         sarlineToken.setToken(token);
         sarlineToken.setName(key);
@@ -42,8 +42,10 @@ public class TokenCache {
         String token = (String) redisUtil.get(key);
         if (token == null) {
             SarlineToken sarlineToken = sarlineTokenService.queryByName(key);
-            token = sarlineToken.getToken();
-            redisUtil.add(key, token);
+            if(sarlineToken!=null){
+                token = sarlineToken.getToken();
+                redisUtil.set(key, token);
+            }
         }
         return token;
     }

@@ -3,7 +3,7 @@ package com.example.mysecurity.auth.cache;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * redis缓存，也可用其他缓存代替
+ * 先缓存本地，后期同步到数据库和redis
  */
 public class RedisCache {
 
@@ -19,5 +19,8 @@ public class RedisCache {
         return map.get(key);
     }
 
+    public static Boolean clearToken(String key, String token) {
 
+        return map.remove(key, token);
+    }
 }

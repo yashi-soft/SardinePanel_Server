@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mysecurity.mapper.SardlineUserBehaviourDao">
+
+    <resultMap id="BaseResultMap" type="com.example.mysecurity.entity.SardlineUserBehaviour">
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="userUrl" column="user_url" jdbcType="VARCHAR"/>
+        <result property="userApiType" column="user_api_type" jdbcType="VARCHAR"/>
+        <result property="time" column="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          user_id,user_name,time,user_api_type,user_url
+        from sardline.sardline_user_behaviour
+        where user_id = #{userId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          user_id,user_name,time,user_api_type,user_url
+        from sardline.sardline_user_behaviour
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+<!--    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        user_id,user_name,user_url,user_interface_type,time
+        from sardline.sardline_user_behaviour
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="userUrl != null">
+                and user_url = #{pid}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+        </where>
+    </select>-->
+
+    <!--新增所有列-->
+    <insert id="insert1" keyProperty="userId" useGeneratedKeys="true">
+        insert into sardline.sardline_user_behaviour(user_id,user_name, user_url, user_api_type,time)
+        values (#{userId},#{userName}, #{userUrl}, #{userApi},#{time})
+    </insert>
+
+    <!--通过主键修改数据-->
+<!--    <update id="update">
+        update sardline.sardline_organization
+        <set>
+            <if test="orgName != null and orgName != ''">
+                org_name = #{orgName},
+            </if>
+            <if test="pid != null">
+                pid = #{pid},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+        </set>
+        where org_id = #{orgId}
+    </update>-->
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sardline.sardline_user_behaviour where user_id = #{userId}
+    </delete>
+
+    <!--通过实体作为筛选条件查询-->
+    <!--<select id="queryByName" resultType="com.example.mysecurity.vo.OrgVo">
+        select
+        org_id, org_name, pid, description,sort,create_time,update_time
+        from sardline.sardline_organization
+        <where>
+            <if test="orgName != null and orgName != ''">
+                org_name like '%'||#{orgName}||'%'
+            </if>
+        </where>
+    </select>-->
+</mapper>

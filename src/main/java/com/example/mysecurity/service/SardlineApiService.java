@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * (SardlineApi)表服务接口
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:55
  */
 public interface SardlineApiService {
@@ -55,4 +55,6 @@ public interface SardlineApiService {
     List<SardlineApi> getApiUrlByUserName(String username);
 
     Boolean add(SardlineApi api);
+
+    List<SardlineApi> selectUsualApi();
 }

@@ -12,6 +12,12 @@ public class RoleVo extends SardlineRole {
 
     private MenuVo menuVo;
 
+    private String apis;
+
+    private String menus;
+
+    private String orgId;
+
 }
 
 

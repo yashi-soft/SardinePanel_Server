@@ -8,6 +8,7 @@
         <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="selectIds" column="select_ids" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
@@ -45,19 +46,19 @@
     </select>
 
 
-    <select id="queryForPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    <select id="queryForPage" resultType="com.example.mysecurity.vo.RoleVo" parameterType="java.util.Map">
         select
-        role_id, role_name, description,state
-        from sardline.sardline_role
+        a.role_id, a.role_name, a.description,a.state,a.select_ids ,b.org_id orgId
+        from sardline.sardline_role a left join sardline.sardline_role_org b on a.role_id=b.role_id
         <where>
             <if test="roleId != null and roleId != ''">
-                and role_id = #{roleId}
+                and a.role_id = #{roleId}
             </if>
             <if test="roleName != null and roleName != ''">
-                and role_name = #{roleName}
+                and a.role_name = #{roleName}
             </if>
             <if test="description != null and description != ''">
-                and description = #{description}
+                and a.description = #{description}
             </if>
         </where>
     </select>
@@ -76,6 +77,9 @@
             </if>
             <if test="state != null and state != ''">
                 and state = #{state}
+            </if>
+            <if test="selectIds != null and selectIds != ''">
+                and select_ids = #{selectIds}
             </if>
         </where>
     </select>
@@ -96,6 +100,9 @@
             </if>
             <if test="description != null and description != ''">
                 description = #{description},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
             </if>
         </set>
         where role_id = #{roleId}

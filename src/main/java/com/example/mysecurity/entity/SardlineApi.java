@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * (SardlineApi)实体类
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:55
  */
 @TableName("sardline_api")
@@ -46,6 +46,16 @@ public class SardlineApi implements Serializable {
     private String description;
 
     private String menuId;
+
+    private String ifUsual;
+
+    public String getIfUsual() {
+        return ifUsual;
+    }
+
+    public void setIfUsual(String ifUsual) {
+        this.ifUsual = ifUsual;
+    }
 
     public String getMenuId() {
         return menuId;

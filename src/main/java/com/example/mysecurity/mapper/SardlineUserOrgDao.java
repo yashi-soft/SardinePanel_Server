@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * (SardlineUserOrg)表数据库访问层
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:57
  */
 @Mapper
@@ -71,4 +71,6 @@ public interface SardlineUserOrgDao {
     String getOrgId(@Param("userId")String userId);
 
     String getOrgName(@Param("userId")String userId);
+
+    Boolean deleteByOrgId(String orgId);
 }

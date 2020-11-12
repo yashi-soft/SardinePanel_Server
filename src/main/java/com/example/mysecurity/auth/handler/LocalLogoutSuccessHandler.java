@@ -1,6 +1,7 @@
 package com.example.mysecurity.auth.handler;
 
 import com.example.mysecurity.auth.JsonAuth;
+import com.example.mysecurity.common.ResultCode;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,7 @@ public class LocalLogoutSuccessHandler extends JsonAuth implements LogoutSuccess
         Map result = new HashMap();
 //        R<String> data = R.ok("退出成功");
         result.put("msg", "退出成功");
+        result.put("code", ResultCode.SUCCESS);
         super.writeJson(httpServletRequest, httpServletResponse, result);
     }
 }

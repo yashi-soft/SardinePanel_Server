@@ -2,15 +2,17 @@ package com.example.mysecurity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineRole;
+import com.example.mysecurity.vo.RoleVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
 /**
  * (SardlineRole)表数据库访问层
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:57
  */
 @Mapper
@@ -28,7 +30,7 @@ public interface SardlineRoleDao extends BaseMapper<SardlineRole> {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<SardlineRole> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
@@ -36,7 +38,7 @@ public interface SardlineRoleDao extends BaseMapper<SardlineRole> {
 
     List<SardlineRole> queryAll();
 
-    List<SardlineRole> queryForPage(Map map);
+    List<RoleVo> queryForPage(Map map);
 
     Integer queryCountForPage(Map map);
 

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * (SardlineUser)表服务接口
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:57
  */
 public interface SardlineUserService {

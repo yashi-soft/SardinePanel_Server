@@ -19,7 +19,7 @@ import java.util.List;
 public class MethodCheckUtil {
 
     @Autowired
-    SardlineApiService service;
+   private SardlineApiService service;
 
 
     /**
@@ -46,6 +46,8 @@ public class MethodCheckUtil {
             // System.out.println("DynamicPermission  username = " + username);
             //通过账号获取资源鉴权
             List<SardlineApi> apiUrls = service.getApiUrlByUserName(username);
+            List<SardlineApi> usualApiUrls = service.selectUsualApi();
+            apiUrls.addAll(usualApiUrls);
 
             //查询通用接口
 
@@ -56,8 +58,6 @@ public class MethodCheckUtil {
             //提交类型
             String urlMethod = request.getMethod();
             log.info("requestURI======={}:urlMethod=========={}", requestURI, urlMethod);
-            System.out.println("requestURI=======" + requestURI + "--------------urlMethod==========" + urlMethod);
-
             // System.out.println("DynamicPermission requestURI = " + requestURI);
 
             //判断当前路径中是否在资源鉴权中
@@ -82,7 +82,6 @@ public class MethodCheckUtil {
                 return rs;
             } else {
                 throw new LocalAccessDeniedException("您没有访问该API的权限！");
-
             }
 
         } else {

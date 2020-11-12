@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * (SardlineRoleMenu)实体类
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:57
  */
 @TableName("sardline_role_menu")

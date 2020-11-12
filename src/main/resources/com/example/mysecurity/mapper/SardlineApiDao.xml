@@ -12,12 +12,13 @@
         <result property="sort" column="sort" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="menuId" column="menu_id" jdbcType="VARCHAR"/>
+        <result property="ifUsual" column="if_usual" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          api_id, api_name, api_url, api_method, pid, sort, description,menu_id
+          api_id, api_name, api_url, api_method, pid, sort, description,menu_id,if_usual
         from sardline.sardline_api
         where api_id = #{apiId}
     </select>
@@ -30,8 +31,16 @@
             sardline_role_api c
             LEFT JOIN sardline_api d ON c.api_id = d.api_id
         WHERE
-            c.role_id IN ( SELECT r.role_id  from sardline.sardline_role r where r.role_id in (SELECT b.role_id  FROM sardline_user a LEFT JOIN sardline_user_role b ON a.user_id = b.user_id WHERE a.user_name = #{usernmae}) and r.state=1);
+            c.role_id IN ( SELECT r.role_id  from sardline.sardline_role r where r.role_id in (SELECT b.role_id  FROM sardline_user a LEFT JOIN sardline_user_role b ON a.user_id = b.user_id WHERE a.user_name = #{usernmae}) and r.state=1) and d.api_url is NOT NULL AND d.api_method is NOT NULL;
     </select>
+
+
+    <select id="selectUsualApi" resultMap="BaseResultMap">
+
+        select * from  sardline.sardline_api where if_usual='1'
+
+    </select>
+
 
 
     <select id="queryByMenuId" resultType="com.example.mysecurity.vo.ApiVo">
@@ -101,30 +110,32 @@
         </delete>
 
 
-
     <update id="updateApi">
         update sardline.sardline_api
         <set>
             <if test="apiName != null and apiName != ''">
-                 api_name = #{apiName},
+                api_name = #{apiName},
             </if>
             <if test="apiUrl != null and apiUrl != ''">
-                 api_url = #{apiUrl},
+                api_url = #{apiUrl},
             </if>
             <if test="apiMethod != null and apiMethod != ''">
-                 api_method = #{apiMethod},
+                api_method = #{apiMethod},
             </if>
             <if test="pid != null and pid != ''">
-                 pid = #{pid},
+                pid = #{pid},
             </if>
             <if test="sort != null and sort != ''">
-                 sort = #{sort},
+                sort = #{sort},
             </if>
             <if test="description != null and description != ''">
-                 description = #{description},
+                description = #{description},
             </if>
             <if test="menuId != null and menuId != ''">
-                 menu_id = #{menuId},
+                menu_id = #{menuId},
+            </if>
+            <if test="ifUsual != null and ifUsual != ''">
+                if_usual = #{ifUsual},
             </if>
         </set>
         where api_id = #{apiId}

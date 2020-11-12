@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * (SardlineApi)表服务实现类
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:55
  */
 @Service("sardlineApiService")
@@ -108,4 +108,11 @@ public class SardlineApiServiceImpl extends ServiceImpl<SardlineApiDao, Sardline
 
         return flag > 0;
     }
+
+    @Override
+    public List<SardlineApi> selectUsualApi() {
+        return sardlineApiDao.selectUsualApi();
+    }
+
+
 }

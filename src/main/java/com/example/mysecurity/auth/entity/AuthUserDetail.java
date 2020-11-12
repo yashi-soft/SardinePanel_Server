@@ -22,14 +22,14 @@ public class AuthUserDetail implements UserDetails {
     private Boolean enabled;
 
 
-    private Integer state;
+    private String state;
 
     private Collection<? extends GrantedAuthority> authorities;
 
     public AuthUserDetail() {
     }
 
-    public AuthUserDetail(String username, String password, Integer state, Collection<? extends GrantedAuthority> authorities) {
+    public AuthUserDetail(String username, String password, String state, Collection<? extends GrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.state = state;

@@ -1,7 +1,10 @@
 package com.example.mysecurity.auth.handler;
 
 import com.example.mysecurity.auth.JsonAuth;
+import com.example.mysecurity.auth.cache.RedisCache;
+import com.example.mysecurity.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -16,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 public class LocalLogoutHandler extends JsonAuth implements LogoutHandler {
 
     private String header = "Authorization";
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public void logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) {
@@ -28,7 +33,8 @@ public class LocalLogoutHandler extends JsonAuth implements LogoutHandler {
 
             String token = headerToken.replace("Bearer", "").trim();
             log.info("authentication ={}", authentication);
-//            System.out.println("authentication = " + authentication);
+            String name = jwtUtil.getUsernameFromToken(token);
+            RedisCache.clearToken(name, token);
             SecurityContextHolder.clearContext();
         }
     }

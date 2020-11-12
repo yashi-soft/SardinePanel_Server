@@ -73,12 +73,10 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
         String rootid = "-1";
 
         for (SardlineUserRole role : sardlineUserRoles) {
-
             SardlineRole sardlineRole = sardlineRoleService.queryById(role.getRoleId());
             RoleVo roleVo = BeanUtil.toBean(sardlineRole, RoleVo.class);
             roleVo.setMenuVo(allMenu.get(rootid));
             roles.add(roleVo);
-
         }
 
         //查询出菜单，子菜单，按钮，

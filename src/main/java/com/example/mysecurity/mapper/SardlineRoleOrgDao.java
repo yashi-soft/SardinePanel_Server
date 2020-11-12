@@ -1,5 +1,6 @@
 package com.example.mysecurity.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mysecurity.entity.SardlineRoleOrg;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -8,11 +9,11 @@ import java.util.List;
 /**
  * (SardlineRoleOrg)表数据库访问层
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:57
  */
 @Mapper
-public interface SardlineRoleOrgDao {
+public interface SardlineRoleOrgDao extends BaseMapper<SardlineRoleOrg> {
 
     /**
      * 通过ID查询单条数据
@@ -46,7 +47,7 @@ public interface SardlineRoleOrgDao {
      * @param sardlineRoleOrg 实例对象
      * @return 影响行数
      */
-    int insert(SardlineRoleOrg sardlineRoleOrg);
+    int insert1(SardlineRoleOrg sardlineRoleOrg);
 
     /**
      * 修改数据
@@ -64,4 +65,5 @@ public interface SardlineRoleOrgDao {
      */
     int deleteById(String id);
 
+    Boolean deleteByOrgId(String orgId);
 }

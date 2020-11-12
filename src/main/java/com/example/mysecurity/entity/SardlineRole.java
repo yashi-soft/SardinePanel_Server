@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * (SardlineRole)实体类
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:57
  */
 @TableName("sardline_role")
@@ -34,6 +34,15 @@ public class SardlineRole implements Serializable {
      */
     private String state;
 
+    private String selectIds;
+
+    public String getSelectIds() {
+        return selectIds;
+    }
+
+    public void setSelectIds(String selectIds) {
+        this.selectIds = selectIds;
+    }
 
     public String getState() {
         return state;

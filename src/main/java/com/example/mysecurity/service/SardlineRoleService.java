@@ -4,6 +4,7 @@ import com.example.mysecurity.entity.SardlineRole;
 import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.entity.req.SardlineRoleReq;
 import com.example.mysecurity.vo.MenuVo;
+import com.example.mysecurity.vo.RoleVo;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * (SardlineRole)表服务接口
  *
- * @author makejava
+ * @author fjx
  * @since 2020-10-10 10:40:57
  */
 public interface SardlineRoleService {
@@ -65,7 +66,7 @@ public interface SardlineRoleService {
 
     Boolean addRole(SardlineRoleReq sardlineRole);
 
-    PageInfo<SardlineRole> queryForPage(PageParm pageParm, SardlineRole req);
+    PageInfo<RoleVo> queryForPage(PageParm pageParm, SardlineRole req);
 
     Boolean delete(String roleId);
 

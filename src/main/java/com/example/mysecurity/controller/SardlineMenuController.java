@@ -38,8 +38,6 @@ public class SardlineMenuController {
 
     @PostMapping("list")
     public Result<MenuVo> getMenuList(String roleId) {
-
-
         return Result.success(this.sardlineMenuService.getMenuVo(roleId));
     }
 
@@ -49,7 +47,6 @@ public class SardlineMenuController {
      */
     @PostMapping("addMenu")
     public Result<Boolean> addMenu(SardlineMenu menu) {
-
         return Result.success(this.sardlineMenuService.addMenu(menu) != null ? true : false);
     }
 
@@ -58,7 +55,6 @@ public class SardlineMenuController {
      */
     @PostMapping("updateMenu")
     public Result<Boolean> updateMenu(SardlineMenu menu) {
-
         return Result.success(this.sardlineMenuService.update(menu) != null ? true : false);
     }
 
@@ -68,7 +64,6 @@ public class SardlineMenuController {
      */
     @PostMapping("deleteMenu")
     public Result<Boolean> deleteMenu(String menuId) {
-
         return Result.success(this.sardlineMenuService.delete(menuId));
     }
 
@@ -77,7 +72,6 @@ public class SardlineMenuController {
      */
     @PostMapping("queryAllMenu")
     public Result<MenuVo> queryAllMenu() {
-
         return Result.success(this.sardlineMenuService.queryAllMenu());
     }
 

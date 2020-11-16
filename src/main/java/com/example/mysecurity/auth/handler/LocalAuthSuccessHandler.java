@@ -43,7 +43,6 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
     @Resource
     private SardlineUserOrgService sardlineUserOrgService;
 
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
 
@@ -63,7 +62,6 @@ public class LocalAuthSuccessHandler extends JsonAuth implements AuthenticationS
         SardlineUser sardlineUser = sardlineUserService.queryByName(name);
 
         List<SardlineUserOrg> sardlineUserOrgs = sardlineUserOrgService.queryByUserId(sardlineUser.getUserId());
-
 
         List<SardlineUserRole> sardlineUserRoles = sardlineUserRoleService.queryByUserId(sardlineUser.getUserId());
 

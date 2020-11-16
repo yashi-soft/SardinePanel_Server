@@ -20,7 +20,6 @@ public interface SardlineOrganizationService {
      * @return 实例对象
      */
     SardlineOrganization queryById(String orgId);
-
     /**
      * 查询多条数据
      *
@@ -29,7 +28,6 @@ public interface SardlineOrganizationService {
      * @return 对象列表
      */
     List<SardlineOrganization> queryAllByLimit(int offset, int limit);
-
     /**
      * 新增数据
      *
@@ -37,7 +35,6 @@ public interface SardlineOrganizationService {
      * @return 实例对象
      */
     SardlineOrganization insert(SardlineOrganization sardlineOrganization);
-
     /**
      * 修改数据
      *
@@ -45,7 +42,6 @@ public interface SardlineOrganizationService {
      * @return 实例对象
      */
     SardlineOrganization update(SardlineOrganization sardlineOrganization);
-
     /**
      * 通过主键删除数据
      *

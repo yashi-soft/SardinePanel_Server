@@ -1,6 +1,8 @@
 package com.example.mysecurity.service;
 
 import com.example.mysecurity.entity.SardlineUserBehaviour;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ public interface SardlineUserBehaviourService {
      * @param
      * @return 实例对象
      */
-    List<SardlineUserBehaviour> queryById(String userId);
+    List<SardlineUserBehaviour> queryById(String userId, String startTime);
 
     /**
      * 查询多条数据
@@ -37,12 +39,17 @@ public interface SardlineUserBehaviourService {
     boolean insert(SardlineUserBehaviour sardlineUserBehaviour);
 
     /**
+     * 通过用户名字模糊查询
+     * */
+    List<SardlineUserBehaviour> queryByName(String name);
+
+    /**
      * 修改数据
      *
      * @param sardlineUserBehaviour 实例对象
      * @return 实例对象
      */
-    boolean update(SardlineUserBehaviour sardlineUserBehaviour);
+//    boolean update(SardlineUserBehaviour sardlineUserBehaviour);
 
     /**
      * 通过主键删除数据

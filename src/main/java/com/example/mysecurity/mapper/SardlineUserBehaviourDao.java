@@ -5,6 +5,8 @@ import com.example.mysecurity.entity.SardlineOrganization;
 import com.example.mysecurity.entity.SardlineUserBehaviour;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +24,7 @@ public interface SardlineUserBehaviourDao extends BaseMapper<SardlineUserBehavio
      * @param
      * @return 实例对象
      */
-    List<SardlineUserBehaviour> queryById(@Param("userId") String userId);
+    List<SardlineUserBehaviour> queryById(@Param("userId") String userId, @Param("startTime")String startTime);
 
     /**
      * 查询指定行数据
@@ -32,7 +34,11 @@ public interface SardlineUserBehaviourDao extends BaseMapper<SardlineUserBehavio
      * @return 对象列表
      */
     List<SardlineUserBehaviour> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
-
+    /**
+     * 通过用户名字模糊查询
+     *
+     * */
+    List<SardlineUserBehaviour> queryByName(@Param("name") String name);
 
     /**
      * 通过实体作为筛选条件查询
@@ -56,7 +62,7 @@ public interface SardlineUserBehaviourDao extends BaseMapper<SardlineUserBehavio
      * @param sardlineUserBehaviour 实例对象
      * @return 影响行数
      */
-    int update(SardlineUserBehaviour sardlineUserBehaviour);
+//    int updateById(SardlineUserBehaviour sardlineUserBehaviour);
 
     /**
      * 通过主键删除数据

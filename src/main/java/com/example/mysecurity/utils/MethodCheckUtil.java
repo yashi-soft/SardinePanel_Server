@@ -3,7 +3,11 @@ package com.example.mysecurity.utils;
 ;
 import com.example.mysecurity.auth.exception.LocalAccessDeniedException;
 import com.example.mysecurity.entity.SardlineApi;
+import com.example.mysecurity.entity.SardlineUser;
+import com.example.mysecurity.entity.SardlineUserBehaviour;
 import com.example.mysecurity.service.SardlineApiService;
+import com.example.mysecurity.service.SardlineUserBehaviourService;
+import com.example.mysecurity.service.SardlineUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,6 +16,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -20,7 +27,6 @@ public class MethodCheckUtil {
 
     @Autowired
    private SardlineApiService service;
-
 
     /**
      * 判断有访问API的权限
@@ -71,7 +77,6 @@ public class MethodCheckUtil {
                 //处理null，万一数据库存值
                 dbMethod = (dbMethod == null) ? "" : dbMethod;
                 int hasMethod = dbMethod.indexOf(urlMethod);
-
                 //两者都成立，返回真，否则返回假
                 return hashAntPath && (hasMethod != -1);
             });
@@ -83,7 +88,6 @@ public class MethodCheckUtil {
             } else {
                 throw new LocalAccessDeniedException("您没有访问该API的权限！");
             }
-
         } else {
             throw new LocalAccessDeniedException("不是UserDetails类型！");
         }

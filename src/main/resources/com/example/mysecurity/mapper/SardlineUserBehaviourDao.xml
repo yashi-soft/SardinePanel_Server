@@ -15,7 +15,9 @@
         select
           user_id,user_name,time,user_api_type,user_url
         from sardline.sardline_user_behaviour
-        where user_id = #{userId}
+        <if test="startTime!=null and startTime!=''">
+        where user_id = #{userId} and time>#{startTime}
+        </if>
     </select>
 
     <!--查询指定行数据-->
@@ -24,6 +26,16 @@
           user_id,user_name,time,user_api_type,user_url
         from sardline.sardline_user_behaviour
         limit #{offset}, #{limit}
+    </select>
+
+        <!--通过用户名字模糊查询-->
+    <select id="queryByName" resultMap="BaseResultMap">
+        select
+            user_id,user_name,time,user_api_type,user_url
+        from sardline.sardline_user_behaviour
+        <if test="name!=null and name!=''">
+        where user_name like "%"#{name}"%"
+        </if>
     </select>
 
     <!--通过实体作为筛选条件查询-->

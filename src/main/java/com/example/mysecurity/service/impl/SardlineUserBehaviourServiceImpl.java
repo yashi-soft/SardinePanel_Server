@@ -6,6 +6,8 @@ import com.example.mysecurity.service.SardlineUserBehaviourService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,8 +28,8 @@ public class SardlineUserBehaviourServiceImpl implements SardlineUserBehaviourSe
      * @return 实例对象
      */
     @Override
-    public List<SardlineUserBehaviour> queryById(String userId) {
-        return this.sardlineUserBehaviourDao.queryById(userId);
+    public List<SardlineUserBehaviour> queryById(String userId, String startTime) {
+        return this.sardlineUserBehaviourDao.queryById(userId,startTime);
     }
 
     /**
@@ -53,16 +55,21 @@ public class SardlineUserBehaviourServiceImpl implements SardlineUserBehaviourSe
         return this.sardlineUserBehaviourDao.insert(sardlineUserBehaviour)>0;
     }
 
+    @Override
+    public List<SardlineUserBehaviour> queryByName(String name) {
+        return this.sardlineUserBehaviourDao.queryByName(name);
+    }
+
     /**
      * 修改数据
      *
      * @param sardlineUserBehaviour 实例对象
      * @return 实例对象
      */
-    @Override
-    public boolean update(SardlineUserBehaviour sardlineUserBehaviour) {
-        return this.sardlineUserBehaviourDao.update(sardlineUserBehaviour)>0;
-    }
+//    @Override
+//    public boolean update(SardlineUserBehaviour sardlineUserBehaviour) {
+//        return this.sardlineUserBehaviourDao.update(sardlineUserBehaviour)>0;
+//    }
 
     /*@Override
     public SardlineUserBehaviour update(SardlineUserBehaviour sardlineUserBehaviour) {

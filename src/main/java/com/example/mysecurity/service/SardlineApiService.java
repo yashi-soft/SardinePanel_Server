@@ -56,11 +56,11 @@ public interface SardlineApiService {
     List<SardlineApi> getApiUrlByUserName(String username);
 
 
-    Map getUrlMap(String username);
+    Map<String,SardlineApi> getUrlMap(String username);
 
     Boolean add(SardlineApi api);
 
     List<SardlineApi> selectUsualApi();
 
-    Map selectUsualApiMap();
+    Map<String,SardlineApi> selectUsualApiMap();
 }

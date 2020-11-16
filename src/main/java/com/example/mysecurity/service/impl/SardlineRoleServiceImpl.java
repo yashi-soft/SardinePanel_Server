@@ -214,18 +214,27 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
 
             StringBuilder menuSb = new StringBuilder();
             StringBuilder apiSb = new StringBuilder();
+
+
             for (SardlineMenu menu : sardlineMenus) {
-                menuSb.append(menu.getMenuId() + ",");
+                if (menu.getMenuId() != null) {
+                    menuSb.append(menu.getMenuId() + ",");
+                }
             }
+
 
             String menuStr = menuSb.toString();
             if (menuStr.length() > 0) {
                 role.setMenus(menuStr.substring(0, menuStr.length() - 1));
             }
             List<SardlineRoleApi> sardlineRoleApis = sardlineRoleApiDao.queryByRoleId(role.getRoleId());
+
             for (SardlineRoleApi api : sardlineRoleApis) {
-                apiSb.append(api.getId() + ",");
+                if (api.getId() != null) {
+                    apiSb.append(api.getId() + ",");
+                }
             }
+
             String apiStr = apiSb.toString();
             if (apiStr.length() > 0) {
                 role.setApis(apiStr.substring(0, apiStr.length() - 1));

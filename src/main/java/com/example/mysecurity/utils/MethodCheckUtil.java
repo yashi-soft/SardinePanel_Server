@@ -3,6 +3,7 @@ package com.example.mysecurity.utils;
 ;
 import com.example.mysecurity.auth.exception.LocalAccessDeniedException;
 import com.example.mysecurity.entity.SardlineApi;
+import com.example.mysecurity.factory.UsualApiCache;
 import com.example.mysecurity.service.SardlineApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class MethodCheckUtil {
 
     @Autowired
     private SardlineApiService service;
+
 
 
     /**
@@ -46,8 +48,10 @@ public class MethodCheckUtil {
 
             // System.out.println("DynamicPermission  username = " + username);
             //通过账号获取资源鉴权
-            Map urlMap = service.getUrlMap(username);
-            Map usualApiUrlMap = service.selectUsualApiMap();
+            Map<String,SardlineApi> urlMap = service.getUrlMap(username);
+
+//            UsualApiCache.getMap();
+            Map<String,SardlineApi> usualApiUrlMap = service.selectUsualApiMap();
             urlMap.putAll(usualApiUrlMap);
 
             //查询通用接口
@@ -59,10 +63,15 @@ public class MethodCheckUtil {
             //提交类型
             String urlMethod = request.getMethod();
 
-            log.info("requestURI======={}***********************urlMethod=========={}", requestURI, urlMethod);
+            log.info("requestURI======={}\nurlMethod=========={}", requestURI, urlMethod);
+            log.info("{}操作了{}方式的{}", username, urlMethod, requestURI);
             Boolean flag = false;
             if (urlMap.get(requestURI) != null) {
-                if (urlMap.get(requestURI).equals(urlMethod)) {
+                SardlineApi api = urlMap.get(requestURI);
+                if (api.getApiMethod().equals(urlMethod)) {
+                    //userId,用户信息，url，method，时间,接口描述
+                    //插入数据库
+
                     flag = true;
                 }
             }

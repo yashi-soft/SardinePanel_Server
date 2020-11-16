@@ -99,13 +99,13 @@ public class SardlineApiServiceImpl extends ServiceImpl<SardlineApiDao, Sardline
     }
 
     @Override
-    public Map getUrlMap(String username) {
+    public Map<String,SardlineApi> getUrlMap(String username) {
 
-        Map result = new HashMap();
+        Map<String,SardlineApi> result = new HashMap();
         List<SardlineApi> apis = this.sardlineApiDao.getApiUrlByUserName(username);
 
         for (SardlineApi api : apis) {
-            result.put(api.getApiUrl(), api.getApiMethod());
+            result.put(api.getApiUrl(), api);
         }
         return result;
     }
@@ -129,11 +129,11 @@ public class SardlineApiServiceImpl extends ServiceImpl<SardlineApiDao, Sardline
     }
 
     @Override
-    public Map selectUsualApiMap() {
+    public Map<String,SardlineApi> selectUsualApiMap() {
         List<SardlineApi> sardlineApis = sardlineApiDao.selectUsualApi();
         Map result = new HashMap();
         for (SardlineApi api : sardlineApis) {
-            result.put(api.getApiUrl(), api.getApiMethod());
+            result.put(api.getApiUrl(), api);
         }
 
         return result;

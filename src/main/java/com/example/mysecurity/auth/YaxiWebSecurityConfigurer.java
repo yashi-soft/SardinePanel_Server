@@ -63,14 +63,16 @@ public class YaxiWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers()
                 .cacheControl();
+
+        //请求权限配置
         http.authorizeRequests().
                 antMatchers(HttpMethod.POST, "/user/register").permitAll();
         http.authorizeRequests().
                 antMatchers(HttpMethod.POST, "/swagger-ui.html").permitAll().
                 anyRequest().access("@methodCheckUtil.checkMethod(request,authentication)");
-
+        //拦截账号密码
         http.addFilterAt(localUsernamePasswordAuthenticationFilter(), LocalUsernamePasswordAuthenticationFilter.class);
-
+        //拦截token
         http.addFilterBefore(yaxiOncePerResuestFilter, UsernamePasswordAuthenticationFilter.class);
         http.formLogin();
         http.logout().addLogoutHandler(localLogoutHandler).logoutSuccessHandler(logoutSuccessHandler);

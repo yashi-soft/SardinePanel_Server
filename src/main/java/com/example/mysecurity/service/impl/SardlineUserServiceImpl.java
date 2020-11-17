@@ -205,10 +205,10 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
             List<String> name = sardlineUserRoleDao.getRoleName(userListSo.getUserId());
             String names = String.join(",", name);
             userListSo.setRoleList(names);
-            String orgId = sardlineUserOrgDao.getOrgId(userListSo.getUserId());
-            userListSo.setOrganizationIds(orgId == null ? "" : String.join(",", orgId));
-            String orgName = sardlineUserOrgDao.getOrgName(userListSo.getUserId());
-            userListSo.setOrganizationList(orgName == null ? "" : String.join(",", orgName));
+            List<String> orgIds = sardlineUserOrgDao.getOrgId(userListSo.getUserId());
+            userListSo.setOrganizationIds(orgIds.isEmpty() ? "" : String.join(",", orgIds));
+            List<String> orgNames = sardlineUserOrgDao.getOrgName(userListSo.getUserId());
+            userListSo.setOrganizationList(orgNames.isEmpty() ? "" : String.join(",", orgNames));
         }
         return pageInfo;
 

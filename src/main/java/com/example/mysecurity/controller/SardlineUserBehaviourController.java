@@ -23,7 +23,7 @@ public class SardlineUserBehaviourController {
     public Result<List<SardlineUserBehaviour>> userBehaviourList(String userId, String startTime){
         return Result.success(this.sardlineUserBehaviourService.queryById(userId,startTime));
     }
-    @PostMapping("selectByName")
+    @GetMapping("selectByName")
     public Result<List<SardlineUserBehaviour>> userBehaviourList(String username){
         return Result.success(this.sardlineUserBehaviourService.queryByName(username));
     }

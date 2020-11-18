@@ -57,8 +57,10 @@ public class LogAspect {
         sardlineUserBehaviour.setUserUrl(requestURI);
         sardlineUserBehaviour.setUserApiType(method);
         sardlineUserBehaviour.setTime(new Date());
+        String describe = sardlineUserBehaviour.getUserName()+":用户操作了:"+sardlineUserBehaviour.getUserUrl();
+        sardlineUserBehaviour.setDescribe(describe);
         sardlineUserBehaviourService.insert(sardlineUserBehaviour);
-        List<SardlineUserBehaviour> list = sardlineUserBehaviourService.queryAllByLimit(0,50);
+//        List<SardlineUserBehaviour> list = sardlineUserBehaviourService.queryAllByLimit(0,50);
         /*for (SardlineUserBehaviour t:list
              ) {
             System.out.println(t.getUserId()+";"+t.getUserName()+";"+t.getUserUrl()+";"+t.getUserApiType()+";"+t.getTime());

@@ -50,4 +50,5 @@ public interface SardlineUserDao  extends BaseMapper<SardlineUser> {
 
     void updateUser(SardlineUser sardlineUser);
 
+
 }

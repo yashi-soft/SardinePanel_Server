@@ -8,6 +8,7 @@
         <result property="userUrl" column="user_url" jdbcType="VARCHAR"/>
         <result property="userApiType" column="user_api_type" jdbcType="VARCHAR"/>
         <result property="time" column="time" jdbcType="TIMESTAMP"/>
+        <result property="describe" column="user_describe" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
@@ -16,7 +17,7 @@
           user_id,user_name,time,user_api_type,user_url
         from sardline.sardline_user_behaviour
         <if test="startTime!=null and startTime!=''">
-        where user_id = #{userId} and time>#{startTime}
+        where user_id = #{userId} and time > #{startTime}
         </if>
     </select>
 
@@ -60,9 +61,22 @@
     </select>-->
 
     <!--新增所有列-->
-    <insert id="insert1" keyProperty="userId" useGeneratedKeys="true">
-        insert into sardline.sardline_user_behaviour(user_id,user_name, user_url, user_api_type,time)
-        values (#{userId},#{userName}, #{userUrl}, #{userApi},#{time})
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+        insert into sardline.sardline_user_behaviour(user_id,user_name, user_url, user_api_type,time, user_describe )
+        values(
+        <if test="userId!=null and userId!=''">
+            #{userId},
+        </if>
+        <if test="userName!=null and userName!=''">
+            #{userName},
+        </if>
+        <if test="userUrl!=null and userUrl!=''">
+            #{userUrl},
+        </if>
+        <if test="userApiType!=null and userApiType!=''">
+            #{userApiType},
+        </if>
+        #{time},#{describe})
     </insert>
 
     <!--通过主键修改数据-->

@@ -26,6 +26,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -215,6 +216,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     }
 
     @Override
+    @Transactional
     public Boolean delete(String userId) {
         //删除用户角色信息
         sardlineUserRoleDao.deleteByUserId(userId);

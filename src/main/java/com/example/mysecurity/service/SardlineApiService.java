@@ -53,6 +53,8 @@ public interface SardlineApiService {
      */
     boolean deleteById(String apiId);
 
+    String getApiNameByUrl(String apiUrl);
+
     List<SardlineApi> getApiUrlByUserName(String username);
 
 

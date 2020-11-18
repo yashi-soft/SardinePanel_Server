@@ -212,7 +212,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
             userListSo.setOrganizationList(orgNames.isEmpty() ? "" : String.join(",", orgNames));
         }
         return pageInfo;
-
     }
 
     @Override
@@ -249,6 +248,5 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
                 return Result.success();
             }
         }
-
     }
 }

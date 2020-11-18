@@ -1,6 +1,7 @@
 package com.example.mysecurity.aspect;
 
 import com.example.mysecurity.entity.SardlineUserBehaviour;
+import com.example.mysecurity.service.SardlineApiService;
 import com.example.mysecurity.service.SardlineUserBehaviourService;
 import com.example.mysecurity.service.SardlineUserService;
 import jdk.nashorn.internal.ir.CallNode;
@@ -27,6 +28,8 @@ public class LogAspect {
     private SardlineUserBehaviourService sardlineUserBehaviourService;
     @Autowired
     private SardlineUserService sardlineUserService;
+    @Autowired
+    private SardlineApiService sardlineApiService;
 
 //    @Autowired
 //    HttpServletRequest request;
@@ -57,8 +60,7 @@ public class LogAspect {
         sardlineUserBehaviour.setUserUrl(requestURI);
         sardlineUserBehaviour.setUserApiType(method);
         sardlineUserBehaviour.setTime(new Date());
-        String describe = sardlineUserBehaviour.getUserName()+":用户操作了:"+sardlineUserBehaviour.getUserUrl();
-        sardlineUserBehaviour.setDescribe(describe);
+        sardlineUserBehaviour.setDescribe(sardlineUserBehaviour.getUserName()+":用户操作了:"+sardlineApiService.getApiNameByUrl(requestURI)+"功能");
         sardlineUserBehaviourService.insert(sardlineUserBehaviour);
 //        List<SardlineUserBehaviour> list = sardlineUserBehaviourService.queryAllByLimit(0,50);
         /*for (SardlineUserBehaviour t:list

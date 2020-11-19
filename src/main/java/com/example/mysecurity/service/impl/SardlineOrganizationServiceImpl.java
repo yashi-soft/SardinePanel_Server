@@ -80,7 +80,7 @@ public class SardlineOrganizationServiceImpl implements SardlineOrganizationServ
     @Override
     public SardlineOrganization update(SardlineOrganization sardlineOrganization) {
         sardlineOrganization.setUpdateTime(DateUtil.date());
-        this.sardlineOrganizationDao.update(sardlineOrganization);
+        this.sardlineOrganizationDao.updateOrganization(sardlineOrganization);
         return this.queryById(sardlineOrganization.getOrgId());
     }
 

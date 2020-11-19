@@ -56,15 +56,9 @@ public interface SardlineOrganizationDao  extends BaseMapper<SardlineOrganizatio
      * @param sardlineOrganization 实例对象
      * @return 影响行数
      */
-    int update(SardlineOrganization sardlineOrganization);
+    int updateOrganization(SardlineOrganization sardlineOrganization);
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param orgId 主键
-     * @return 影响行数
-     */
-    int deleteById(String orgId);
+
 
     List<OrgVo> queryByName(String orgName);
 }

@@ -10,6 +10,7 @@ import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.SardlineUserRole;
 import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.entity.req.SardineUserReq;
+import com.example.mysecurity.entity.req.UserReq;
 import com.example.mysecurity.entity.so.UserListSo;
 import com.example.mysecurity.mapper.SardlineUserDao;
 import com.example.mysecurity.mapper.SardlineUserOrgDao;
@@ -28,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import springfox.documentation.annotations.Cacheable;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -118,12 +120,14 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     }
 
     @Override
+    @Cacheable(value = "name")
     public SardlineUser queryByName(String name) {
         return this.sardlineUserDao.queryByName(name);
     }
 
     @Override
-    public Result register(SardlineUser user) {
+    public Result register(UserReq req) {
+        SardlineUser user = BeanUtil.toBean(req, SardlineUser.class);
         Result result = new Result();
         SardlineUser sardlineUser = this.sardlineUserDao.queryByName(user.getUserName());
         if (sardlineUser != null) {

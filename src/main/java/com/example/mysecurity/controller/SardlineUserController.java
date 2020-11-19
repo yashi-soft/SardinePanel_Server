@@ -6,17 +6,22 @@ import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.SardlineUserRole;
 import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.entity.req.SardineUserReq;
+import com.example.mysecurity.entity.req.UserReq;
 import com.example.mysecurity.entity.so.UserListSo;
 import com.example.mysecurity.service.SardlineUserOrgService;
 import com.example.mysecurity.service.SardlineUserRoleService;
 import com.example.mysecurity.service.SardlineUserService;
 import com.example.mysecurity.vo.UserVo;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.parameters.P;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -28,6 +33,9 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 public class SardlineUserController {
+
+
+    Logger logger = LoggerFactory.getLogger(SardlineUserController.class);
     /**
      * 服务对象
      */
@@ -39,7 +47,6 @@ public class SardlineUserController {
 
     @Resource
     private SardlineUserOrgService sardlineUserOrgService;
-
 
 
     /**
@@ -61,10 +68,12 @@ public class SardlineUserController {
      * @return
      */
     @PostMapping("register")
-    public Result register(@Validated SardlineUser user) {
+    public Result register(@Validated UserReq user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.info("有報錯信息");
+        }
         return sardlineUserService.register(user);
     }
-
 
 
     /**
@@ -74,7 +83,6 @@ public class SardlineUserController {
     public Result<Boolean> update(@Validated SardlineUser user) {
         return Result.success(sardlineUserService.update(user) == null ? false : true);
     }
-
 
 
     @PostMapping("queryUser")
@@ -91,11 +99,11 @@ public class SardlineUserController {
 
     /**
      * 用户列表
-     * */
+     */
     @PostMapping("list")
     public Result<PageInfo<UserListSo>> UserList(@Validated PageParm pageParm, @Validated SardlineUser sardlineUser) {
 
-        return Result.success(this.sardlineUserService.queryAll(pageParm,sardlineUser));
+        return Result.success(this.sardlineUserService.queryAll(pageParm, sardlineUser));
 
     }
 
@@ -115,7 +123,7 @@ public class SardlineUserController {
     @PostMapping("setRoles")
     public Result<Boolean> setRoles(@RequestParam("userId") String userId, @RequestParam("roleIds") String roleIds) {
 
-        return Result.success(this.sardlineUserRoleService.setRoles(userId,roleIds));
+        return Result.success(this.sardlineUserRoleService.setRoles(userId, roleIds));
 
 
     }
@@ -126,18 +134,17 @@ public class SardlineUserController {
     @PostMapping("setOrgs")
     public Result<Boolean> setOrgs(@RequestParam("userId") String userId, @RequestParam("orgIds") String orgIds) {
 
-        return Result.success(this.sardlineUserOrgService.setOrgs(userId,orgIds));
+        return Result.success(this.sardlineUserOrgService.setOrgs(userId, orgIds));
     }
 
     /**
      * 分配角色
      */
     @PostMapping("updatePassword")
-    public Result<Boolean> updatePassword(SardineUserReq req ) {
+    public Result<Boolean> updatePassword(SardineUserReq req) {
 
         return Result.success(this.sardlineUserService.updatePassword(req));
     }
-
 
 
 }

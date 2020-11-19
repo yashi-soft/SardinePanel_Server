@@ -50,7 +50,7 @@
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="update">
+    <update id="updateRoleOrg">
         update sardline.sardline_role_org
         <set>
             <if test="orgId != null and orgId != ''">
@@ -60,10 +60,7 @@
         where role_id = #{roleId}
     </update>
 
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from sardline.sardline_role_org where id = #{id}
-    </delete>
+
 
 
     <delete id="deleteByOrgId">

@@ -56,15 +56,9 @@ public interface SardlineRoleApiDao extends BaseMapper<SardlineRoleApi> {
      * @param sardlineRoleApi 实例对象
      * @return 影响行数
      */
-    int update(SardlineRoleApi sardlineRoleApi);
+    int updateSardlineRole(SardlineRoleApi sardlineRoleApi);
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 影响行数
-     */
-    int deleteById(String id);
+
 
     int deleteByRoleTd(String roleId);
 

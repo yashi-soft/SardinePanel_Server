@@ -1,7 +1,6 @@
 package com.example.mysecurity.service.impl;
 
 
-
 import com.example.mysecurity.entity.SardlineRoleApi;
 import com.example.mysecurity.mapper.SardlineRoleApiDao;
 import com.example.mysecurity.service.SardlineRoleApiService;
@@ -36,7 +35,7 @@ public class SardlineRoleApiServiceImpl implements SardlineRoleApiService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     @Override
@@ -64,7 +63,7 @@ public class SardlineRoleApiServiceImpl implements SardlineRoleApiService {
      */
     @Override
     public SardlineRoleApi update(SardlineRoleApi sardlineRoleApi) {
-        this.sardlineRoleApiDao.update(sardlineRoleApi);
+        this.sardlineRoleApiDao.updateSardlineRole(sardlineRoleApi);
         return this.queryById(sardlineRoleApi.getId());
     }
 

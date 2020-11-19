@@ -57,7 +57,7 @@
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="update">
+    <update id="updateOrganization">
         update sardline.sardline_organization
         <set>
             <if test="orgName != null and orgName != ''">
@@ -73,10 +73,6 @@
         where org_id = #{orgId}
     </update>
 
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from sardline.sardline_organization where org_id = #{orgId}
-    </delete>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryByName" resultType="com.example.mysecurity.vo.OrgVo">

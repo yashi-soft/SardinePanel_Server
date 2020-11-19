@@ -281,7 +281,7 @@ public class SardlineRoleServiceImpl implements SardlineRoleService {
         SardlineRoleOrg rg = new SardlineRoleOrg();
         rg.setOrgId(req.getOrgId());
         rg.setRoleId(req.getRoleId());
-        sardlineRoleOrgDao.update(rg);
+        sardlineRoleOrgDao.updateRoleOrg(rg);
 
         sardlineRoleApiDao.deleteByRoleTd(req.getRoleId());
 

@@ -4,9 +4,11 @@ import com.example.mysecurity.common.Result;
 import com.example.mysecurity.entity.SardlineUser;
 import com.example.mysecurity.entity.base.PageParm;
 import com.example.mysecurity.entity.req.SardineUserReq;
+import com.example.mysecurity.entity.req.UserReq;
 import com.example.mysecurity.entity.so.UserListSo;
 import com.example.mysecurity.vo.UserVo;
 import com.github.pagehelper.PageInfo;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -61,7 +63,7 @@ public interface SardlineUserService {
 
     SardlineUser queryByName(String name);
 
-    Result register(SardlineUser user);
+    Result register( UserReq user);
 
     boolean checkLogin(String username, String password);
 

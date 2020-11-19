@@ -48,13 +48,7 @@ public interface SardlineUserBehaviourDao extends BaseMapper<SardlineUserBehavio
      */
 //    List<SardlineUserBehaviour> queryAll(SardlineUserBehaviour sardlineUserBehaviour);
 
-    /**
-     * 新增数据
-     *
-     * @param sardlineUserBehaviour 实例对象
-     * @return 影响行数
-     */
-    int insert(SardlineUserBehaviour sardlineUserBehaviour);
+
 
     /**
      * 修改数据
@@ -64,12 +58,6 @@ public interface SardlineUserBehaviourDao extends BaseMapper<SardlineUserBehavio
      */
 //    int updateById(SardlineUserBehaviour sardlineUserBehaviour);
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param
-     * @return 影响行数
-     */
-    int deleteById(@Param("userId") String userId);
+
 
 }

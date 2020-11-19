@@ -58,7 +58,7 @@
     <!--    </insert>-->
 
     <!--通过主键修改数据-->
-    <update id="update">
+    <update id="updateSardlineRole">
         update sardline.sardline_role_api
         <set>
             <if test="roleId != null and roleId != ''">
@@ -70,11 +70,6 @@
         </set>
         where id = #{id}
     </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from sardline.sardline_role_api where id = #{id}
-    </delete>
 
     <delete id="deleteByRoleTd">
         delete from sardline.sardline_role_api where role_id = #{roleId}

@@ -61,7 +61,7 @@
     </select>-->
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+<!--    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
         insert into sardline.sardline_user_behaviour(user_id,user_name, user_url, user_api_type,time, user_describe )
         values(
         <if test="userId!=null and userId!=''">
@@ -77,7 +77,7 @@
             #{userApiType},
         </if>
         #{time},#{describe})
-    </insert>
+    </insert>-->
 
     <!--通过主键修改数据-->
 <!--    <update id="update">
@@ -97,9 +97,11 @@
     </update>-->
 
     <!--通过主键删除-->
+<!--
     <delete id="deleteById">
         delete from sardline.sardline_user_behaviour where user_id = #{userId}
     </delete>
+-->
 
     <!--通过实体作为筛选条件查询-->
     <!--<select id="queryByName" resultType="com.example.mysecurity.vo.OrgVo">

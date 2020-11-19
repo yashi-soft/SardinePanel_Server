@@ -3,6 +3,8 @@ package com.example.mysecurity.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -17,17 +19,18 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.core.script.DigestUtils;
+import org.springframework.data.redis.serializer.*;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.Duration;
 
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
+
+    private Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
     @Value("${spring.redis.host}")
     private String host;
@@ -78,6 +81,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         return factory;
     }
 
+/*
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         //初始化一个RedisCacheWriter
@@ -91,6 +95,24 @@ public class RedisConfig extends CachingConfigurerSupport {
         defaultCacheConfig.entryTtl(Duration.ofDays(1));
         //初始化RedisCacheManager
         return new RedisCacheManager(redisCacheWriter, defaultCacheConfig);
+    }
+*/
+
+    @Bean
+    public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+        // 重新配置缓存
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
+
+        //设置缓存的默认超时时间：30分钟
+        redisCacheConfiguration = redisCacheConfiguration.entryTtl(Duration.ofMinutes(30L))
+                .disableCachingNullValues()
+                .disableKeyPrefix()
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer((new GenericJackson2JsonRedisSerializer())));
+
+        return RedisCacheManager.builder(RedisCacheWriter
+                .nonLockingRedisCacheWriter(redisConnectionFactory))
+                .cacheDefaults(redisCacheConfiguration).build();
     }
 
 
@@ -110,6 +132,36 @@ public class RedisConfig extends CachingConfigurerSupport {
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
         template.setValueSerializer(jackson2JsonRedisSerializer);
+    }
+
+    public KeyGenerator keyGenerator(){
+        return new KeyGenerator() {
+            @Override
+            public Object generate(Object target, Method method, Object... params) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(target.getClass().getName());
+                sb.append("&");
+                for (Object obj : params) {
+                    if (obj != null){
+//                        if(!BaseUtil.isBaseType(obj)) {
+                        try {
+                            Field id = obj.getClass().getDeclaredField("id");
+                            id.setAccessible(true);
+                            sb.append(id.get(obj));
+                        } catch (NoSuchFieldException | IllegalAccessException e) {
+                            logger.error(e.getMessage());
+                        }
+//                        } else{
+//                            sb.append(obj);
+//                        }
+                    }
+                }
+
+                logger.info("redis cache key str: " + sb.toString());
+                logger.info("redis cache key sha256Hex: " + DigestUtils.sha1DigestAsHex(sb.toString()));
+                return DigestUtils.sha1DigestAsHex(sb.toString());
+            }
+        };
     }
 
 

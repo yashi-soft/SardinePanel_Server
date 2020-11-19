@@ -126,7 +126,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     public Result register(SardlineUser user) {
         Result result = new Result();
         SardlineUser sardlineUser = this.sardlineUserDao.queryByName(user.getUserName());
-
         if (sardlineUser != null) {
             result.setCode(ResultCode.FAIL);
             result.setMsg("此用户已存在");
@@ -176,7 +175,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         UserVo userVo = null;
         if (sardlineUser != null) {
             userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
-
             List<SardlineUserRole> sardlineUserRoles = sardlineUserRoleService.queryByUserId(sardlineUser.getUserId());
             for (SardlineUserRole role : sardlineUserRoles) {
                 SardlineRole sardlineRole = sardlineRoleService.queryById(role.getRoleId());
@@ -191,7 +189,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
 
     @Override
     public PageInfo<UserListSo> queryAll(PageParm pageParm, SardlineUser sardlineUser) {
-
         PageHelper.startPage(pageParm.getPageNum(), pageParm.getPageSize());
         PageInfo<UserListSo> pageInfo = new PageInfo<>(sardlineUserDao.queryAll(sardlineUser));
         if (CollectionUtils.isEmpty(pageInfo.getList())) {
@@ -228,11 +225,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
 
     @Override
     public Result updatePassword(SardineUserReq req) {
-
-
         SardlineUser sardlineUser = sardlineUserDao.queryByName(req.getUserName());
-
-
         if (sardlineUser == null) {
             return Result.fail(1001, "该用户不存在");
         } else {

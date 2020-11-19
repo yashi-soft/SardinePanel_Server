@@ -62,7 +62,7 @@ public class SardlineUserBehaviourTest {
          System.out.println(sardlineUserBehaviourService.deleteById("1232"));
      }
      @Test
-    public void test1(){
+    public void getApiName(){
         String apiName = sardlineApiService.getApiNameByUrl("/sardline/user/deleteUser");
          System.out.println(apiName);
      }

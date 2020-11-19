@@ -16,8 +16,6 @@ import java.io.Serializable;
  * @since 2020-11-11 11:09:55
  */
 @TableName("sardline_user_behaviour")
-
-
 public class SardlineUserBehaviour implements Serializable {
     private static final long serialVersionUID = 855453586474686113L;
 
@@ -29,9 +27,11 @@ public class SardlineUserBehaviour implements Serializable {
     private String userUrl;
     
     private String userApiType;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date time;
+
     private String describe;
 
     public String getDescribe() {

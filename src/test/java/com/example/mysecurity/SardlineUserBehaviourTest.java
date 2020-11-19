@@ -1,28 +1,27 @@
-package com.example.mysecurity.test;
+package com.example.mysecurity;
 
 
-import cn.hutool.json.JSONUtil;
 import com.example.mysecurity.entity.SardlineUserBehaviour;
+import com.example.mysecurity.service.SardlineApiService;
 import com.example.mysecurity.service.SardlineUserBehaviourService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import static cn.hutool.core.date.DateTime.now;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class SardlineUserBehaviourTest {
     @Autowired
      SardlineUserBehaviourService sardlineUserBehaviourService;
+    @Autowired
+    SardlineApiService sardlineApiService;
     @Test
      public void insert(){
         SardlineUserBehaviour sardlineUserBehaviour = new SardlineUserBehaviour();
@@ -63,8 +62,8 @@ public class SardlineUserBehaviourTest {
          System.out.println(sardlineUserBehaviourService.deleteById("1232"));
      }
      @Test
-    public void update()
-     {
-
+    public void getApiName(){
+        String apiName = sardlineApiService.getApiNameByUrl("/sardline/user/deleteUser");
+         System.out.println(apiName);
      }
 }

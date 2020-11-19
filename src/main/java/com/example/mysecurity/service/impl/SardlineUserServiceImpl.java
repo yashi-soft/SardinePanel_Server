@@ -26,6 +26,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -125,7 +126,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
     public Result register(SardlineUser user) {
         Result result = new Result();
         SardlineUser sardlineUser = this.sardlineUserDao.queryByName(user.getUserName());
-
         if (sardlineUser != null) {
             result.setCode(ResultCode.FAIL);
             result.setMsg("此用户已存在");
@@ -175,7 +175,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
         UserVo userVo = null;
         if (sardlineUser != null) {
             userVo = BeanUtil.toBean(sardlineUser, UserVo.class);
-
             List<SardlineUserRole> sardlineUserRoles = sardlineUserRoleService.queryByUserId(sardlineUser.getUserId());
             for (SardlineUserRole role : sardlineUserRoles) {
                 SardlineRole sardlineRole = sardlineRoleService.queryById(role.getRoleId());
@@ -190,7 +189,6 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
 
     @Override
     public PageInfo<UserListSo> queryAll(PageParm pageParm, SardlineUser sardlineUser) {
-
         PageHelper.startPage(pageParm.getPageNum(), pageParm.getPageSize());
         PageInfo<UserListSo> pageInfo = new PageInfo<>(sardlineUserDao.queryAll(sardlineUser));
         if (CollectionUtils.isEmpty(pageInfo.getList())) {
@@ -211,10 +209,10 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
             userListSo.setOrganizationList(orgNames.isEmpty() ? "" : String.join(",", orgNames));
         }
         return pageInfo;
-
     }
 
     @Override
+    @Transactional
     public Boolean delete(String userId) {
         //删除用户角色信息
         sardlineUserRoleDao.deleteByUserId(userId);
@@ -227,11 +225,7 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
 
     @Override
     public Result updatePassword(SardineUserReq req) {
-
-
         SardlineUser sardlineUser = sardlineUserDao.queryByName(req.getUserName());
-
-
         if (sardlineUser == null) {
             return Result.fail(1001, "该用户不存在");
         } else {
@@ -247,6 +241,5 @@ public class SardlineUserServiceImpl extends ServiceImpl<SardlineUserDao, Sardli
                 return Result.success();
             }
         }
-
     }
 }

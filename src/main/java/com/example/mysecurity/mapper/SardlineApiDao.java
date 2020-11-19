@@ -46,6 +46,8 @@ public interface SardlineApiDao extends BaseMapper<SardlineApi> {
 
     List<SardlineApi> getApiUrlByUserName(String username);
 
+    String getApiNameByUrl(@Param("apiUrl") String apiUrl);
+
     List<SardlineApi> selectUsualApi();
 
 

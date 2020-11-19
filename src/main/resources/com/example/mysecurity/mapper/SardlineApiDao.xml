@@ -102,6 +102,16 @@
     </select>
 
 
+    <select id="getApiNameByUrl" resultType="String">
+        select
+        api_name
+        from
+        sardline.sardline_api
+        where
+        api_url = #{apiUrl}
+    </select>
+
+
     <!--    <select id="queryAllMenus" parameterType="java.lang.String" resultMap="BaseResultMap">-->
     <!--    </select>-->
 

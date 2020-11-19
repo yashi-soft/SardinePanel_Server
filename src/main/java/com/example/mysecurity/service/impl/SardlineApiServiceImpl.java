@@ -94,6 +94,11 @@ public class SardlineApiServiceImpl extends ServiceImpl<SardlineApiDao, Sardline
     }
 
     @Override
+    public String getApiNameByUrl(String apiUrl) {
+        return this.sardlineApiDao.getApiNameByUrl(apiUrl);
+    }
+
+    @Override
     public List<SardlineApi> getApiUrlByUserName(String username) {
         return this.sardlineApiDao.getApiUrlByUserName(username);
     }

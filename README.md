@@ -31,7 +31,7 @@ Sardine(沙丁鱼)是基于SpringBoot+Vue+SpringSecurity+MybatisPlus研发的权
 
 
 ##技术支持
-联系方式:1768288563@qq.com
+联系方式:1768268563@qq.com
 
 开发文档：编写中
 
@@ -39,23 +39,23 @@ Sardine(沙丁鱼)是基于SpringBoot+Vue+SpringSecurity+MybatisPlus研发的权
 
 登录页面
 
-![avatar](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/89d5b1f16e7137037eb28ef8b13a8fa.png)
+![image](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/89d5b1f16e7137037eb28ef8b13a8fa.png)
 
 菜单管理
 
-![avatar](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/94dd03115f4d70551b351f97f9c5365.png)
+![image](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/94dd03115f4d70551b351f97f9c5365.png)
 
 机构管理
 
-![avatar](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/f1e4acad4db752cc7ced0018bcb7117.png)
+![image](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/f1e4acad4db752cc7ced0018bcb7117.png)
 
 角色管理
 
-![avatar](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/fc5aece437b01785759efa252970f6b.png)
+![image](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/fc5aece437b01785759efa252970f6b.png)
 
 用户管理
 
-![avatar](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/0d0b7fcf863b47114a9f0ad5c87b0be.png)
+![image](https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/0d0b7fcf863b47114a9f0ad5c87b0be.png)
 
 未完待续
 

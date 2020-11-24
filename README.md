@@ -1,6 +1,6 @@
 #沙丁鱼
 
-<div align=center><img src="https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/b7ba1b96af8deb5abf040a42bca5b82.png"/></div>
+<div align=center><img src="https://sardine-1257630833.cos.ap-nanjing.myqcloud.com/089fdf6b8595f3da2ddeee527b59fb0.png"/></div>
 
 
 ##项目介绍
@@ -33,6 +33,7 @@ Sardine(沙丁鱼)是基于SpringBoot+Vue+SpringSecurity+MybatisPlus研发的权
 ##技术支持
 联系方式:1768288563@qq.com
 
+开发文档：编写中
 
 ##展示图
 
@@ -66,6 +67,12 @@ Sardine(沙丁鱼)是基于SpringBoot+Vue+SpringSecurity+MybatisPlus研发的权
 感谢MybatisPlus、Vue、Springboot等优秀开源项目
 
 ##版权信息
+
+版权所有Copyright © 2019-2020 (https://www.yashisoft.com/)
+
 更多细节参阅MIT.License
+
+
+
 
 
